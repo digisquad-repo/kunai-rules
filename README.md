@@ -8,6 +8,41 @@ This repository contains a selection of Kunai rules that I use as an alternative
 
 In addition to the rule sets, this repository also includes a few scripts I personally use to streamline the analysis of Kunai logs. These small utilities are designed to simplify day-to-day tasks and are intended to be added to your system's PATH for quick access. A brief description of each tool is provided below.
 
+
+## Why I created theses rules 
+
+
+The core idea behind these rules is simple: In most real-world attack scenarios, an adversary will eventually either use existing tooling on the system or modify configuration files to establish persistence.
+
+With that in mind, this rule set focuses on two main detection strategies:
+
+1. **Monitoring for changes to critical configuration files**  
+   These include files commonly abused for persistence or privilege escalation. The rules are designed to detect specific modifications that could indicate tampering or unauthorized configuration changes.
+
+2. **Identifying uncommon or potentially dangerous tooling**  
+   By cataloging most utilities typically found on a system and classifying them based on usage frequency and risk level, the rules highlight activity involving:
+   - Rarely used or suspicious binaries
+   - Tools commonly abused during post-exploitation
+   - Dual-use utilities leveraged in living-off-the-land techniques
+   - ect
+
+I think this approach aims to reduce noise while maintaining strong coverage of techniques often missed by more generic or purely signature-based systems. 
+For what it's worth, tools like `rkhunter` or `chkrootkit` probably won't alert you to any recent malicious activity on your system. 😉
+
+
+## Why I wrote these scripts
+
+While Kunai provides rich and detailed event data, working directly with raw JSON logs can quickly become tedious — especially during investigations or live system monitoring. I created these scripts to streamline that process.
+
+They help with:
+- Filtering events by type (e.g., connect, exec, write, etc.)
+- Simplifying and formatting JSON output for readability
+- Extracting specific fields such as command lines or network activity
+- Correlating behaviors across different event types
+- ...
+
+The goal was simple: to be faster and make the logs more actionable for me. I use these scripts daily, and I keep them in my `$PATH` for quick access during incident response or routine system monitoring.
+
 ## New to Kunai?
 
 Here's how the author describes it:
@@ -19,8 +54,8 @@ URL : https://github.com/kunai-project/kunai
 If you're the kind of person who investigates every unusual system behavior, even a subtle variation in the sound frequency of your CPU fan, Kunai is made for you.
 And if you're a ninja, Kunai might just become your weapon of choice... though I must confess, I still have a soft spot for the katana. :)
 
-## Quick introduction
 
+## Quick introduction
 
 ```
 ./_kunai-amd64.start_without_rules
@@ -45,7 +80,9 @@ Please note that the provided script will load the necessary configuration and w
 
 Let's start with a simple yet effective example to demonstrate how the scripts can be used in practice. Start Kunai as `root` and let it run for a few seconds to collect some activity.
 
+
 ### case 01 - Trigger a sample write
+
 
 In a separate terminal, simulate a simple file write using vim:
 
@@ -53,7 +90,9 @@ In a separate terminal, simulate a simple file write using vim:
 vim -c 'call writefile(["hello world."], "/tmp/hello_there")' -c 'q'
 ```
 
-### case 01 - Investigate the Logs
+
+### case 01 - Investigate the logs
+
 
 Now inspect the log output using the helper script:
 
@@ -64,7 +103,9 @@ cat /tmp/data.json \
   | jq .
 ```
 
+
 ### case 01 - output
+
 
 ```json
 {
@@ -96,10 +137,11 @@ Of course when editing a file using `vim`, the filtered output will look somethi
 }
 ```
 
-
 This example illustrates how you can easily start collecting and inspecting system activity using Kunai and the provided utilities.
 
+
 ## Event filtering scripts
+
 
 The included helper scripts are organized by event type and allow you to quickly filter and inspect specific categories of events captured by Kunai.
 
@@ -115,7 +157,8 @@ Below is a list of the available filters:
 These scripts are useful for narrowing down the data to specific behaviors during an investigation or during live monitoring.
 
 
-## Event View Scripts
+## Event view scripts
+
 
 If, like me, you enjoy reading raw JSON, you will likely still want to simplify the output a bit to improve readability during investigations.
 
@@ -131,7 +174,8 @@ The following scripts are prepared to clean up and reformat Kunai event logs for
 These views are particularly useful when reviewing logs manually or piping output into other tools like `jq` or `grep`.
 
 
-## Case 02 – Extracting the Exact Command Line
+## Case 02 – Extracting the exact command line
+
 
 These views operate on the same principle and accept input via `stdin` enabling quick and flexible investigations through pipelines.
 For example, to extract the exact command lines related to our `vim` write events:
@@ -140,7 +184,8 @@ For example, to extract the exact command lines related to our `vim` write event
 cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh |  grep -i vim | ./kunai.jsons.list_command_lines.to.jsons.sh 
 ```
 
-### Sample Output
+### Sample output
+
 
 ```json
 {
@@ -168,8 +213,8 @@ cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh | grep -i vim |
 In this case, I recommended to **avoid** using the `-r` flag with `jq` to prevent potential gift with escaping or formatting ;) 
 
 
-
 ## Case 03 – Extracting network activity from vim
+
 
 Let’s now imagine a scenario where `vim` is used to execute a `curl` command. 
 
@@ -187,6 +232,7 @@ cat /tmp/data.json | ./kunai.jsons.filter_connect_events.to.jsons.sh |  grep vim
 
 ### Sample Output
 
+
 ```json
 {
   "utc_time": "2025-05-21T23:34:01.996487377Z",
@@ -202,7 +248,9 @@ cat /tmp/data.json | ./kunai.jsons.filter_connect_events.to.jsons.sh |  grep vim
 }
 ```
 
+
 ### viewing ancestor process informatio 
+
 
 You can also retrieve the **ancestor** process of the command (`curl`) using a dedicated script:
 
@@ -233,7 +281,8 @@ cat /tmp/data.json \
 This makes it easy to trace indirect behaviors, such as tools like `vim` spawning network-related commands, which is especially useful for detecting unexpected or suspicious activity. Hmm cool, no ? :) 
 
 
-## Leveraging rules for detections
+# Leveraging rules for detections
+
 
 If you have already taken a look at the log files, you probably notice that on an active system the file can grow quite fast. While this level of detail is excellent for in-depth investigations, it can become overwhelming for daily monitoring.
 
@@ -242,26 +291,3 @@ That's where **rules** come into play.
 As mentioned earlier, I use Kunai not just for forensic analysis/threat hunting too. I consider it as a full replacement for `auditd`. And if you've ever taken a close look at `auditd`, you'll know that while it is a solid tool, Kunai already outperforms it in several key areas.
 
 I believe the rule sets included in this repository help reduce noise by flagging only meaningful events tailored to real-world usage and threat hunting scenarios.
-
-
-## Why I created theses rules 
-
-The core idea behind these rules is simple: In most real-world attack scenarios, an adversary will eventually either use existing tooling on the system or modify configuration files to establish persistence.
-
-With that in mind, this rule set focuses on two main detection strategies:
-
-1. **Monitoring for changes to critical configuration files**  
-   These include files commonly abused for persistence or privilege escalation. The rules are designed to detect specific modifications that could indicate tampering or unauthorized configuration changes.
-
-2. **Identifying uncommon or potentially dangerous tooling**  
-   By cataloging most utilities typically found on a system and classifying them based on usage frequency and risk level, the rules highlight activity involving:
-   - Rarely used or suspicious binaries
-   - Tools commonly abused during post-exploitation
-   - Dual-use utilities leveraged in living-off-the-land techniques
-   - ect
-
-I think this approach aims to reduce noise while maintaining strong coverage of techniques often missed by more generic or purely signature-based systems. 
-For what it's worth, tools like `rkhunter` or `chkrootkit` probably won't alert you to any recent malicious activity on your system. 😉
-
-
-
