@@ -1,0 +1,28 @@
+---
+name: bin_hacking_net_discovery_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_hacking_net_discovery",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_hacking_net_discovery_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(arping|iputils-arping)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(dnsenum|dnsmap|dnsrecon|dnswalk)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(enum4linux|maltego|masscan|metagoofil|recon-ng)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(hping3|ike-scan|nbtscan|nmap|recon-ng|smbmap|ssldump|sslscan|thc-ipv6|theharvester|zenmap)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_05: .data.ancestors ~= "/[^/]*/(arping|iputils-arping)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(dnsenum|dnsmap|dnsrecon|dnswalk)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(enum4linux|maltego|masscan|metagoofil|recon-ng)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_08: .data.ancestors ~= "/[^/]*/(hping3|ike-scan|nbtscan|nmap|recon-ng|smbmap|ssldump|sslscan|thc-ipv6|theharvester|zenmap)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

@@ -1,0 +1,28 @@
+---
+name: config_kernel_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_kernel",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_kernel_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/sysctl.conf($|/)?"
+  $r_02: .data.path ~= "^/etc/sysctl.d(/|$)"
+  $r_03: .data.path ~= ".*/etc/modprobe.conf($|/)?"
+  $r_04: .data.path ~= "^/etc/modprobe.d(/|$)"
+
+condition: any of $r_

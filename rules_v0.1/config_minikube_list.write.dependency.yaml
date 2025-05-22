@@ -1,0 +1,29 @@
+---
+name: config_minikube_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_minikube",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_minikube_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/home/.*/\.minikube(/|$)"
+  $r_02: .data.path ~= ".*/root/\.minikube(/|$)"
+  $r_03: .data.path ~= ".*/etc/systemd/system/minikube\.service($|/)?"
+  $r_04: .data.path ~= ".*/usr/lib/systemd/system/minikube\.service($|/)?"
+  $r_05: .data.path ~= ".*/usr/bin/minikube($|/)?"
+
+condition: any of $r_

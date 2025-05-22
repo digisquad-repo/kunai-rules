@@ -1,0 +1,30 @@
+---
+name: config_system_mount_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_mount",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_system_mount_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/fstab($|/)?"
+  $r_02: .data.path ~= ".*/etc/mtab($|/)?"
+  $r_03: .data.path ~= ".*/etc/fstab.d(/|$)"
+  $r_04: .data.path ~= ".*/etc/auto.master($|/)?"
+  $r_05: .data.path ~= ".*/etc/auto.*($|/)?"
+  $r_06: .data.path ~= "^/etc/autofs(/|$)"
+
+condition: any of $r_

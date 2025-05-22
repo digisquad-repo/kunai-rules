@@ -1,0 +1,44 @@
+---
+name: config_system_systemd_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_systemd",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_system_systemd_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/systemd(/|$)"
+  $r_02: .data.path ~= "^/lib/systemd(/|$)"
+  $r_03: .data.path ~= "^/usr/lib/systemd(/|$)"
+  $r_04: .data.path ~= "^/run/systemd(/|$)"
+  $r_05: .data.path ~= "^/var/lib/systemd(/|$)"
+  $r_06: .data.path ~= "^/etc/systemd/system(/|$)"
+  $r_07: .data.path ~= "^/etc/systemd/user(/|$)"
+  $r_08: .data.path ~= "^/usr/lib/systemd/system(/|$)"
+  $r_09: .data.path ~= "^/usr/lib/systemd/user(/|$)"
+  $r_10: .data.path ~= "^/lib/systemd/system(/|$)"
+  $r_11: .data.path ~= "^/lib/systemd/user(/|$)"
+  $r_12: .data.path ~= "^/run/systemd/system(/|$)"
+  $r_13: .data.path ~= "^/run/systemd/user(/|$)"
+  $r_14: .data.path ~= "^/etc/systemd/system-preset(/|$)"
+  $r_15: .data.path ~= "^/usr/lib/systemd/system-preset(/|$)"
+  $r_16: .data.path ~= "^/etc/systemd/network(/|$)"
+  $r_17: .data.path ~= "^/usr/lib/systemd/network(/|$)"
+  $r_18: .data.path ~= "^/etc/systemd/resolved.conf($|/)?"
+  $r_19: .data.path ~= "^/etc/systemd/logind.conf($|/)?"
+  $r_20: .data.path ~= "^/etc/systemd/journald.conf($|/)?"
+
+condition: any of $r_

@@ -1,0 +1,29 @@
+---
+name: config_users_groups_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_users_groups",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_users_groups_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/passwd($|/)?"
+  $r_02: .data.path ~= ".*/etc/shadow($|/)?"
+  $r_03: .data.path ~= ".*/etc/group($|/)?"
+  $r_04: .data.path ~= ".*/etc/gshadow($|/)?"
+  $r_05: .data.path ~= ".*/etc/security/opasswd($|/)?"
+
+condition: any of $r_

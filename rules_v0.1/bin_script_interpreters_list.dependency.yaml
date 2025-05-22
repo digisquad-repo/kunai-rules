@@ -1,0 +1,29 @@
+---
+name: bin_script_interpreters_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_script_interpreters",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_script_interpreters_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(python|python3|ipython|pypy3)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_01_fix: .data.exe.path ~= "/[^/]*/(python[0-9.]*|ipython[0-9.]*|pypy3[0-9.]*)$"
+
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(perl|ruby|php|lua|node|deno)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(make|awk)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_04: .data.ancestors ~= "/[^/]*/(python|python3|ipython|pypy3)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04_fix: .data.ancestors ~= "/[^/]*/(python[0-9.]*|ipython[0-9.]*|pypy3[0-9.]*)$"
+  $bin_dep_05: .data.ancestors ~= "/[^/]*/(perl|ruby|php|lua|node|deno)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(make|awk)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

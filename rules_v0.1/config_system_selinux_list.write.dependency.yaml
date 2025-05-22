@@ -1,0 +1,26 @@
+---
+name: config_system_selinux_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_selinux",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_system_selinux_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/selinux(/|$)"
+  $r_02: .data.path ~= ".*/etc/selinux/config($|/)?"
+
+condition: any of $r_

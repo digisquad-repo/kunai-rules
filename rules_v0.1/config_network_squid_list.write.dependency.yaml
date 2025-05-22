@@ -1,0 +1,27 @@
+---
+name: config_network_squid_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_network_squid",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_network_squid_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/squid/squid.conf($|/)?"
+  $r_02: .data.path ~= "^/etc/squid/conf.d(/|$)"
+  $r_03: .data.path ~= "^/etc/squid(/|$)"
+
+condition: any of $r_

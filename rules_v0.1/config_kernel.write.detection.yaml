@@ -1,0 +1,29 @@
+---
+name: config_kernel.write.detection
+type: detection
+meta:
+  tags: [
+      "config_kernel",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify config_kernel_list.write.dependency
+
+match-on:
+  events:
+    kunai:
+      - write
+      - write_close
+      - write_config
+
+matches:
+  $dep_01: rule( config_kernel_list.write.dependency)
+condition: $dep_01
+severity: 8

@@ -1,0 +1,56 @@
+---
+name: config_user_shells_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_user_shells",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_user_shells_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/profile($|/)?"
+  $r_02: .data.path ~= "^/etc/profile.d(/|$)"
+  $r_03: .data.path ~= "^/etc/shells($|/)?"
+  $r_04: .data.path ~= "^/etc/bashrc($|/)?"
+  $r_05: .data.path ~= "^/etc/csh.cshrc($|/)?"
+  $r_06: .data.path ~= "^/etc/csh.login($|/)?"
+  $r_07: .data.path ~= "^/etc/fish(/|$)"
+  $r_08: .data.path ~= "^/etc/zsh(/|$)"
+  $r_09: .data.path ~= "^/etc/environment($|/)?"
+  $r_10: .data.path ~= "^/etc/login.defs($|/)?"
+  $r_11: .data.path ~= "^/etc/pam.d(/|$)"
+  $r_12: .data.path ~= "^/etc/securetty($|/)?"
+
+  $r_13: .data.path ~= "^/home/.*/\.bashrc($|/)?"
+  $r_14: .data.path ~= "^/home/.*/\.bash_profile($|/)?"
+  $r_15: .data.path ~= "^/home/.*/\.profile($|/)?"
+  $r_16: .data.path ~= "^/home/.*/\.zshrc($|/)?"
+  $r_17: .data.path ~= "^/home/.*/\.zprofile($|/)?"
+  $r_18: .data.path ~= "^/home/.*/\.cshrc($|/)?"
+  $r_19: .data.path ~= "^/home/.*/\.login($|/)?"
+  $r_20: .data.path ~= "^/home/.*/\.tcshrc($|/)?"
+  $r_21: .data.path ~= "^/home/.*/\.config/fish/config.fish($|/)?"
+
+  $r_22: .data.path ~= "^/root/\.bashrc($|/)?"
+  $r_23: .data.path ~= "^/root/\.bash_profile($|/)?"
+  $r_24: .data.path ~= "^/root/\.profile($|/)?"
+  $r_25: .data.path ~= "^/root/\.zshrc($|/)?"
+  $r_26: .data.path ~= "^/root/\.zprofile($|/)?"
+  $r_27: .data.path ~= "^/root/\.cshrc($|/)?"
+  $r_28: .data.path ~= "^/root/\.login($|/)?"
+  $r_29: .data.path ~= "^/root/\.tcshrc($|/)?"
+  $r_30: .data.path ~= "^/root/\.config/fish/config.fish($|/)?"
+
+condition: any of $r_

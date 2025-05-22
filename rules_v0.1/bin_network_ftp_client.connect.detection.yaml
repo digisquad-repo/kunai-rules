@@ -1,0 +1,28 @@
+---
+name: bin_network_ftp_client.connect.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_ftp_client",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify CONNECT - apply on bin - bin_network_ftp_client_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $bin_dep_01: rule( bin_network_ftp_client_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####  

@@ -1,0 +1,27 @@
+---
+name: config_libvirt_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_libvirt",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_libvirt_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/libvirt(/|$)"
+  $r_02: .data.path ~= ".*/etc/libvirt/libvirtd.conf($|/)?"
+  $r_03: .data.path ~= ".*/etc/libvirt/qemu.conf($|/)?"
+
+condition: any of $r_

@@ -1,0 +1,29 @@
+---
+name: config_network_dns_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_network_dns",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_network_dns_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/resolv.conf($|/)?"
+  $r_02: .data.path ~= ".*/etc/hosts($|/)?"
+  $r_03: .data.path ~= ".*/etc/hostname($|/)?"
+  $r_04: .data.path ~= ".*/etc/nsswitch.conf($|/)?"
+  $r_06: .data.path ~= ".*/etc/systemd/resolved.conf($|/)?"
+
+condition: any of $r_

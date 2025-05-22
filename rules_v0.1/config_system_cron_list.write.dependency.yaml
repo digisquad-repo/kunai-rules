@@ -1,0 +1,33 @@
+---
+name: config_system_cron_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_cron",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_system_cron_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  # $r_01: .data.path ~= ".*/resolv.conf($|/)?" # file match
+
+  $cron_01: .data.path == ".*/etc/anacrontab($|/)?"
+  $cron_02: .data.path == ".*/etc/cron.allow($|/)?"
+  $cron_03: .data.path == ".*/etc/cron.deny($|/)?"
+  $cron_05: .data.path == ".*/etc/crontab($|/)?"
+  $cron_04: .data.path ~= "^/etc/cron(\.d|\.daily|\.hourly|\.monthly|\.weekly)?/($|/)?"
+  $cron_06: .data.path ~= "^/var/spool/cron/($|/)?"
+  # $cron_07: .data.path ~= "^/etc/cron.monthly(/|$)" # all sub dir match
+
+condition: any of $cron_

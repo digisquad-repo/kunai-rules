@@ -1,0 +1,28 @@
+---
+name: config_network_nginx_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_network_nginx",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_network_nginx_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/nginx/nginx.conf($|/)?"
+  $r_02: .data.path ~= "^/etc/nginx/conf.d(/|$)"
+  $r_03: .data.path ~= "^/etc/nginx/sites-available(/|$)"
+  $r_04: .data.path ~= "^/etc/nginx/sites-enabled(/|$)"
+
+condition: any of $r_
