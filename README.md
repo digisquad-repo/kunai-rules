@@ -62,11 +62,11 @@ I use them daily and keep them in my `$PATH` for fast access during incident res
 
 These documents demonstrate how to put the repository's tools and rules into practical use:
 
-- [00 – How to Use This](./00_HOWTOUSE.md)  
+- [00 – How to Use This](./doc/00_HOWTOUSE.md)  
   How to use the repository content.
 
-- [01 – Quick Demo and Overview of Scripts Usage](./01_QUICK_DEMO.md)  
+- [01 – Quick Demo and Overview of Scripts Usage](./doc/01_QUICK_DEMO.md)  
   Use the scripts to filter, inspect, and trace events using quick shell script toolkits.
 
-- [02 – Quick Cheatsheet](./02_SCRIPTS_CHEATSHEET.md)  
+- [02 – Quick Cheatsheet](./doc/02_SCRIPTS_CHEATSHEET.md)  
   Scripts cheatsheet for quick reference.
