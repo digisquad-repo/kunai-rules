@@ -8,9 +8,9 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       # #
-      "event_write", 
-      "event_write_close", 
-      "event_write_config"
+      "event_write",
+      "event_write_close",
+      "event_write_config",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
   comments:
@@ -27,6 +27,3 @@ matches:
   $dep_01: rule( config_network_postgresql_list.write.dependency)
 condition: $dep_01
 severity: 8
-
-
-
