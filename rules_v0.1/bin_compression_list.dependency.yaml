@@ -1,0 +1,65 @@
+---
+name: bin_compression_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_compression",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - bin_compression_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  # $bin_dep_01: .data.exe.path ~= ".*(7z|7za|7zr).*"
+  # $bin_dep_02: .data.exe.path ~= ".*(bunzip|bunzip2|bzip2).*"
+  # $bin_dep_03: .data.exe.path ~= ".*(bzcat|bzcmp|bzdiff|bzless|bzmore).*"
+  # $bin_dep_04: .data.exe.path ~= ".*(dact|gunzip|gzexe|gzip).*"
+  # $bin_dep_05: .data.exe.path ~= ".*(lz4|lzcat|lzma|lzop|unlz4|unlzma|unlzop).*"
+  # $bin_dep_06: .data.exe.path ~= ".*(unxz|unzstd|xz|xzcat).*"
+  # $bin_dep_07: .data.exe.path ~= ".*(zcat|zcmp|zdiff|zegrep|zfgrep|zgrep).*"
+  # $bin_dep_08: .data.exe.path ~= ".*(unzip|zip|zless|zmore|zstd).*"
+  # $bin_dep_09: .data.exe.path ~= ".*(untar|tar|cpio|pax|ar|shar).*"
+  # $bin_dep_10: .data.exe.path ~= ".*(unar|p7zip|xarchiver|ark|peazip|lzip|plzip|pbzip2|lbzip2|pixz|pigz|unpigz).*" # classification to split ?
+
+  # $bin_dep_11: .data.ancestors ~= ".*(7z|7za|7zr).*"
+  # $bin_dep_12: .data.ancestors ~= ".*(bunzip|bunzip2|bzip2).*"
+  # $bin_dep_13: .data.ancestors ~= ".*(bzcat|bzcmp|bzdiff|bzless|bzmore).*"
+  # $bin_dep_14: .data.ancestors ~= ".*(dact|gunzip|gzexe|gzip).*"
+  # $bin_dep_15: .data.ancestors ~= ".*(lz4|lzcat|lzma|lzop|unlz4|unlzma|unlzop).*"
+  # $bin_dep_16: .data.ancestors ~= ".*(unxz|unzstd|xz|xzcat).*"
+  # $bin_dep_17: .data.ancestors ~= ".*(zcat|zcmp|zdiff|zegrep|zfgrep|zgrep).*"
+  # $bin_dep_18: .data.ancestors ~= ".*(unzip|zip|zless|zmore|zstd).*"
+  # $bin_dep_19: .data.ancestors ~= ".*(untar|tar|cpio|pax|ar|shar).*"
+  # $bin_dep_20: .data.ancestors ~= ".*(unar|p7zip|xarchiver|ark|peazip|lzip|plzip|pbzip2|lbzip2|pixz|pigz|unpigz).*" # classification to split ?
+
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(7z|7za|7zr)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(bunzip|bunzip2|bzip2)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(bzcat|bzcmp|bzdiff|bzless|bzmore)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(dact|gunzip|gzexe|gzip)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_05: .data.exe.path ~= "/[^/]*/(lz4|lzcat|lzma|lzop|unlz4|unlzma|unlzop)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.exe.path ~= "/[^/]*/(unxz|unzstd|xz|xzcat)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.exe.path ~= "/[^/]*/(zcat|zcmp|zdiff|zegrep|zfgrep|zgrep)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_08: .data.exe.path ~= "/[^/]*/(unzip|zip|zless|zmore|zstd)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_09: .data.exe.path ~= "/[^/]*/(untar|tar|cpio|pax|ar|shar)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_10: .data.exe.path ~= "/[^/]*/(unar|p7zip|xarchiver|ark|peazip|lzip|plzip|pbzip2|lbzip2|pixz|pigz|unpigz)(-[a-zA-Z0-9._]+)?$" # classification to split ?
+
+  $bin_dep_11: .data.ancestors ~= "/[^/]*/(7z|7za|7zr)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_12: .data.ancestors ~= "/[^/]*/(bunzip|bunzip2|bzip2)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_13: .data.ancestors ~= "/[^/]*/(bzcat|bzcmp|bzdiff|bzless|bzmore)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_14: .data.ancestors ~= "/[^/]*/(dact|gunzip|gzexe|gzip)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_15: .data.ancestors ~= "/[^/]*/(lz4|lzcat|lzma|lzop|unlz4|unlzma|unlzop)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_16: .data.ancestors ~= "/[^/]*/(unxz|unzstd|xz|xzcat)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_17: .data.ancestors ~= "/[^/]*/(zcat|zcmp|zdiff|zegrep|zfgrep|zgrep)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_18: .data.ancestors ~= "/[^/]*/(unzip|zip|zless|zmore|zstd)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_19: .data.ancestors ~= "/[^/]*/(untar|tar|cpio|pax|ar|shar)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_20: .data.ancestors ~= "/[^/]*/(unar|p7zip|xarchiver|ark|peazip|lzip|plzip|pbzip2|lbzip2|pixz|pigz|unpigz)(-[a-zA-Z0-9._]+)?$" # classification to split ?
+
+condition: any of $bin_dep_
+# reminder :
+# condition: $is_compression and $not_noise
+# condition: any of $bin_dep_

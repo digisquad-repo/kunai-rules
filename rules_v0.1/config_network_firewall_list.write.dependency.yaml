@@ -1,0 +1,34 @@
+---
+name: config_network_firewall_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_network_firewall",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_network_firewall_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/iptables/rules.v4($|/)?"
+  $r_02: .data.path ~= ".*/etc/iptables/rules.v6($|/)?"
+  $r_03: .data.path ~= "^/etc/iptables(/|$)"
+  $r_04: .data.path ~= ".*/etc/nftables.conf($|/)?"
+  $r_05: .data.path ~= "^/etc/nftables.d(/|$)"
+  $r_06: .data.path ~= ".*/etc/ufw/ufw.conf($|/)?"
+  $r_07: .data.path ~= "^/etc/ufw(/|$)"
+  $r_08: .data.path ~= ".*/etc/firewalld/firewalld.conf($|/)?"
+  $r_09: .data.path ~= "^/etc/firewalld(/|$)"
+  $r_10: .data.path ~= ".*/etc/pf.conf($|/)?"
+
+condition: any of $r_

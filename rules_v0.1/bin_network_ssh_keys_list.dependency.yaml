@@ -1,0 +1,21 @@
+---
+name: bin_network_ssh_keys_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_network_ssh_keys",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_network_ssh_keys_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(ssh-keygen|ssh-copy-id|ssh-add|ssh-agent|ssh-keyscan)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(ssh-keygen|ssh-copy-id|ssh-add|ssh-agent|ssh-keyscan)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

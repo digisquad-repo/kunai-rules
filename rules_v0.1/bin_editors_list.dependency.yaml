@@ -1,0 +1,25 @@
+---
+name: bin_editors_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_editors",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_browsers_headless_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+# match-on:
+#   events:
+#     kunai: [execve, execve_script, connect]
+matches:
+  $r_01: .data.exe.path ~= "/[^/]*/(vim|vim.basic|vi|nano|emacs|gedit|kate|micro|view|rview|rvim|vimdiff)(-[a-zA-Z0-9._]+)?$"
+  $r_02: .data.ancestors ~= "/[^/]*/(vim|vim.basic|vi|nano|emacs|gedit|kate|micro|view|rview|rvim|vimdiff)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $r_

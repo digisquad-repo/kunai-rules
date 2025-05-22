@@ -1,0 +1,35 @@
+---
+name: config_container_docker_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_container_docker",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_container_docker_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/usr/bin/docker($|/)?"
+  $r_02: .data.path ~= ".*/usr/bin/dockerd($|/)?"
+  $r_03: .data.path ~= ".*/usr/local/bin/docker($|/)?"
+  $r_04: .data.path ~= ".*/usr/local/bin/dockerd($|/)?"
+  $r_06: .data.path ~= ".*/etc/docker/daemon.json($|/)?"
+  $r_07: .data.path ~= ".*/etc/sysconfig/docker($|/)?"
+  $r_08: .data.path ~= ".*/etc/default/docker($|/)?"
+  $r_09: .data.path ~= ".*/run/docker.sock($|/)?"
+  $r_10: .data.path ~= ".*/var/run/docker.sock($|/)?"
+  $r_11: .data.path ~= ".*/(usr/lib|etc)/systemd/system/docker\.(service|socket)($|/)?"
+  $r_05: .data.path ~= "^/etc/docker(/|$)"
+
+condition: any of $r_

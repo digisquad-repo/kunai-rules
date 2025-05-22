@@ -1,0 +1,29 @@
+---
+name: config_system_sudoers_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_sudoers",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_system_sudoers_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/sudoers($|/)?"
+  $r_02: .data.path ~= "^/etc/sudoers.d(/|$)"
+  $r_03: .data.path ~= ".*/etc/pam.d/sudo($|/)?"
+  $r_04: .data.path ~= ".*/usr/bin/sudo($|/)?"
+  $r_05: .data.path ~= ".*/usr/bin/sudoedit($|/)?"
+
+condition: any of $r_

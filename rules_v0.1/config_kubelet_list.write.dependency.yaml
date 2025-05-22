@@ -1,0 +1,29 @@
+---
+name: config_kubelet_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_kubelet",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_kubelet_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/kubernetes/kubelet.conf($|/)?"
+  $r_02: .data.path ~= "^/etc/systemd/system/kubelet.service.d(/|$)"
+  $r_03: .data.path ~= ".*/usr/lib/systemd/system/kubelet.service($|/)?"
+  $r_04: .data.path ~= ".*/etc/systemd/system/kubelet.service($|/)?"
+  $r_05: .data.path ~= ".*/var/run/kubelet.sock($|/)?"
+
+condition: any of $r_

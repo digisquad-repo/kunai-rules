@@ -1,0 +1,33 @@
+---
+name: config_network_card_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_network_card",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_network_card_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/network/interfaces($|/)?"
+  $r_02: .data.path ~= "^/etc/network/interfaces.d(/|$)"
+  $r_03: .data.path ~= ".*/etc/netplan/.*\.yaml($|/)?"
+  $r_04: .data.path ~= "^/etc/netplan(/|$)"
+  $r_05: .data.path ~= ".*/etc/NetworkManager/NetworkManager.conf($|/)?"
+  $r_06: .data.path ~= "^/etc/NetworkManager/system-connections(/|$)"
+  $r_07: .data.path ~= ".*/etc/sysconfig/network-scripts/ifcfg-.*($|/)?"
+  $r_08: .data.path ~= "^/etc/sysconfig/network-scripts(/|$)"
+  $r_09: .data.path ~= ".*/etc/sysconfig/network($|/)?"
+
+condition: any of $r_

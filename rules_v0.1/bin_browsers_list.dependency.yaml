@@ -1,0 +1,39 @@
+---
+name: bin_browsers_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_browsers",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify EXECVE EXECVE_SCRIPT - apply on bin - bin_browsers_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  # $bin_dep_01: .data.exe.path ~= "/.*(google-chrome|chrome|chromium).*"
+  # $bin_dep_02: .data.exe.path ~= "/.*(firefox|mozilla).*"
+  # $bin_dep_03: .data.exe.path ~= "/.*(brave|opera|vivaldi|midori|epiphany|konqueror|falkon|rekonq|safari|iceweasel|icecat|palemoon|seamonkey).*"
+  # $bin_dep_04: .data.exe.path ~= "/.*(lynx|w3m|elinks|netsurf|surf).*"
+
+  # $bin_dep_05: .data.ancestors ~= "/.*(google-chrome|chrome|chromium).*"
+  # $bin_dep_06: .data.ancestors ~= "/.*(firefox|mozilla).*"
+  # $bin_dep_07: .data.ancestors ~= "/.*(brave|opera|vivaldi|midori|epiphany|konqueror|falkon|rekonq|safari|iceweasel|icecat|palemoon|seamonkey).*"
+  # $bin_dep_08: .data.ancestors ~= "/.*(lynx|w3m|elinks|netsurf|surf).*"
+
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(google-chrome|chrome|chromium)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(firefox|mozilla)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(brave|opera|vivaldi|midori|epiphany|konqueror|falkon|rekonq|safari|iceweasel|icecat|palemoon|seamonkey)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(lynx|w3m|elinks|netsurf|surf)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_05: .data.ancestors ~= "/[^/]*/(google-chrome|chrome|chromium)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(firefox|mozilla)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(brave|opera|vivaldi|midori|epiphany|konqueror|falkon|rekonq|safari|iceweasel|icecat|palemoon|seamonkey)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_08: .data.ancestors ~= "/[^/]*/(lynx|w3m|elinks|netsurf|surf)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

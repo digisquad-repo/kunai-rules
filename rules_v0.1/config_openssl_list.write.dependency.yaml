@@ -1,0 +1,27 @@
+---
+name: config_openssl_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_openssl",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_openssl_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/ssl/certs(/|$)"
+  $r_02: .data.path ~= "^/etc/pki(/|$)"
+  $r_03: .data.path ~= ".*/etc/ssl/openssl.cnf($|/)?"
+
+condition: any of $r_

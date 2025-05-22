@@ -1,0 +1,42 @@
+---
+name: config_user_others_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_user_others",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_user_others_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/root/\.gitconfig($|/)?"
+  $r_02: .data.path ~= ".*/root/\.vimrc($|/)?"
+  $r_03: .data.path ~= ".*/root/\.config/nvim/init.vim($|/)?"
+  $r_04: .data.path ~= ".*/root/\.config/nvim/init.lua($|/)?"
+  $r_05: .data.path ~= "^/root/\.gvm(/|$)"
+
+  $r_06: .data.path ~= ".*/home/.*/\.gitconfig($|/)?"
+  $r_07: .data.path ~= ".*/home/.*/\.vimrc($|/)?"
+  $r_08: .data.path ~= ".*/home/.*/\.config/nvim/init.vim($|/)?"
+  $r_09: .data.path ~= ".*/home/.*/\.config/nvim/init.lua($|/)?"
+  $r_10: .data.path ~= "^/home/.*/\.gvm(/|$)"
+
+  $r_11: .data.path ~= "^/home/.*/\.config/Code(/|$)"
+  $r_12: .data.path ~= "^/root/\.config/Code(/|$)"
+  $r_13: .data.path ~= ".*/root/\.tmux.conf($|/)?"
+  $r_14: .data.path ~= ".*/home/.*/\.tmux.conf($|/)?"
+  $r_15: .data.path ~= ".*/root/\.screenrc($|/)?"
+  $r_16: .data.path ~= ".*/home/.*/\.screenrc($|/)?"
+
+condition: any of $r_

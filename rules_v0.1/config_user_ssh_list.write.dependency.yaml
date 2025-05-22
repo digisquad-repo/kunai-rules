@@ -1,0 +1,33 @@
+---
+name: config_user_ssh_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_user_ssh",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_user_ssh_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/root/\.ssh(/|$)"
+  $r_02: .data.path ~= ".*/root/\.ssh/authorized_keys($|/)?"
+  $r_03: .data.path ~= ".*/root/\.ssh/known_hosts($|/)?"
+  $r_04: .data.path ~= ".*/root/\.ssh/config($|/)?"
+
+  $r_05: .data.path ~= "^/home/.*/\.ssh(/|$)"
+  $r_06: .data.path ~= ".*/home/.*/\.ssh/authorized_keys($|/)?"
+  $r_07: .data.path ~= ".*/home/.*/\.ssh/known_hosts($|/)?"
+  $r_08: .data.path ~= ".*/home/.*/\.ssh/config($|/)?"
+
+condition: any of $r_

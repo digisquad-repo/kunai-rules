@@ -1,0 +1,28 @@
+---
+name: config_network_mysql_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_network_mysql",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_network_mysql_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/mysql/my.cnf($|/)?"
+  $r_02: .data.path ~= "^/etc/mysql/mysql.conf.d(/|$)"
+  $r_03: .data.path ~= "^/etc/mysql/mariadb.conf.d(/|$)"
+  $r_04: .data.path ~= "^/etc/my.cnf.d(/|$)" # CentOS/RHEL-style includes
+
+condition: any of $r_

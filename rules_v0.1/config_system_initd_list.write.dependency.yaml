@@ -1,0 +1,32 @@
+---
+name: config_system_initd_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_initd",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_system_initd_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= ".*/etc/inittab($|/)?"
+  $r_02: .data.path ~= ".*/etc/rc.local($|/)?"
+  $r_03: .data.path ~= ".*/etc/rc.common($|/)?"
+
+  $r_04: .data.path ~= "^/etc/init.d(/|$)"
+  $r_05: .data.path ~= "^/etc/init(/|$)"
+  $r_06: .data.path ~= "^/etc/rc.d(/|$)"
+  $r_07: .data.path ~= "^/etc/rc*.d(/|$)"
+
+condition: any of $r_
