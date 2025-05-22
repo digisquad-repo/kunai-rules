@@ -1,10 +1,21 @@
-# Kunai rules & scripts 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [What Is Kunai?](#what-is-kunai)
+- [Why This Repository?](#why-this-repository)
+  - [Goals of the Rule Set](#goals-of-the-rule-set)
+  - [Purpose of the Scripts](#purpose-of-the-scripts)
+- [Usage Guides](#usage-guides)
+
+---
+
+# Kunai rules & scripts
 
 ## Introduction
 
 This repository provides a set of **detection rules** and **shell-based helper scripts** designed to improve system visibility and threat detection on Linux using [Kunai](https://github.com/kunai-project/kunai).
 
-Think of it as a pragmatic alternative to `auditd` and a practical toolkit for investigating binaries, monitoring systems, or building lightweight detection pipelines.
+Think of it as a pragmatic alternative to `auditd` — and a practical toolkit for investigating binaries, monitoring systems, or building lightweight detection pipelines.
 
 ---
 
@@ -14,23 +25,23 @@ As described by its author:
 
 > Kunai is a powerful tool designed to bring actionable insights for tasks such as security monitoring and threat hunting on Linux systems. Think of it as the Linux counterpart to Sysmon on Windows, tailored for comprehensive and precise event monitoring.
 
-If you're the kind of person who investigates every unusual system behavior even a subtle change in CPU fan frequency then kunai is for you.  
-Additionnaly, if you're a ninja, this might be your next weapon of choice... although I still prefer the katana. 😉
+If you're the kind of person who investigates every unusual system behavior — even a subtle change in CPU fan frequency — then Kunai is for you.  
+Additionally, if you're a ninja, this might be your next weapon of choice... although I still prefer the katana. 😉
 
 ---
 
 ## Why this repository?
 
-### Goals of the rules set
+### Goals of the rule sets
 
-Most attacks rely on either:
+Most attacks rely on one (or more) of the following:
 - Existing system utilities (LOLbins, scripting, etc.)
 - Modifying configuration files to establish persistence
 - ...
 
 This rule set was designed with those patterns in mind. It focuses on:
 - Detecting changes to critical configuration files
-- Highlighting usage of uncommon or potentially dangerous binaries
+- Highlighting the use of uncommon or potentially dangerous binaries
 - Reducing noise while surfacing meaningful signals
 - ...
 
@@ -51,6 +62,11 @@ I use them daily and keep them in my `$PATH` for fast access during incident res
 
 These documents demonstrate how to put the repository's tools and rules into practical use:
 
-- [00 - How to use this](./00_HOWTOUSE.md) - How to use the repository content.
-- [01 - Quick demo and overview of scripts usage](./01_QUICK_DEMO.md) - Use the script to filter, inspect, and trace events using quick shell scripts toolkits.
-- [02 - Quick cheatsheet ](./02_SCRIPTS_CHEATSHEET.md) - Scripts Cheatsheet 
+- [00 – How to Use This](./00_HOWTOUSE.md)  
+  How to use the repository content.
+
+- [01 – Quick Demo and Overview of Scripts Usage](./01_QUICK_DEMO.md)  
+  Use the scripts to filter, inspect, and trace events using quick shell script toolkits.
+
+- [02 – Quick Cheatsheet](./02_SCRIPTS_CHEATSHEET.md)  
+  Scripts cheatsheet for quick reference.
