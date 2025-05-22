@@ -56,8 +56,7 @@ And if you're a ninja, Kunai might just become your weapon of choice... though I
 
 ## Usage Guides
 
-
-These documents go beyond the basics and show how you can actually use the tools in real-world situations.
+These documents show how you can actually use the tools and rules provided in this repository.
 
 - [01 – Script usage guide](./doc/01_HOWTOUSE_SCRIPTS.md) - Use the script to filter, inspect, and trace events using quick shell scripts toolkits.
 - [02 – Repo rules based guide](./doc/02_HOWTOUSE_RULES.md) - Intro to the logic behind the detection rules and how to use the rules in this repository.
