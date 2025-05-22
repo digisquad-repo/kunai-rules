@@ -113,7 +113,6 @@ In a separate terminal, simulate a simple file write using vim:
 vim -c 'call writefile(["hello world."], "/tmp/hello_there")' -c 'q'
 ```
 
-
 ### Case 01 - Investigate the logs
 
 
