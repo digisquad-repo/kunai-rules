@@ -51,6 +51,6 @@ I use them daily and keep them in my `$PATH` for fast access during incident res
 
 These documents demonstrate how to put the repository's tools and rules into practical use:
 
-- [01 – Script Usage Guide](./doc/01_HOWTOUSE_SCRIPTS.md) - Use the scripts to filter, inspect, and trace events using small composable shell tools.
-- [02 – Rule-Based Detection Guide](./doc/02_HOWTOUSE_RULES.md) -  Understand the logic behind the rules and how to apply them for effective monitoring.
+- [01 – Script usage guide](./doc/01_HOWTOUSE_SCRIPTS.md) - Use the scripts to filter, inspect, and trace events using small shell tools.
+- [02 – Rule-based detection guide](./doc/02_HOWTOUSE_RULES.md) -  Understand the logic behind the rules and how to apply them for effective monitoring.
 
