@@ -1,0 +1,84 @@
+# UUID identifying the host. This is auto-generated and should not be changed.
+host_uuid: c030b40d-0eab-417b-b33a-22d952357984
+
+max_buffered_events: 4096
+max_eps_fs: 2048
+workers: null
+send_data_min_len: null
+harden: false
+
+output:
+  path: /dev/stdout
+  rotate_size: null
+  max_size: null
+  buffered: false
+
+scanner:
+  # Path to files or directories containing Kunai detection/filtering rules to load in the engine.
+  # Supported file extensions: kun, kunai, gen, gene.
+  rules: [   ]
+
+  # Path to files or directories containing IoCs to be loaded.
+  # Supported file extensions: ioc.
+  iocs: [   ]
+
+  # Path to files or directories containing YARA rules.
+  # Supported file extensions: yar, yara.
+  yara: []
+
+  min_severity: 0
+
+  # Ensure every positive YARA file scan will be displayed.
+  show_positive_file_scan: true
+
+events:
+  # Enable or disable specific events.
+  execve:
+    enable: true
+  execve_script:
+    enable: true
+  exit:
+    enable: true
+  exit_group:
+    enable: true
+  clone:
+    enable: true
+  prctl:
+    enable: true
+  kill:
+    enable: true
+  ptrace:
+    enable: true
+  init_module:
+    enable: true
+  bpf_prog_load:
+    enable: true
+  bpf_socket_filter:
+    enable: true
+  mprotect_exec:
+    enable: true
+  mmap_exec:
+    enable: true
+  connect:
+    enable: true
+  dns_query:
+    enable: true
+  send_data:
+    enable: true
+  read:
+    enable: false
+  read_config:
+    enable: false
+  write:
+    enable: true
+  write_config:
+    enable: true
+  file_rename:
+    enable: false
+  file_unlink:
+    enable: false
+  write_close:
+    enable: false
+  file_scan:
+    enable: true
+
