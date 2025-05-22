@@ -1,4 +1,4 @@
 #!/bin/bash 
 
-./_kunai-amd64 run -c ./config.rules | jq -c  > /tmp/data.json
+./_kunai-amd64 run -c ./config.rules  > /tmp/data.json
 
