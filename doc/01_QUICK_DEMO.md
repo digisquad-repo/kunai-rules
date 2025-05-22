@@ -173,6 +173,15 @@ Of course when editing a file using `vim`, the filtered output will look somethi
 These views operate on the same principle and accept input via `stdin` enabling quick and flexible investigations through pipelines.
 For example, to extract the exact command lines related to our `vim` write events:
 
+```bash
+cat /tmp/data.json \
+  | ./kunai.jsons.view_events_write.to.jsons.sh \
+  | grep -i vim \
+  | ./kunai.jsons.list_command_lines.to.jsons.sh
+```
+
+But I prefer onliner version : 
+
 ```bash 
 cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh |  grep -i vim | ./kunai.jsons.list_command_lines.to.jsons.sh 
 ```
@@ -200,6 +209,17 @@ cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh |  grep -i vim 
 I believe this shoud allows you to quickly review how specific commands were executed making it easier to trace actions during an investigation.
 Optionnaly, if you prefer to extract only the command line associated with a matching event, you can use the following pipeline:
 
+
+```bash
+cat /tmp/data.json \
+  | ./kunai.jsons.view_events_write.to.jsons.sh \
+  | grep -i vim \
+  | ./kunai.jsons.list_command_lines.to.jsons.sh \
+  | jq ".command_line"
+```
+
+But I prefer onliner : 
+
 ```bash
 cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | ./kunai.jsons.list_command_lines.to.jsons.sh | jq ".command_line"
 ```
@@ -219,6 +239,16 @@ vim -c '!curl https://google.com' -c 'q'
 ```
 
 In this case, `vim` launches `curl`, which initiates a connection to `google.com`. You can easily extract and view the corresponding event and its details using the following command:
+
+```bash
+cat /tmp/data.json \
+  | ./kunai.jsons.filter_connect_events.to.jsons.sh \
+  | grep vim \
+  | ./kunai.jsons.view_network_events.to.jsons.sh
+```
+
+But I prefer oneliner:
+
 
 ```bash
 cat /tmp/data.json | ./kunai.jsons.filter_connect_events.to.jsons.sh |  grep vim |  ./kunai.jsons.view_network_events.to.jsons.sh
@@ -253,6 +283,12 @@ cat /tmp/data.json \
   | ./kunai.jsons.filter_connect_events.to.jsons.sh \
   | grep vim \
   | ./kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
+```
+
+But I prefer oneliner:
+
+```bash
+cat /tmp/data.json | ./kunai.jsons.filter_connect_events.to.jsons.sh | grep vim | ./kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
 ```
 
 ### Case 03 - Output
