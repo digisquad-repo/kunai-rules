@@ -1,0 +1,32 @@
+---
+name: {{ TARGET_NAME_DETECTION }}
+type: {{ TARGET_TYPE }}
+meta:
+  tags: [
+      "{{ TARGET_FIRST_TAG }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_{{ TARGET_TYPE }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write", 
+      "event_write_close", 
+      "event_write_config"
+    ]
+  authors: [" {{ TARGET_AUTHOR }}"]
+  comments:
+    - {{ TARGET_TYPE }} rule - identify {{ TARGET_NAME_DEPENDENCY }}
+
+match-on:
+  events:
+    kunai:
+      - write
+      - write_close
+      - write_config
+
+matches:
+  $dep_01: rule( {{ TARGET_NAME_DEPENDENCY }})
+condition: $dep_01
+severity: 8
+
+
+
