@@ -45,6 +45,11 @@ This rule set was designed with those patterns in mind. It focuses on:
 - Reducing noise while surfacing meaningful signals
 - ...
 
+For more information, see the following document : 
+- [03 - Rules Structure](./doc/03_RULES_STRUCTURE.md)  
+
+
+
 ### Purpose of the scripts
 
 Kunai's raw JSON logs are powerful, but not exactly easy to work with at scale. These scripts help:
@@ -56,17 +61,27 @@ Kunai's raw JSON logs are powerful, but not exactly easy to work with at scale. 
 
 I use them daily and keep them in my `$PATH` for fast access during incident response and system monitoring.
 
+For more information, see the following document : 
+- [00 - How to Use This](./doc/00_HOWTOUSE.md)  
+- [01 - Quick Demo and Overview of Scripts Usage](./doc/01_QUICK_DEMO.md)  
+- [02 - Quick Cheatsheet](./doc/02_SCRIPTS_CHEATSHEET.md)  
 ---
 
 ## Usage guides
 
 These documents demonstrate how to put the repository's tools and rules into practical use:
 
-- [00 – How to Use This](./doc/00_HOWTOUSE.md)  
+- [00 - How to Use This](./doc/00_HOWTOUSE.md)  
   How to use the repository content.
 
-- [01 – Quick Demo and Overview of Scripts Usage](./doc/01_QUICK_DEMO.md)  
+- [01 - Quick Demo and Overview of Scripts Usage](./doc/01_QUICK_DEMO.md)  
   Use the scripts to filter, inspect, and trace events using quick shell script toolkits.
 
-- [02 – Quick Cheatsheet](./doc/02_SCRIPTS_CHEATSHEET.md)  
+- [02 - Quick Cheatsheet](./doc/02_SCRIPTS_CHEATSHEET.md)  
   Scripts cheatsheet for quick reference.
+
+- [03 - Rules Structure](./doc/03_RULES_STRUCTURE.md)  
+  For details on how rules are named, organized etc.
+  
+
+
