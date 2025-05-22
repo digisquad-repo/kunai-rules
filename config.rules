@@ -1,0 +1,271 @@
+# UUID identifying the host. This is auto-generated and should not be changed.
+host_uuid: c030b40d-0eab-417b-b33a-22d952357984
+
+max_buffered_events: 4096
+max_eps_fs: 2048
+workers: null
+send_data_min_len: null
+harden: false
+
+output:
+  path: /dev/stdout
+  rotate_size: null
+  max_size: null
+  buffered: false
+
+scanner:
+  # Path to files or directories containing Kunai detection/filtering rules to load in the engine.
+  # Supported file extensions: kun, kunai, gen, gene.
+  rules: [
+      "./rules_v0.1/bin_exclusion_common.dependency.yaml",
+      "./rules_v0.1/bin_system_wiper_list.dependency.yaml",
+      "./rules_v0.1/bin_hacking_c2_framework_list.dependency.yaml",
+      "./rules_v0.1/bin_hacking_wireless_list.dependency.yaml",
+      "./rules_v0.1/config_system_selinux_list.write.dependency.yaml",
+      "./rules_v0.1/config_openssl_list.write.dependency.yaml",
+      "./rules_v0.1/bin_hacking_metasploit_list.dependency.yaml",
+      "./rules_v0.1/bin_network_firewall_list.dependency.yaml",
+      "./rules_v0.1/config_network_card_list.write.dependency.yaml",
+      "./rules_v0.1/config_system_initd_list.write.dependency.yaml",
+      "./rules_v0.1/bin_hacking_responder_list.dependency.yaml",
+      "./rules_v0.1/bin_hacking_net_discovery_list.dependency.yaml",
+      "./rules_v0.1/bin_network_tunnel_list.dependency.yaml",
+      "./rules_v0.1/bin_power_mgmt_list.dependency.yaml",
+      "./rules_v0.1/config_kubelet_list.write.dependency.yaml",
+      "./rules_v0.1/config_network_mysql_list.write.dependency.yaml",
+      "./rules_v0.1/bin_daily_cmd_list.dependency.yaml",
+      "./rules_v0.1/bin_hacking_brute_force_list.dependency.yaml",
+      "./rules_v0.1/config_libvirt_list.write.dependency.yaml",
+      "./rules_v0.1/config_user_others_list.write.dependency.yaml",
+      "./rules_v0.1/bin_browsers_headless_list.dependency.yaml",
+      "./rules_v0.1/bin_kernel_list.dependency.yaml",
+      "./rules_v0.1/bin_system_shell_multiplexer_list.dependency.yaml",
+      "./rules_v0.1/bin_hacking_net_list.dependency.yaml",
+      "./rules_v0.1/config_users_groups_list.write.dependency.yaml",
+      "./rules_v0.1/bin_network_rdp_client_list.dependency.yaml",
+      "./rules_v0.1/bin_browsers_list.dependency.yaml",
+      "./rules_v0.1/bin_system_diag_list.dependency.yaml",
+      "./rules_v0.1/config_network_postgresql_list.write.dependency.yaml",
+      "./rules_v0.1/config_system_systemd_list.write.dependency.yaml",
+      "./rules_v0.1/bin_network_diag_list.dependency.yaml",
+      "./rules_v0.1/config_kernel_list.write.dependency.yaml",
+      "./rules_v0.1/config_network_mongo_list.write.dependency.yaml",
+      "./rules_v0.1/bin_network_ssh_client_list.dependency.yaml",
+      "./rules_v0.1/bin_system_recon_list.dependency.yaml",
+      "./rules_v0.1/bin_system_shell_list.dependency.yaml",
+      "./rules_v0.1/bin_compression_list.dependency.yaml",
+      "./rules_v0.1/bin_pkg_mgmt_list.dependency.yaml",
+      "./rules_v0.1/bin_editors_list.dependency.yaml",
+      "./rules_v0.1/config_system_sudoers_list.write.dependency.yaml",
+      "./rules_v0.1/config_system_cron_list.write.dependency.yaml",
+      "./rules_v0.1/bin_hacking_reverse_list.dependency.yaml",
+      "./rules_v0.1/config_network_redis_list.write.dependency.yaml",
+      "./rules_v0.1/bin_network_admin_list.dependency.yaml",
+      "./rules_v0.1/bin_filesystem_mount_list.dependency.yaml",
+      "./rules_v0.1/bin_network_http_client_list.dependency.yaml",
+      "./rules_v0.1/config_network_rsync_list.write.dependency.yaml",
+      "./rules_v0.1/config_network_dns_list.write.dependency.yaml",
+      "./rules_v0.1/config_network_firewall_list.write.dependency.yaml",
+      "./rules_v0.1/config_user_ssh_list.write.dependency.yaml",
+      "./rules_v0.1/config_system_apparmor_list.write.dependency.yaml",
+      "./rules_v0.1/config_dmcrypt_list.write.dependency.yaml",
+      "./rules_v0.1/config_container_docker_list.write.dependency.yaml",
+      "./rules_v0.1/bin_hacking_impacket_list.dependency.yaml",
+      "./rules_v0.1/bin_string_search_list.dependency.yaml",
+      "./rules_v0.1/bin_forensics_hardware_list.dependency.yaml",
+      "./rules_v0.1/config_network_apache_list.write.dependency.yaml",
+      "./rules_v0.1/bin_build_list.dependency.yaml",
+      "./rules_v0.1/bin_debug_list.dependency.yaml",
+      "./rules_v0.1/bin_hacking_mimikatz_list.dependency.yaml",
+      "./rules_v0.1/config_network_ssh_list.write.dependency.yaml",
+      "./rules_v0.1/config_minikube_list.write.dependency.yaml",
+      "./rules_v0.1/bin_hacking_web_list.dependency.yaml",
+      "./rules_v0.1/bin_script_interpreters_list.dependency.yaml",
+      "./rules_v0.1/bin_network_ftp_client_list.dependency.yaml",
+      "./rules_v0.1/bin_forensics_list.dependency.yaml",
+      "./rules_v0.1/bin_network_ssh_keys_list.dependency.yaml",
+      "./rules_v0.1/config_network_nginx_list.write.dependency.yaml",
+      "./rules_v0.1/config_user_shells_list.write.dependency.yaml",
+      "./rules_v0.1/config_system_mount_list.write.dependency.yaml",
+      "./rules_v0.1/config_network_squid_list.write.dependency.yaml",
+      "./rules_v0.1/bin_forensics_hardware.connect.detection.yaml",
+      "./rules_v0.1/bin_string_search.execve.detection.yaml",
+      "./rules_v0.1/config_system_mount.write.detection.yaml",
+      "./rules_v0.1/config_network_nginx.write.detection.yaml",
+      "./rules_v0.1/bin_string_search.connect.detection.yaml",
+      "./rules_v0.1/bin_editors.detect.connect.yaml",
+      "./rules_v0.1/bin_system_shell.execve.detection.yaml",
+      "./rules_v0.1/bin_forensics.execve.detection.yaml",
+      "./rules_v0.1/config_network_postgresql.write.detection.yaml",
+      "./rules_v0.1/bin_browsers_headless.execve.detection.yaml",
+      "./rules_v0.1/config_openssl.write.detection.yaml",
+      "./rules_v0.1/bin_hacking_wireless.connect.detection.yaml",
+      "./rules_v0.1/bin_script_interpreters.execve.detection.yaml",
+      "./rules_v0.1/bin_hacking_brute_force.execve.detection.yaml",
+      "./rules_v0.1/bin_network_firewall.execve.detection.yaml",
+      "./rules_v0.1/bin_network_ssh_client.execve.detection.yaml",
+      "./rules_v0.1/bin_network_ssh_keys.execve.detection.yaml",
+      "./rules_v0.1/bin_network_ftp_client.execve.detection.yaml",
+      "./rules_v0.1/config_network_card.write.detection.yaml",
+      "./rules_v0.1/config_system_systemd.write.detection.yaml",
+      "./rules_v0.1/bin_hacking_impacket.connect.detection.yaml",
+      "./rules_v0.1/bin_system_shell.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_net_discovery.connect.detection.yaml",
+      "./rules_v0.1/bin_system_shell_multiplexer.connect.detection.yaml",
+      "./rules_v0.1/config_network_mysql.write.detection.yaml",
+      "./rules_v0.1/bin_system_wiper.execve.detection.yaml",
+      "./rules_v0.1/bin_network_rdp_client.connect.detection.yaml",
+      "./rules_v0.1/bin_compression.connect.detection.yaml",
+      "./rules_v0.1/bin_network_rdp_client.execve.detection.yaml",
+      "./rules_v0.1/bin_hacking_net.execve.detection.yaml",
+      "./rules_v0.1/bin_filesystem_mount.connect.detection.yaml",
+      "./rules_v0.1/bin_network_ftp_client.connect.detection.yaml",
+      "./rules_v0.1/bin_network_ssh_keys.connect.detection.yaml",
+      "./rules_v0.1/bin_network_admin.execve.detection.yaml",
+      "./rules_v0.1/bin_power_mgmt.execve.detection.yaml",
+      "./rules_v0.1/bin_network_diag.execve.detection.yaml",
+      "./rules_v0.1/bin_kernel.execve.detection.yaml",
+      "./rules_v0.1/config_user_shells.write.detection.yaml",
+      "./rules_v0.1/config_user_others.write.detection.yaml",
+      "./rules_v0.1/bin_power_mgmt.connect.detection.yaml",
+      "./rules_v0.1/config_kernel.write.detection.yaml",
+      "./rules_v0.1/config_user_ssh.write.detection.yaml",
+      "./rules_v0.1/bin_system_diag.execve.detection.yaml",
+      "./rules_v0.1/bin_daily_cmd.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_web.execve.detection.yaml",
+      "./rules_v0.1/config_system_cron.write.detection.yaml",
+      "./rules_v0.1/bin_system_wiper.connect.detection.yaml",
+      "./rules_v0.1/bin_browsers.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_net_discovery.execve.detection.yaml",
+      "./rules_v0.1/config_network_dns.write.detection.yaml",
+      "./rules_v0.1/bin_hacking_metasploit.execve.detection.yaml",
+      "./rules_v0.1/bin_filesystem_mount.execve.detection.yaml",
+      "./rules_v0.1/bin_debug.connect.detection.yaml",
+      "./rules_v0.1/bin_debug.execve.detection.yaml",
+      "./rules_v0.1/bin_network_tunnel.execve.detection.yaml",
+      "./rules_v0.1/bin_compression.execve.detection.yaml",
+      "./rules_v0.1/config_container_docker.write.detection.yaml",
+      "./rules_v0.1/bin_hacking_c2_framework.execve.detection.yaml",
+      "./rules_v0.1/bin_hacking_responder.execve.detection.yaml",
+      "./rules_v0.1/config_minikube.write.detection.yaml",
+      "./rules_v0.1/bin_pkg_mgmt.execve.detection.yaml",
+      "./rules_v0.1/config_network_firewall.write.detection.yaml",
+      "./rules_v0.1/bin_browsers_headless.connect.detection.yaml",
+      "./rules_v0.1/config_system_apparmor.write.detection.yaml",
+      "./rules_v0.1/bin_forensics.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_reverse.connect.detection.yaml",
+      "./rules_v0.1/bin_network_http_client.execve.detection.yaml",
+      "./rules_v0.1/config_system_initd.write.detection.yaml",
+      "./rules_v0.1/bin_hacking_impacket.execve.detection.yaml",
+      "./rules_v0.1/bin_network_diag.connect.detection.yaml",
+      "./rules_v0.1/bin_system_recon.execve.detection.yaml",
+      "./rules_v0.1/config_libvirt.write.detection.yaml",
+      "./rules_v0.1/bin_network_ssh_client.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_wireless.execve.detection.yaml",
+      "./rules_v0.1/config_network_ssh.write.detection.yaml",
+      "./rules_v0.1/bin_system_recon.connect.detection.yaml",
+      "./rules_v0.1/bin_network_tunnel.connect.detection.yaml",
+      "./rules_v0.1/config_system_sudoers.write.detection.yaml",
+      "./rules_v0.1/config_network_apache.write.detection.yaml",
+      "./rules_v0.1/bin_script_interpreters.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_brute_force.connect.detection.yaml",
+      "./rules_v0.1/config_system_selinux.write.detection.yaml",
+      "./rules_v0.1/bin_build.execve.detection.yaml",
+      "./rules_v0.1/bin_pkg_mgmt.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_responder.connect.detection.yaml",
+      "./rules_v0.1/bin_forensics_hardware.execve.detection.yaml",
+      "./rules_v0.1/bin_kernel.connect.detection.yaml",
+      "./rules_v0.1/config_network_mongo.write.detection.yaml",
+      "./rules_v0.1/bin_network_admin.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_mimikatz.execve.detection.yaml",
+      "./rules_v0.1/bin_network_http_client.connect.detection.yaml",
+      "./rules_v0.1/bin_system_diag.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_mimikatz.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_reverse.execve.detection.yaml",
+      "./rules_v0.1/bin_daily_cmd.execve.detection.yaml",
+      "./rules_v0.1/config_kubelet.write.detection.yaml",
+      "./rules_v0.1/config_network_rsync.write.detection.yaml",
+      "./rules_v0.1/bin_hacking_net.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_metasploit.connect.detection.yaml",
+      "./rules_v0.1/bin_hacking_c2_framework.connect.detection.yaml",
+      "./rules_v0.1/bin_network_firewall.connect.detection.yaml",
+      "./rules_v0.1/config_users_groups.write.detection.yaml",
+      "./rules_v0.1/bin_system_shell_multiplexer.execve.detection.yaml",
+      "./rules_v0.1/config_dmcrypt.write.detection.yaml",
+      "./rules_v0.1/bin_editors.detect.execve.yaml",
+      "./rules_v0.1/config_network_squid.write.detection.yaml",
+      "./rules_v0.1/bin_browsers.execve.detection.yaml",
+      "./rules_v0.1/bin_build.connect.detection.yaml",
+      "./rules_v0.1/config_network_redis.write.detection.yaml",
+      "./rules_v0.1/bin_hacking_web.connect.detection.yaml",
+
+    ]
+
+  
+
+  # Path to files or directories containing IoCs to be loaded.
+  # Supported file extensions: ioc.
+  iocs: [
+      
+  ]
+
+  # Path to files or directories containing YARA rules.
+  # Supported file extensions: yar, yara.
+  yara: []
+
+  min_severity: 0
+
+  # Ensure every positive YARA file scan will be displayed.
+  show_positive_file_scan: true
+
+events:
+  # Enable or disable specific events.
+  execve:
+    enable: true
+  execve_script:
+    enable: true
+  exit:
+    enable: true
+  exit_group:
+    enable: true
+  clone:
+    enable: true
+  prctl:
+    enable: true
+  kill:
+    enable: true
+  ptrace:
+    enable: true
+  init_module:
+    enable: true
+  bpf_prog_load:
+    enable: true
+  bpf_socket_filter:
+    enable: true
+  mprotect_exec:
+    enable: true
+  mmap_exec:
+    enable: true
+  connect:
+    enable: true
+  dns_query:
+    enable: true
+  send_data:
+    enable: true
+  read:
+    enable: false
+  read_config:
+    enable: false
+  write:
+    enable: true
+  write_config:
+    enable: true
+  file_rename:
+    enable: false
+  file_unlink:
+    enable: false
+  write_close:
+    enable: false
+  file_scan:
+    enable: true
+
