@@ -184,12 +184,9 @@ cat /tmp/data.json | ./kunai.jsons.count_rules_matches.to.jsons.sh
 {"count":1,"rules":"config_network_dns.write.detection"}
 {"count":1,"rules":"bin_network_ssh_keys.execve.detection"}
 
-```json
-
-
+```
 
 To get command line associated to connect detection rules use the following command 
-
 
 ```bash 
 
