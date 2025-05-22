@@ -1,0 +1,21 @@
+---
+name: bin_hacking_brute_force_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_hacking_brute_force",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_hacking_brute_force_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path  ~= "/[^/]*/(hydra|john|hashcat|medusa|cewl|crunch|cupp|ncrack|patator|unshadow|zip2john|rar2john|pdf2john|hccap2john|ssh2john|office2john|7z2john|gpg2john|truecrypt2john)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(hydra|john|hashcat|medusa|cewl|crunch|cupp|ncrack|patator|unshadow|zip2john|rar2john|pdf2john|hccap2john|ssh2john|office2john|7z2john|gpg2john|truecrypt2john)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

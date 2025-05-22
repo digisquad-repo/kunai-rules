@@ -1,0 +1,23 @@
+---
+name: bin_debug_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_debug",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_debug_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  # $bin_dep_01: .data.exe.path ~= "/.*/(strace|lsof)$"
+  # $bin_dep_02: .data.ancestors ~= "/.*/(strace|lsof)$"
+
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(strace|lsof)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~=  "/[^/]*/(strace|lsof)(-[a-zA-Z0-9._]+)?$"
+condition: any of $bin_dep_

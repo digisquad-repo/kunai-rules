@@ -1,0 +1,24 @@
+---
+name: bin_network_tunnel_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_network_tunnel",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_network_tunnel_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(stunnel|stunnel4|ptunnel|privoxy|hping3|httptunnel|hts|htc|obfsproxy|iodine|dnscat2|proxychains4|proxychains|dns2tcp)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(redsocks|tunna|rinetd|sslh|chisel|frp|ligolo)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_03: .data.ancestors ~= "/[^/]*/(stunnel|stunnel4|ptunnel|privoxy|hping3|httptunnel|hts|htc|obfsproxy|iodine|dnscat2|proxychains4|proxychains|dns2tcp)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.ancestors ~= "/[^/]*/(redsocks|tunna|rinetd|sslh|chisel|frp|ligolo)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_
