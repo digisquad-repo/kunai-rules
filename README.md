@@ -48,7 +48,7 @@ This rule set was designed with those patterns in mind. It focuses on:
 For more information, see the following document : 
 - [03 - Rules Structure](./doc/03_RULES_STRUCTURE.md)  
 
-
+---
 
 ### Purpose of the scripts
 
@@ -65,6 +65,7 @@ For more information, see the following document :
 - [00 - How to Use This](./doc/00_HOWTOUSE.md)  
 - [01 - Quick Demo and Overview of Scripts Usage](./doc/01_QUICK_DEMO.md)  
 - [02 - Quick Cheatsheet](./doc/02_SCRIPTS_CHEATSHEET.md)  
+
 ---
 
 ## Usage guides
