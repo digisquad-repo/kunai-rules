@@ -27,4 +27,3 @@ matches:
   $r_05: .data.path ~= "^/etc/httpd(/|$)"
 
 condition: any of $r_
-
