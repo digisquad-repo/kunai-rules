@@ -317,8 +317,21 @@ You want to see how the repository rules can help you in practice? See next sect
 
 ---
 
-# Backlinks 
+## Usage guides
 
-- [00 - How to use this](./00_HOWTOUSE.md) - How to use the repository content.
-- [01 - Quick demo and overview of scripts usage](./01_QUICK_DEMO.md) - Use the script to filter, inspect, and trace events using quick shell scripts toolkits.
-- [02 - Quick cheatsheet ](./02_SCRIPTS_CHEATSHEET.md) - Scripts Cheatsheet 
+These documents demonstrate how to put the repository's tools and rules into practical use:
+
+- [00 - How to Use This](./doc/00_HOWTOUSE.md)  
+  How to use the repository content.
+
+- [01 - Quick Demo and Overview of Scripts Usage](./doc/01_QUICK_DEMO.md)  
+  Use the scripts to filter, inspect, and trace events using quick shell script toolkits.
+
+- [02 - Quick Cheatsheet](./doc/02_SCRIPTS_CHEATSHEET.md)  
+  Scripts cheatsheet for quick reference.
+
+- [03 - Rules Structure](./doc/03_RULES_STRUCTURE.md)  
+  For details on how rules are named, organized etc.
+  
+
+
