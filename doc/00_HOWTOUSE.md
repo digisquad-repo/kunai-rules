@@ -32,7 +32,6 @@ If you prefer to run it without any rules:
 _kunai-amd64.start_without_rules.sh
 ```
 
-
 ---
 
 # Backlinks 

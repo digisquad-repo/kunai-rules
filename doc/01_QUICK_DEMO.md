@@ -126,6 +126,11 @@ cat /tmp/data.json \
   | jq .
 ```
 
+But I prefer onliner version : 
+
+```bash 
+cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | jq .
+```
 
 ### Case 01 - Output
 
