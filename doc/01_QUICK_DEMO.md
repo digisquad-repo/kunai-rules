@@ -7,15 +7,18 @@
 - [Warmup](#warmup)
 - [Event filtering scripts](#event-filtering-scripts)
 - [Event view scripts](#event-view-scripts)
+
 - [Case 01 - Trigger a sample write](#case-01---trigger-a-sample-write)
-- [Case 01 - Investigate the logs](#case-01---investigate-the-logs)
-- [Case 01 - Output](#case-01---output)
+  - [Case 01 - Investigate the logs](#case-01---investigate-the-logs)
+  - [Case 01 - Output](#case-01---output)
+
 - [Case 02 - Extracting the exact command line](#case-02---extracting-the-exact-command-line)
-- [Case 02 - Output](#case-02---output)
+  - [Case 02 - Output](#case-02---output)
+  
 - [Case 03 - Extracting network activity from vim](#case-03---extracting-network-activity-from-vim)
-- [Case 03 - Output](#case-03---output)
-- [Case 03 - viewing ancestor process information](#case-03---viewing-ancestor-process-information)
-- [Case 03 - Output](#case-03---output)
+  - [Case 03 - Output](#case-03---output)
+  - [Case 03 - viewing ancestor process information](#case-03---viewing-ancestor-process-information)
+  - [Case 03 - Output](#case-03---output)
 - [Leveraging rules for detections](#leveraging-rules-for-detections)
 
 ---
@@ -280,5 +283,5 @@ You want to see how the repository rules can help you in practice? See next sect
 # Backlinks 
 
 - [00 - How to use this](./00_HOWTOUSE.md) - How to use the repository content.
-- [01 - Quick demo and overview of scripts usage](./01_HOWTOUSE_SCRIPTS.md) - Use the script to filter, inspect, and trace events using quick shell scripts toolkits.
+- [01 - Quick demo and overview of scripts usage](./01_QUICK_DEMO.md) - Use the script to filter, inspect, and trace events using quick shell scripts toolkits.
 - [02 - Quick cheatsheet ](./02_SCRIPTS_CHEATSHEET.md) - Scripts Cheatsheet 
