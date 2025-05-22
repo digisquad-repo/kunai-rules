@@ -51,6 +51,7 @@ These views are particularly useful when reviewing logs manually or piping outpu
 To extract network-related events and trace their process ancestry:
 
 ```bash
+
 cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh 
 
 ```
@@ -58,13 +59,17 @@ cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh
 For a cleaner or minimalistic output, you can use the dedicated viewer:
 
 ```bash
+
 cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh | kunai.jsons.view_network_events.to.jsons.sh
+
 ```
 
 Note that you want the ancestor : 
 
 ```bash 
+
 cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh  |  ./kunai.jsons.view_network_events_with_ancestors.to.jsons.sh 
+
 ```
 
 ### Output
@@ -91,7 +96,9 @@ cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh  |  ./kunai.j
 To list all write-related events:
 
 ```bash
+
 cat /tmp/data.json | kunai.jsons.filter_write_events.to.jsons.sh
+
 ```
 
 For a cleaner or minimalistic output, you can use the dedicated viewer:
@@ -127,7 +134,9 @@ cat /tmp/data.json | kunai.jsons.filter_write_events.to.jsons.sh | ./kunai.jsons
 To get a high-level view of the types of events captured by kunai use the following command:
 
 ```bash
+
 cat /tmp/data.json | ./kunai.jsons.count_event_types.to.jsons.sh
+
 ```
 
 ### Output
@@ -149,7 +158,9 @@ cat /tmp/data.json | ./kunai.jsons.count_event_types.to.jsons.sh
 To get a quick overview of which detection rules were triggered use the following command : 
 
 ```bash
+
 cat /tmp/data.json | ./kunai.jsons.count_rules_matches.to.jsons.sh
+
 ```
 
 ### Output
@@ -189,6 +200,7 @@ cat /tmp/data.json  | ./kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i
 ### Output
 
 ```json
+
 {"utc_time":"2025-05-22T08:54:08.973461967Z","event_name":"execve","host":"fn4x","user":"grml","command_line":"grep -q ??"}
 {"utc_time":"2025-05-22T08:54:12.945970484Z","event_name":"execve","host":"fn4x","user":"root","command_line":"sleep 3600"}
 
@@ -196,7 +208,17 @@ cat /tmp/data.json  | ./kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i
 
 Or this ? 
 
+```bash
+cat /tmp/data.json \
+  | ./kunai.jsons.filter_connect_events.to.jsons.sh \
+  | grep -i vim \
+  | ./kunai.jsons.view_network_events_04_verbose.to.jsons.sh \
+  | ./kunai.jsons.list_command_lines.to.jsons.sh \
+  | jq .command_line \
+  | huniq
+```
 
+But I prefer oneliner:
 
 ```bash 
 
@@ -211,6 +233,17 @@ cat /tmp/data.json  | ./kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i
 ```
 
 hmm or this ? 
+
+```bash
+cat /tmp/data.json \
+  | ./kunai.jsons.filter_connect_events.to.jsons.sh \
+  | grep -i vim \
+  | ./kunai.jsons.view_network_events_04_verbose.to.jsons.sh \
+  | jq 'del(.utc_time)' -c \
+  | jq '{host,bin_path,dst_ip,ancestors}' -c
+```
+
+But I prefer oneliner:
 
 ```bash 
 
