@@ -1,6 +1,5 @@
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Event filtering scripts](#event-filtering-scripts)
 - [Event view scripts](#event-view-scripts)
 - [Identify network activity](#identify-network-activity)
