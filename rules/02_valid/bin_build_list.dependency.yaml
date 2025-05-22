@@ -1,0 +1,34 @@
+---
+name: bin_build_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_build",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_build_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  #
+  # TO FIX - various issues.
+  #
+  #
+  # $bin_dep_01: .data.exe.path ~= "./[^/]*/(gcc)(-[a-zA-Z0-9._]+)?$" # to fix.
+  # $bin_dep_04: .data.ancestors ~= "(^|\\|)/[^/]*/(gcc)(-[a-zA-Z0-9._]+)?($|\\|)" # to fix.
+  # $bin_dep_04: .data.ancestors ~= "/[^/]*/(gcc)(-[a-zA-Z0-9._]+)?$" # to fix
+  # $bin_dep_06: .data.ancestors ~= ".*/(go|rustc|cargo|javac|jar|objdump)$"
+
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(make|cmake|ld|as|strip|objdump|readelf|xxd)$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(go|rustc|cargo|javac|jar|objdump)$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(go|golang|rustc|cargo|javac|jar|objdump)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_04: .data.ancestors ~= "/[^/]*/(make|cmake|ld|as|strip|objdump|readelf|xxd)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_05: .data.exe.path ~= "/[^/]*/(go|golang|rustc|cargo|javac|jar|objdump)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

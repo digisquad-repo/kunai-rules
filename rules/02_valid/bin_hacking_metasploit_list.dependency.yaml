@@ -1,0 +1,24 @@
+---
+name: bin_hacking_metasploit_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_hacking_metasploit",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_hacking_metasploit_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(metasploit|msfconsole|msfvenom|msfd|msfrpcd|meterpreter|armitage|searchsploit|exploitdb)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(metasploit|msfconsole|msfvenom|msfd|msfrpcd|meterpreter|armitage|searchsploit|exploitdb)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(msfupdate|msf-egghunter|msf-exe2vba|msf-exe2vbs|msf-find_badchars|msf-halflm_second|msf-hmac_sha1_crack|msf-java_deserializer|msf-jsobfu|msf-makeiplist|msf-md5_lookup|msf-metasm_shell|msf-msf_irb_shell|msf-nasm_shell|msf-pattern_create|msf-pattern_offset|msf-pdf2xdp|msf-virustotal|msfdb)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.ancestors ~= "/[^/]*/(msfupdate|msf-egghunter|msf-exe2vba|msf-exe2vbs|msf-find_badchars|msf-halflm_second|msf-hmac_sha1_crack|msf-java_deserializer|msf-jsobfu|msf-makeiplist|msf-md5_lookup|msf-metasm_shell|msf-msf_irb_shell|msf-nasm_shell|msf-pattern_create|msf-pattern_offset|msf-pdf2xdp|msf-virustotal|msfdb)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

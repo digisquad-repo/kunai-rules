@@ -1,0 +1,21 @@
+---
+name: bin_forensics_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_forensics",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_forensics_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*(apktool|binwalk|dex2jar|volatility|autopsy|foremost|sleuthkit)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*(apktool|binwalk|dex2jar|volatility|autopsy|foremost|sleuthkit)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

@@ -1,0 +1,29 @@
+---
+name: bin_kernel.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_kernel",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE EXECVE_SCRIPT bin_kernel_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( bin_kernel_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
