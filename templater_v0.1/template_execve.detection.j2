@@ -1,0 +1,33 @@
+---
+name: {{ TARGET_NAME_DETECTION }}
+type: {{ TARGET_TYPE }}
+meta:
+  tags: [
+      "{{ TARGET_FIRST_TAG }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_{{ TARGET_TYPE }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+    ]
+  authors: [" {{ TARGET_AUTHOR }}"]
+  comments:
+    - {{ TARGET_TYPE }} rule - identify EXECVE EXECVE_SCRIPT {{ TARGET_NAME_DEPENDENCY }}
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( {{ TARGET_NAME_DEPENDENCY }})
+condition: $bin_dep_01
+  
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+severity: 3
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+
+# reminder : 
+# condition: $is_compression and $not_noise
+# condition: any of $bin_dep_

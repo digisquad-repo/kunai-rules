@@ -1,0 +1,34 @@
+---
+name: {{ TARGET_NAME_DEPENDENCY }}
+type: {{ TARGET_TYPE }}
+meta:
+  tags: [
+      "{{ TARGET_FIRST_TAG }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_{{ TARGET_TYPE }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write", 
+      "event_write_close", 
+      "event_write_config"
+  ]
+
+  authors: [" {{ TARGET_AUTHOR }}"]
+  comments:
+    - {{ TARGET_TYPE }} rule - identify write {{ TARGET_NAME_DEPENDENCY }}   
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+
+matches:
+  $r_01: .data.path ~= ".*/resolv.conf($|/)?" # file match
+  $r_02: .data.path ~= "^/etc/network(/|$)" # all sub dir match
+
+condition: any of $r_
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+# reminder : 
+# condition: $is_compression and $not_noise
+# condition: any of $bin_dep_
+
+
+

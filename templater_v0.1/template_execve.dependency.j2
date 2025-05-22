@@ -1,0 +1,26 @@
+---
+name: {{ TARGET_NAME_DEPENDENCY }}
+type: {{ TARGET_TYPE }}
+meta:
+  tags: [
+      "{{ TARGET_FIRST_TAG }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_{{ TARGET_TYPE }}",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" {{ TARGET_AUTHOR }}"]
+  comments:
+    - {{ TARGET_TYPE }} - {{ TARGET_NAME_DEPENDENCY }} 
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/.*/(google-chrome|chrome|chromimum|firefox)$"
+  $bin_dep_02: .data.ancestors ~= "/.*/(google-chrome|chrome|chromimum|firefox)$"
+
+condition: any of $bin_dep_
+
+
+# reminder : 
+# condition: $is_compression and $not_noise
+# condition: any of $bin_dep_
