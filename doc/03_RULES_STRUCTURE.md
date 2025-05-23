@@ -7,7 +7,7 @@
 - [1. Detection rules](#1-detection-rules)
 - [2. Dependency rules](#2-dependency-rules)
 - [Design philosophy](#design-philosophy)
-- [llgh](#llg-ssh)
+- [llg](#llg-ssh)
 - [Usage guides](#usage-guides)
 
 ---
