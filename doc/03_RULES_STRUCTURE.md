@@ -1,3 +1,17 @@
+
+## Table of Contents
+
+ [Rule files structure and naming convention](#rule-files-structure-and-naming-convention)
+- [File naming convention](#file-naming-convention)
+- [Rule types](#rule-types)
+- [1. Detection rules](#1-detection-rules)
+- [2. Dependency rules](#2-dependency-rules)
+- [Design philosophy](#design-philosophy)
+- [llgh](#llg-ssh)
+- [Usage guides](#usage-guides)
+
+---
+
 ## Rule files structure and naming convention
 
 The rules in this repository follow a consistent structure and naming pattern to allow for categorization of detection logic. 
