@@ -1,0 +1,33 @@
+# Detects network connections from Kerberos tools — active Kerberos ticket operations connecting to KDC or service hosts.
+---
+name: bin_network_kerberos.connect.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_kerberos",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1558", "steal_or_forge_kerberos_tickets",
+    ]
+  attack: [ T1558 ]
+  # Steal or Forge Kerberos Tickets
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify CONNECT from Kerberos tools (kinit, klist, ktutil connecting to KDC)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $bin_dep_01: rule( bin_network_kerberos_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

@@ -1,0 +1,28 @@
+# Dependency list for Kerberos authentication tools used for T1558 ticket manipulation/abuse.
+---
+name: bin_network_kerberos_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_network_kerberos",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_network_kerberos_list.dependency - Kerberos ticket management tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(kinit|klist|kdestroy|kpasswd|kvno)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(ktutil|kswitch|k5start|krenew)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(msktutil|kerberos|kadmin|kadmin\.local)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(krb5-config|krb524init)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_05: .data.ancestors ~= "/[^/]*/(kinit|klist|kdestroy|kpasswd|kvno)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(ktutil|kswitch|k5start|krenew)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(msktutil|kerberos|kadmin)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

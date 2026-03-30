@@ -1,0 +1,34 @@
+# Detects execution of Kerberos authentication tools (kinit, klist, kvno, ktutil) — T1558 ticket manipulation/forging on Linux systems.
+---
+name: bin_network_kerberos.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_kerberos",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1558", "steal_or_forge_kerberos_tickets",
+    ]
+  attack: [ T1558 ]
+  # Steal or Forge Kerberos Tickets
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of Kerberos tools (kinit, klist, kvno, ktutil, msktutil)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( bin_network_kerberos_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 5
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
