@@ -17,8 +17,12 @@ meta:
 matches:
   $bin_dep_01: .data.exe.path ~= "/[^/]*/(ps|top|htop)(-[a-zA-Z0-9._]+)?$"
   $bin_dep_02: .data.exe.path ~= "/[^/]*/(vmstat|iostat|iotop|free|df)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(pstree|pidstat|lsmod|dmesg|journalctl)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(ausearch|aureport|auditctl)(-[a-zA-Z0-9._]+)?$"
 
-  $bin_dep_03: .data.ancestors ~= "/[^/]*/(ps|top|htop)(-[a-zA-Z0-9._]+)?$"
-  $bin_dep_04: .data.ancestors ~= "/[^/]*/(vmstat|iostat|iotop|free|df)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_05: .data.ancestors ~= "/[^/]*/(ps|top|htop)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(vmstat|iostat|iotop|free|df)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(pstree|pidstat|lsmod|dmesg|journalctl)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_08: .data.ancestors ~= "/[^/]*/(ausearch|aureport|auditctl)(-[a-zA-Z0-9._]+)?$"
 
 condition: any of $bin_dep_

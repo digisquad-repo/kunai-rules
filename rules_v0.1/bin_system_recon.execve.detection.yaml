@@ -1,3 +1,4 @@
+# Detects execution of system reconnaissance tools (whoami, id, uname, lsof, getcap, etc.) — attacker discovery phase.
 ---
 name: bin_system_recon.execve.detection
 type: detection
@@ -9,8 +10,14 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1082", "system_information_discovery",
+      "T1033", "system_owner/user_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1082, T1033 ]
+  # System Information Discovery
+  # System Owner/User Discovery
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_system_recon_list.dependency
 

@@ -19,10 +19,14 @@ matches:
   $bin_dep_02: .data.exe.path ~= "/[^/]*/(last|lastlog|who|w|finger)(-[a-zA-Z0-9._]+)?$"
   $bin_dep_03: .data.exe.path ~= "/[^/]*/(groups|users|logname)(-[a-zA-Z0-9._]+)?$"
   $bin_dep_04: .data.exe.path ~= "/[^/]*/(hostname|uname|uptime|lsb_release|hostnamectl|os-release)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_05: .data.exe.path ~= "/[^/]*/(lsof|lscpu|lsmem|lsblk|blkid)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.exe.path ~= "/[^/]*/(capsh|getcap|getfacl|sysctl)(-[a-zA-Z0-9._]+)?$"
 
-  $bin_dep_05: .data.ancestors ~= "/[^/]*/(whoami|id|hostname|uname)(-[a-zA-Z0-9._]+)?$"
-  $bin_dep_06: .data.ancestors ~= "/[^/]*/(last|lastlog|who|w|finger)(-[a-zA-Z0-9._]+)?$"
-  $bin_dep_07: .data.ancestors ~= "/[^/]*/(groups|users|logname)(-[a-zA-Z0-9._]+)?$"
-  $bin_dep_08: .data.ancestors ~= "/[^/]*/(hostname|uname|uptime|lsb_release|hostnamectl|os-release)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(whoami|id|hostname|uname)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_08: .data.ancestors ~= "/[^/]*/(last|lastlog|who|w|finger)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_09: .data.ancestors ~= "/[^/]*/(groups|users|logname)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_10: .data.ancestors ~= "/[^/]*/(hostname|uname|uptime|lsb_release|hostnamectl|os-release)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_11: .data.ancestors ~= "/[^/]*/(lsof|lscpu|lsmem|lsblk|blkid)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_12: .data.ancestors ~= "/[^/]*/(capsh|getcap|getfacl|sysctl)(-[a-zA-Z0-9._]+)?$"
 
 condition: any of $bin_dep_

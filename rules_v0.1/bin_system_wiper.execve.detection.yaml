@@ -1,3 +1,4 @@
+# Detects execution of data wiping tools (shred, wipe, dd with zero/random, srm) — may indicate evidence destruction or disk wiping attack.
 ---
 name: bin_system_wiper.execve.detection
 type: detection
@@ -9,8 +10,14 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1070.004", "indicator_removal:_file_deletion",
+      "T1485", "data_destruction",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1070.004, T1485 ]
+  # Indicator Removal: File Deletion
+  # Data Destruction
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_system_wiper_list.dependency
 

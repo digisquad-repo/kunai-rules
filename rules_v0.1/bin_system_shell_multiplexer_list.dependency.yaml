@@ -15,7 +15,7 @@ meta:
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 
 matches:
-  $bin_dep_01: .data.exe.path ~= "/.*/(tmux|screen|byobu|abduco|dvtm|zellij|termpair|mtm)$"
-  $bin_dep_02: .data.ancestors ~= "/.*/(tmux|screen|byobu|abduco|dvtm|zellij|termpair|mtm)$"
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(tmux|screen|byobu|abduco|dvtm|zellij|termpair|mtm)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(tmux|screen|byobu|abduco|dvtm|zellij|termpair|mtm)(-[a-zA-Z0-9._]+)?$"
 
 condition: any of $bin_dep_

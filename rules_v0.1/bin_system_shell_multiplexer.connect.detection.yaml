@@ -1,3 +1,4 @@
+# Detects network connections from terminal multiplexers — tmux/screen initiating connections is suspicious.
 ---
 name: bin_system_shell_multiplexer.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_system_shell_multiplexer_list.dependency
 
@@ -24,5 +29,5 @@ matches:
 condition: $bin_dep_01
 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
-severity: 5
+severity: 8
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####  

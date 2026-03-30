@@ -1,3 +1,4 @@
+# Detects execution of system diagnostic tools (ps, top, htop, lsmod, journalctl, etc.) — process/system discovery.
 ---
 name: bin_system_diag.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1057", "process_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1057 ]
+  # Process Discovery
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_system_diag_list.dependency
 
