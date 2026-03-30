@@ -1,3 +1,4 @@
+# Detects execution of kernel module tools (insmod, modprobe, rmmod) — may indicate rootkit or malicious module loading.
 ---
 name: bin_kernel.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1547.006", "boot_or_logon_autostart_execution:_kernel_modules_and_extensions",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1547.006 ]
+  # Boot or Logon Autostart Execution: Kernel Modules
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_kernel_list.dependency
 
