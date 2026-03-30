@@ -1,0 +1,35 @@
+# Detects malicious eBPF program loading from non-standard processes — eBPF rootkits or traffic interception.
+---
+name: bin_system_bpf.bpf.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_bpf",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_bpf_prog_load",
+      "event_bpf_socket_filter",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1014", "rootkit",
+      "T1040", "network_sniffing",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1014, T1040 ]
+  # Rootkit (bpf_prog_load — eBPF rootkits hook kernel functions) / Network Sniffing (bpf_socket_filter)
+  comments:
+    - detection rule - identify BPF_PROG_LOAD BPF_SOCKET_FILTER from non-legitimate process
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [bpf_prog_load, bpf_socket_filter]
+
+matches:
+  $legit_bpf: rule( bin_bpf_legitimate_list.dependency)
+condition: not $legit_bpf
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

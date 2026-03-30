@@ -1,0 +1,21 @@
+---
+name: bin_bpf_legitimate_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_system_bpf",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_bpf_legitimate_list.dependency - legitimate eBPF program loaders
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $excl_01: .data.exe.path ~= "/[^/]*/(kunai|bpftrace|bpftool|tc|ip|ss|perf|systemd|systemd-networkd|systemd-resolved|docker|dockerd|containerd|runc|NetworkManager|nm-dispatcher|tcpdump|wireshark|dumpcap|cilium-agent|udevadm|ovs-vswitchd|xdp-loader)(-[a-zA-Z0-9._]+)?$"
+  $excl_02: .data.ancestors ~= "/[^/]*/(kunai|bpftrace|bpftool|tc|ip|ss|perf|systemd|docker|dockerd|containerd|runc|NetworkManager|nm-dispatcher|tcpdump|wireshark|dumpcap|cilium-agent|udevadm|ovs-vswitchd)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $excl_
