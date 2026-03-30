@@ -1,0 +1,21 @@
+---
+name: bin_kernel_module_loader_exclude_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_kernel",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_kernel_module_loader_exclude_list.dependency - legitimate kernel module loaders
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $excl_01: .data.exe.path ~= "/[^/]*/(modprobe|insmod|kmod|depmod|rmmod)(-[a-zA-Z0-9._]+)?$"
+  $excl_02: .data.ancestors ~= "/[^/]*/(modprobe|insmod|kmod|depmod|rmmod|systemd)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $excl_

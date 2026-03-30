@@ -1,0 +1,33 @@
+# Detects kernel module loading with a name matching known rootkit patterns — rootkit installation.
+---
+name: bin_kernel_rootkit_module.init_module.detection
+type: detection
+meta:
+  tags: [
+      "bin_kernel_rootkit_module",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_init_module",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1014", "rootkit",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1014 ]
+  # Rootkit
+  comments:
+    - detection rule - identify INIT_MODULE with known rootkit module name (rootkit installation)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [init_module]
+
+matches:
+  $rootkit_name: .data.module_name ~= "^(diamorphine|reptile|reptile_shell|adore|suckit|azazel|beurk|bfhide|bfill|knark|kinsmod|hiding|hideme|hideproc|hidepid|modhide|rootkit|loadmod|syscall_hook|hook_syscall)$"
+condition: $rootkit_name
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 10
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

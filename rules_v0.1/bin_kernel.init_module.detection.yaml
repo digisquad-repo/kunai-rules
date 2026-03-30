@@ -1,0 +1,33 @@
+# Detects kernel module loading from non-standard processes — rootkit or malicious kernel module installation.
+---
+name: bin_kernel.init_module.detection
+type: detection
+meta:
+  tags: [
+      "bin_kernel",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_init_module",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1014", "rootkit",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1014 ]
+  # Rootkit
+  comments:
+    - detection rule - identify INIT_MODULE from non-standard loader (rootkit/unauthorized kernel module)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [init_module]
+
+matches:
+  $legit_loader: rule( bin_kernel_module_loader_exclude_list.dependency)
+condition: not $legit_loader
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
