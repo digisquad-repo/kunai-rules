@@ -1,3 +1,4 @@
+# Detects execution of firewall management tools (iptables, nftables, ufw, firewalld) — may indicate disabling/modifying firewall rules.
 ---
 name: bin_network_firewall.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1562.004", "impair_defenses:_disable_or_modify_system_firewall",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1562.004 ]
+  # Impair Defenses: Disable or Modify System Firewall
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_firewall_list.dependency
 
@@ -25,5 +30,5 @@ matches:
 condition: $bin_dep_01
 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-severity: 8
+severity: 6
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
