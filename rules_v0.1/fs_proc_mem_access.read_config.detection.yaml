@@ -1,0 +1,36 @@
+# Detects read_config access to /proc/[pid]/mem, /proc/kcore, or /proc/*/environ — OS credential dumping by reading process memory directly.
+---
+name: fs_proc_mem_access.read_config.detection
+type: detection
+meta:
+  tags: [
+      "fs_proc_mem_access",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_read_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1003.007", "os_credential_dumping:_proc_filesystem",
+    ]
+  attack: [ T1003.007 ]
+  # OS Credential Dumping: Proc Filesystem
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify read_config on /proc/[pid]/mem or /proc/kcore (process memory dumping for credential extraction)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [read_config]
+
+matches:
+  $proc_mem:     .data.path ~= "^/proc/[0-9]+/(mem|maps|smaps)$"
+  $proc_environ: .data.path ~= "^/proc/[0-9]+/environ$"
+  $proc_kcore:   .data.path ~= "^/proc/kcore$"
+  $is_debugger:  rule( bin_debug_ptrace_exclude_list.dependency)
+condition: ($proc_mem or $proc_environ or $proc_kcore) and (not $is_debugger)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
