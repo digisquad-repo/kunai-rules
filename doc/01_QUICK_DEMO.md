@@ -36,7 +36,7 @@ And if you're a ninja, Kunai might just become your weapon of choice... though I
 ## Quick introduction
 
 ```
-./_kunai-amd64.start_without_rules
+./scripts/_kunai-amd64.start_without_rules.sh
 ```
 
 ## Getting Started
@@ -53,7 +53,7 @@ Once these checks are complete, you're ready to start  :
 
 ```
 sudo -s  
-./_kunai-amd64.start_without_rules.sh
+./scripts/_kunai-amd64.start_without_rules.sh
 ```
 
 Please note that the provided script will load the necessary configuration and write the output to `/tmp/data.json`. Of course, some customization may be required depending on your setup. The goal here is to showcase what can be done quickly using the scripts and rules included in this repository.
@@ -75,12 +75,12 @@ The included helper scripts are organized by event type and allow you to quickly
 
 Below is a list of the available filters:
 
-- `kunai.jsons.filter_connect_events.to.jsons.sh` - Filters **connect** events.
-- `kunai.jsons.filter_exec_events.to.jsons.sh` - Filters execution-related events such as `execve`, `execve_script`, etc.
-- `kunai.jsons.filter_kill_events.to.jsons.sh` - Filters **kill** events.
-- `kunai.jsons.filter_loss_events.to.jsons.sh` - Filters **loss** events 
-- `kunai.jsons.filter_send_events.to.jsons.sh` - Filters **send_data** events.
-- `kunai.jsons.filter_write_events.to.jsons.sh` - Filters write-related events such as `write`, `write_close`, etc.
+- `scripts/kunai.jsons.filter_connect_events.to.jsons.sh` - Filters **connect** events.
+- `scripts/kunai.jsons.filter_exec_events.to.jsons.sh` - Filters execution-related events such as `execve`, `execve_script`, etc.
+- `scripts/kunai.jsons.filter_kill_events.to.jsons.sh` - Filters **kill** events.
+- `scripts/kunai.jsons.filter_loss_events.to.jsons.sh` - Filters **loss** events 
+- `scripts/kunai.jsons.filter_send_events.to.jsons.sh` - Filters **send_data** events.
+- `scripts/kunai.jsons.filter_write_events.to.jsons.sh` - Filters write-related events such as `write`, `write_close`, etc.
 
 These scripts are useful for narrowing down the data to specific behaviors during an investigation or during live monitoring.
 
@@ -92,12 +92,12 @@ If, like me, you enjoy reading raw JSON, you will likely still want to simplify 
 
 The following scripts are prepared to clean up and reformat Kunai event logs for my usage. Each one accepts input from `stdin` and focuses on specific types of data:
 
-- `kunai.jsons.view_01.to.jsons.sh` - General purpose view with simplified fields.
-- `kunai.jsons.view_02.to.jsons.sh` - Alternative compact format for common event types.
-- `kunai.jsons.view_events_connect.to.jsons.sh` - Focused on **connect** type events.
-- `kunai.jsons.view_events_write.to.jsons.sh` - Focused on  **write**-related events.
-- `kunai.jsons.view_iocs.to.jsons.sh`  -  Extracts and displays IOC from the logs.
-- `kunai.jsons.view_network_events.to.jsons.sh`   - Focused view for network-related activity.
+- `scripts/kunai.jsons.view_01.to.jsons.sh` - General purpose view with simplified fields.
+- `scripts/kunai.jsons.view_02.to.jsons.sh` - Alternative compact format for common event types.
+- `scripts/kunai.jsons.view_events_connect.to.jsons.sh` - Focused on **connect** type events.
+- `scripts/kunai.jsons.view_events_write.to.jsons.sh` - Focused on  **write**-related events.
+- `scripts/kunai.jsons.view_iocs.to.jsons.sh`  -  Extracts and displays IOC from the logs.
+- `scripts/kunai.jsons.view_network_events.to.jsons.sh`   - Focused view for network-related activity.
 
 These views are particularly useful when reviewing logs manually or piping output into other tools like `jq` or `grep`.
 
@@ -120,7 +120,7 @@ Now inspect the log output using the helper script:
 
 ```bash
 cat /tmp/data.json \
-  | ./kunai.jsons.view_events_write.to.jsons.sh \
+  | ./scripts/kunai.jsons.view_events_write.to.jsons.sh \
   | grep -i vim \
   | jq .
 ```
@@ -128,7 +128,7 @@ cat /tmp/data.json \
 But I prefer onliner version : 
 
 ```bash 
-cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | jq .
+cat /tmp/data.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | jq .
 ```
 
 ### Case 01 - Output
@@ -174,15 +174,15 @@ For example, to extract the exact command lines related to our `vim` write event
 
 ```bash
 cat /tmp/data.json \
-  | ./kunai.jsons.view_events_write.to.jsons.sh \
+  | ./scripts/kunai.jsons.view_events_write.to.jsons.sh \
   | grep -i vim \
-  | ./kunai.jsons.list_command_lines.to.jsons.sh
+  | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh
 ```
 
 But I prefer onliner version : 
 
 ```bash 
-cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh |  grep -i vim | ./kunai.jsons.list_command_lines.to.jsons.sh 
+cat /tmp/data.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh |  grep -i vim | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh 
 ```
 
 ### Case 02 - Output
@@ -211,16 +211,16 @@ Optionnaly, if you prefer to extract only the command line associated with a mat
 
 ```bash
 cat /tmp/data.json \
-  | ./kunai.jsons.view_events_write.to.jsons.sh \
+  | ./scripts/kunai.jsons.view_events_write.to.jsons.sh \
   | grep -i vim \
-  | ./kunai.jsons.list_command_lines.to.jsons.sh \
+  | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh \
   | jq ".command_line"
 ```
 
 But I prefer onliner : 
 
 ```bash
-cat /tmp/data.json | ./kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | ./kunai.jsons.list_command_lines.to.jsons.sh | jq ".command_line"
+cat /tmp/data.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh | jq ".command_line"
 ```
 In this case, I recommended to **avoid** using the `-r` flag with `jq` to prevent potential gift with escaping or formatting ;) 
 
@@ -241,16 +241,16 @@ In this case, `vim` launches `curl`, which initiates a connection to `google.com
 
 ```bash
 cat /tmp/data.json \
-  | ./kunai.jsons.filter_connect_events.to.jsons.sh \
+  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh \
   | grep vim \
-  | ./kunai.jsons.view_network_events.to.jsons.sh
+  | ./scripts/kunai.jsons.view_network_events.to.jsons.sh
 ```
 
 But I prefer oneliner:
 
 
 ```bash
-cat /tmp/data.json | ./kunai.jsons.filter_connect_events.to.jsons.sh |  grep vim |  ./kunai.jsons.view_network_events.to.jsons.sh
+cat /tmp/data.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh |  grep vim |  ./scripts/kunai.jsons.view_network_events.to.jsons.sh
 ```
 
 ### Case 03 - Output
@@ -279,15 +279,15 @@ You can also retrieve the **ancestor** process of the command (`curl`) using a d
 
 ```bash
 cat /tmp/data.json \
-  | ./kunai.jsons.filter_connect_events.to.jsons.sh \
+  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh \
   | grep vim \
-  | ./kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
+  | ./scripts/kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
 ```
 
 But I prefer oneliner:
 
 ```bash
-cat /tmp/data.json | ./kunai.jsons.filter_connect_events.to.jsons.sh | grep vim | ./kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
+cat /tmp/data.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh | grep vim | ./scripts/kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
 ```
 
 ### Case 03 - Output
@@ -321,17 +321,10 @@ You want to see how the repository rules can help you in practice? See next sect
 
 These documents demonstrate how to put the repository's tools and rules into practical use:
 
-- [00 - How to Use This](./doc/00_HOWTOUSE.md)  
-  How to use the repository content.
-
-- [01 - Quick Demo and Overview of Scripts Usage](./doc/01_QUICK_DEMO.md)  
-  Use the scripts to filter, inspect, and trace events using quick shell script toolkits.
-
-- [02 - Quick Cheatsheet](./doc/02_SCRIPTS_CHEATSHEET.md)  
-  Scripts cheatsheet for quick reference.
-
-- [03 - Rules Structure](./doc/03_RULES_STRUCTURE.md)  
-  For details on how rules are named, organized etc.
-  
-
-
+- [00 - How to Use This](00_HOWTOUSE.md) — Getting started
+- [01 - Quick Demo](01_QUICK_DEMO.md) — Scripts usage examples
+- [02 - Cheatsheet](02_SCRIPTS_CHEATSHEET.md) — Quick reference
+- [03 - Rules Structure](03_RULES_STRUCTURE.md) — Naming and organization
+- [04 - Deployment](04_DEPLOYMENT.md) — Systemd, log rotation, SIEM
+- [05 - Rule Development](05_RULE_DEVELOPMENT.md) — Creating new rules
+- [06 - MITRE ATT&CK Coverage](06_MITRE_ATTACK_COVERAGE.md) — Technique matrix
