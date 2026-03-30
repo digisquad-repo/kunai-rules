@@ -1,0 +1,33 @@
+# Detects kill signals sent to security monitoring processes (kunai, wazuh, auditd, etc.) — security tool tampering.
+---
+name: bin_system_kill_security.kill.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_kill_security",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_kill",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1562.001", "impair_defenses:_disable_or_modify_tools",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1562.001 ]
+  # Impair Defenses: Disable or Modify Tools
+  comments:
+    - detection rule - identify KILL signal sent to security monitoring tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [kill]
+
+matches:
+  $target_is_security: rule( bin_security_tools_list.dependency)
+condition: $target_is_security
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 10
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

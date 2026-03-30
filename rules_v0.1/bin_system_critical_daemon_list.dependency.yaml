@@ -1,0 +1,23 @@
+---
+name: bin_system_critical_daemon_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_system_kill_daemon",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_system_critical_daemon_list.dependency - critical system daemon processes (kill event target)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $daemon_01: .data.target.exe.path ~= "/[^/]*/(sshd|crond|cron|rsyslogd|rsyslog|syslogd|named|ntpd|chronyd)(-[a-zA-Z0-9._]+)?$"
+  $daemon_02: .data.target.exe.path ~= "/[^/]*/(dbus-daemon|polkitd|NetworkManager|wpa_supplicant|nscd|avahi-daemon)(-[a-zA-Z0-9._]+)?$"
+  $daemon_03: .data.target.exe.path ~= "/[^/]*/(dockerd|containerd|kubelet|etcd|udevd|systemd-udevd)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $daemon_

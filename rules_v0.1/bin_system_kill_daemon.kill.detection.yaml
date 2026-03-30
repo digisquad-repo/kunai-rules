@@ -1,0 +1,36 @@
+# Detects SIGKILL or SIGTERM sent to critical system daemons from non-systemd processes — service disruption or sabotage.
+---
+name: bin_system_kill_daemon.kill.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_kill_daemon",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_kill",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1489", "service_stop",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1489 ]
+  # Service Stop
+  comments:
+    - detection rule - identify KILL SIGKILL/SIGTERM sent to critical system daemons from non-systemd (service disruption)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [kill]
+
+matches:
+  $target_is_daemon: rule( bin_system_critical_daemon_list.dependency)
+  $is_sigkill:       .data.signal == "SIGKILL"
+  $is_sigterm:       .data.signal == "SIGTERM"
+  $is_systemd:       .data.exe.path ~= "/[^/]*/(systemd|init|upstart|openrc|s6-svscan)(-[a-zA-Z0-9._]+)?$"
+condition: $target_is_daemon and ($is_sigkill or $is_sigterm) and (not $is_systemd)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
