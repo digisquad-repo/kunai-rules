@@ -1,3 +1,4 @@
+# Detects execution of headless browsers (phantomjs, puppeteer-driven chrome, etc.) which are commonly used for automation attacks.
 ---
 name: bin_browsers_headless.execve.detection
 type: detection
@@ -9,8 +10,13 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.007", "command_and_scripting_interpreter:_javascript",
+      "T1071.001", "application_layer_protocol:_web_protocols",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059.007 ]
+  # Command and Scripting Interpreter: JavaScript
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_browsers_headless_list.dependency
 

@@ -1,3 +1,4 @@
+# Detects network connections from web browsers. Informational for correlation with suspicious downloads.
 ---
 name: bin_browsers.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.001", "application_layer_protocol:_web_protocols",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071.001 ]
+  # Application Layer Protocol: Web Protocols
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_browsers_list.dependency
 

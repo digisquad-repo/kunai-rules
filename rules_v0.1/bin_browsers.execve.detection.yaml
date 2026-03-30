@@ -1,3 +1,4 @@
+# Detects execution of web browsers (chrome, firefox, etc.). Low severity informational rule.
 ---
 name: bin_browsers.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.001", "application_layer_protocol:_web_protocols",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071.001 ]
+  # Application Layer Protocol: Web Protocols
   comments:
     - detection rule - identify bin_browsers_list.dependency
 
