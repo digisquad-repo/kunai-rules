@@ -1,0 +1,37 @@
+# Detects commands activating network interface promiscuous mode (ip link set promisc on / ifconfig promisc) — prerequisite for passive network sniffing.
+---
+name: bin_network_promisc.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_promisc",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1040", "network_sniffing",
+    ]
+  attack: [ T1040 ]
+  # Network Sniffing
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify ip link set promisc on or ifconfig promisc (enabling promiscuous mode)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_ip:         .data.exe.path ~= "/[^/]*/(ip)(-[a-zA-Z0-9._]+)?$"
+  $is_ifconfig:   .data.exe.path ~= "/[^/]*/(ifconfig)(-[a-zA-Z0-9._]+)?$"
+  $promisc_on_ip: .data.command_line ~= "promisc\s+on"
+  $promisc_ifc:   .data.command_line ~= "promisc(\s|$)"
+condition: ($is_ip and $promisc_on_ip) or ($is_ifconfig and $promisc_ifc)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
