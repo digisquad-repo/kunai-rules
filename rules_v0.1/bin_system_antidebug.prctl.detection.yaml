@@ -1,0 +1,34 @@
+# Detects prctl(PR_SET_DUMPABLE, 0) disabling core dumps — anti-forensics technique used by malware to prevent memory analysis.
+---
+name: bin_system_antidebug.prctl.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_antidebug",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_prctl",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1562.006", "impair_defenses:_indicator_blocking",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1562.006 ]
+  # Impair Defenses: Indicator Blocking
+  comments:
+    - detection rule - identify PRCTL PR_SET_DUMPABLE=0 (disable core dumps / anti-forensics)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [prctl]
+
+matches:
+  $is_set_dumpable: .data.option == "PR_SET_DUMPABLE"
+  $disable_dump: .data.arg2 == "0x0"
+condition: $is_set_dumpable and $disable_dump
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

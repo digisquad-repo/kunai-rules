@@ -1,0 +1,34 @@
+# Detects prctl(PR_CAP_AMBIENT, RAISE) adding ambient capabilities — privilege escalation by elevating process capabilities.
+---
+name: bin_system_capability.prctl.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_capability",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_prctl",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1548.001", "abuse_elevation_control_mechanism:_setuid_and_setgid",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1548.001 ]
+  # Abuse Elevation Control Mechanism: Setuid and Setgid
+  comments:
+    - detection rule - identify PRCTL PR_CAP_AMBIENT raise (ambient capability manipulation)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [prctl]
+
+matches:
+  $is_cap_ambient: .data.option == "PR_CAP_AMBIENT"
+  $is_raise: .data.arg2 == "0x2"    # PR_CAP_AMBIENT_RAISE
+condition: $is_cap_ambient and $is_raise
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
