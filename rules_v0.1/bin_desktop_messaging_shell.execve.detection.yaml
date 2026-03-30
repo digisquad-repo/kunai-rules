@@ -1,0 +1,35 @@
+# Detects shell spawned from a desktop messaging app (Signal, Slack, Discord, Telegram, Teams, Zoom) — Electron apps have zero legitimate reason to spawn a shell.
+---
+name: bin_desktop_messaging_shell.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_desktop_messaging_shell",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
+    ]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify shell (bash/sh/zsh) spawned by a desktop messaging application ancestor (Signal/Slack/Discord/Telegram/Teams/Zoom)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_shell:       .data.exe.path ~= "/[^/]*/(bash|sh|zsh|dash|fish|ksh|tcsh|csh|rbash)(-[a-zA-Z0-9._]+)?$"
+  $from_messaging: rule( bin_desktop_messaging_list.dependency)
+condition: $is_shell and $from_messaging
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

@@ -1,0 +1,36 @@
+# Detects HTTP download tools (wget/curl) spawned from a desktop messaging app and writing to /tmp or /dev/shm — payload staging from a compromised messaging client.
+---
+name: bin_desktop_messaging_net_tool.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_desktop_messaging_net_tool",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1105", "ingress_tool_transfer",
+    ]
+  attack: [ T1105 ]
+  # Ingress Tool Transfer
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify wget/curl/fetch spawned by a messaging app ancestor downloading to /tmp or /dev/shm (payload staging)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_http_client: .data.exe.path ~= "/[^/]*/(wget|curl|fetch|aria2c|axel|wget2)(-[a-zA-Z0-9._]+)?$"
+  $from_messaging: rule( bin_desktop_messaging_list.dependency)
+  $to_tmp:         .data.command_line ~= "((\s|^)-[oO]\s+/(tmp|dev/shm|var/tmp)/|--output\s+/(tmp|dev/shm|var/tmp)/)"
+condition: $is_http_client and $from_messaging and $to_tmp
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

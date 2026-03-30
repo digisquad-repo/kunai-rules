@@ -1,0 +1,22 @@
+# Dependency list for desktop messaging/collaboration apps (Electron-based) — Signal, Slack, Discord, Telegram, Teams, Zoom, Element.
+---
+name: bin_desktop_messaging_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_desktop_messaging",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_desktop_messaging_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(signal|signal-desktop|slack|discord|telegram|telegram-desktop|teams|zoom|element-desktop|riot-desktop|mattermost|rocketchat)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(signal|signal-desktop|slack|discord|telegram|telegram-desktop|teams|zoom|element-desktop|riot-desktop|mattermost|rocketchat)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_
