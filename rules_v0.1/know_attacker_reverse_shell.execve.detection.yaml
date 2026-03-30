@@ -1,0 +1,35 @@
+# Detects bash/sh using /dev/tcp or /dev/udp redirection for reverse shells — highest-confidence indicator of active compromise.
+---
+name: know_attacker_reverse_shell.execve.detection
+type: detection
+meta:
+  tags: [
+      "know_attacker_reverse_shell",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
+    ]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify bash/sh /dev/tcp or /dev/udp reverse shell redirection (no legitimate use case)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $dev_tcp:  .data.command_line ~= "/dev/tcp/"
+  $dev_udp:  .data.command_line ~= "/dev/udp/"
+condition: $dev_tcp or $dev_udp
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 10
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
