@@ -1,0 +1,33 @@
+# Detects ptrace calls from non-debugger processes — process injection, credential extraction from memory, or anti-debugging bypass.
+---
+name: bin_system_injection.ptrace.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_injection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_ptrace",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1055", "process_injection",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1055.008 ]
+  # Ptrace System Calls
+  comments:
+    - detection rule - identify PTRACE from non-legitimate debugger (process injection)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [ptrace]
+
+matches:
+  $legit_debugger: rule( bin_debug_ptrace_exclude_list.dependency)
+condition: not $legit_debugger
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

@@ -1,0 +1,21 @@
+---
+name: bin_debug_ptrace_exclude_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_debug",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_debug_ptrace_exclude_list.dependency - legitimate debuggers excluded from ptrace detection
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $excl_01: .data.exe.path ~= "/[^/]*/(gdb|gdbserver|strace|ltrace|perf|valgrind|lldb|rr)(-[a-zA-Z0-9._]+)?$"
+  $excl_02: .data.ancestors ~= "/[^/]*/(gdb|gdbserver|strace|ltrace|perf|valgrind|lldb|rr)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $excl_
