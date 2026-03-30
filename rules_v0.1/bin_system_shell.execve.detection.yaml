@@ -1,3 +1,4 @@
+# Detects execution of system shells (bash, sh, zsh, ksh, etc.) — may indicate interactive attacker session or script execution.
 ---
 name: bin_system_shell.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_system_shell_list.dependency
 

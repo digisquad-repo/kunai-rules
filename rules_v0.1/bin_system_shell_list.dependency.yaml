@@ -15,7 +15,7 @@ meta:
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 
 matches:
-  $bin_dep_01: .data.exe.path ~= "/[^/]*/(sh|bash|dash|ash|zsh|csh|tcsh|fish|ksh|mksh|yash|xonsh|rbash|tclsh|wish)(-[a-zA-Z0-9._]+)?$$"
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(sh|bash|dash|ash|zsh|csh|tcsh|fish|ksh|mksh|yash|xonsh|rbash|tclsh|wish)(-[a-zA-Z0-9._]+)?$"
   $bin_dep_02: .data.ancestors ~= "/[^/]*/(sh|bash|dash|ash|zsh|csh|tcsh|fish|ksh|mksh|yash|xonsh|rbash|tclsh|wish)(-[a-zA-Z0-9._]+)?$"
 
   # EXCLUSIONS  :
