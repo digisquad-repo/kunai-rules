@@ -1,0 +1,24 @@
+# Dependency list for file and directory discovery tools used in T1083 enumeration phase.
+---
+name: bin_system_file_discovery_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_system_file_discovery",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_system_file_discovery_list.dependency - file enumeration tools (exe.path only)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(find)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(locate|mlocate|plocate|slocate)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(updatedb)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(tree|fd|fdfind)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

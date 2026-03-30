@@ -1,0 +1,34 @@
+# Detects execution of file and directory enumeration tools (find, locate, tree) — T1083 file discovery used during attacker reconnaissance phase.
+---
+name: bin_system_file_discovery.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_file_discovery",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1083", "file_and_directory_discovery",
+    ]
+  attack: [ T1083 ]
+  # File and Directory Discovery
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of file discovery tools (find, locate, tree) - low severity, useful for correlation
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( bin_system_file_discovery_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 4
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
