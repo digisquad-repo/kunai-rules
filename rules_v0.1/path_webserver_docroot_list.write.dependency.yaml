@@ -1,0 +1,28 @@
+# Dependency list for web server document root directories — used for write/write_close event detection.
+---
+name: path_webserver_docroot_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_webshell_drop",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write/write_close in web server document root directories
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/var/www(/|$)"
+  $r_02: .data.path ~= "^/srv/www(/|$)"
+  $r_03: .data.path ~= "^/usr/share/nginx/html(/|$)"
+  $r_04: .data.path ~= "^/usr/share/apache2(/|$)"
+  $r_05: .data.path ~= "^/opt/[^/]*/(htdocs|www|public_html|webroot)(/|$)"
+
+condition: any of $r_

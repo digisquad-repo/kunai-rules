@@ -1,0 +1,35 @@
+# Detects creation of server-side script files in web server document roots — web shell installation for persistent access.
+---
+name: fs_webshell_drop.file_create.detection
+type: detection
+meta:
+  tags: [
+      "fs_webshell_drop",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_file_create",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1505.003", "server_software_component:_web_shell",
+    ]
+  attack: [ T1505.003 ]
+  # Server Software Component: Web Shell
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify file_create of server-side script extensions in web server document root directories
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai:
+      - file_create
+
+matches:
+  $is_webdir: rule( path_webserver_docroot_list.file_create.dependency)
+  $is_script: .data.path ~= "\.(php|php5|php7|phtml|asp|aspx|jsp|cgi|py|rb|pl)$"
+condition: $is_webdir and $is_script
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

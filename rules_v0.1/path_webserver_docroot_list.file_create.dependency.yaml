@@ -1,0 +1,27 @@
+# Dependency list for web server document root directories (Apache, Nginx, etc.)
+---
+name: path_webserver_docroot_list.file_create.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_webshell_drop",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_create",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_create in web server document root directories
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/var/www(/|$)"
+  $r_02: .data.path ~= "^/srv/www(/|$)"
+  $r_03: .data.path ~= "^/usr/share/nginx/html(/|$)"
+  $r_04: .data.path ~= "^/usr/share/apache2(/|$)"
+  $r_05: .data.path ~= "^/opt/[^/]*/(htdocs|www|public_html|webroot)(/|$)"
+
+condition: any of $r_
