@@ -1,0 +1,34 @@
+# Detects NFS client tools executing — network share enumeration or mount activity.
+---
+name: bin_network_nfs_client.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_nfs_client",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1039", "data_from_network_shared_drive",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1039 ]
+  # Data from Network Shared Drive
+  comments:
+    - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_nfs_client_list.dependency (NFS share enumeration / mount)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( bin_network_nfs_client_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 5
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

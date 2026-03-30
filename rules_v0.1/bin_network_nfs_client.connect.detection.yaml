@@ -1,0 +1,33 @@
+# Detects NFS client tools making network connections — network share mounting or data access.
+---
+name: bin_network_nfs_client.connect.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_nfs_client",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1039", "data_from_network_shared_drive",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1039 ]
+  # Data from Network Shared Drive
+  comments:
+    - detection rule - identify CONNECT bin_network_nfs_client_list.dependency (NFS network share mounting)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $bin_dep_01: rule( bin_network_nfs_client_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
