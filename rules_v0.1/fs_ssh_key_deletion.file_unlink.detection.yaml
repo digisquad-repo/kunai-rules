@@ -1,0 +1,34 @@
+# Detects deletion of SSH authorized_keys or private keys — backdoor removal after intrusion, or account lockout.
+---
+name: fs_ssh_key_deletion.file_unlink.detection
+type: detection
+meta:
+  tags: [
+      "fs_ssh_key_deletion",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_unlink",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1531", "account_access_removal",
+      "T1070.004", "indicator_removal:_file_deletion",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1531, T1070.004 ]
+  # Account Access Removal / Indicator Removal: File Deletion
+  comments:
+    - detection rule - identify FILE_UNLINK on SSH authorized_keys or private key files
+
+match-on:
+  events:
+    kunai:
+      - file_unlink
+
+matches:
+  $key_01: .data.path ~= "^/root/\.ssh/authorized_keys$"
+  $key_02: .data.path ~= "^/home/[^/]+/\.ssh/authorized_keys$"
+  $key_03: .data.path ~= "^/root/\.ssh/id_[^/]+$"
+  $key_04: .data.path ~= "^/home/[^/]+/\.ssh/id_[^/]+$"
+condition: any of $key_
+severity: 8
