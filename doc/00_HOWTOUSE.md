@@ -23,14 +23,13 @@ Once these checks are complete, you're ready to start.
 To start Kunai with the detection rules enabled, simply run:
 
 ```bash
-sudo bash start.sh
+sudo bash start.sh            # server profile (default)
+sudo bash start.sh desktop    # desktop profile
+sudo bash start.sh dev        # all events (debug)
+sudo bash start.sh --list     # show available profiles
 ```
 
-If you prefer to run it without any rules:
-
-```bash
-sudo bash start.sh --list
-```
+Logs are written to `/var/log/kunai/`.
 
 ---
 

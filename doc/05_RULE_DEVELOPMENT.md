@@ -190,13 +190,10 @@ After generation, review the output files, adjust regex patterns, severity, and 
 The `dev.rules` configuration sets severity threshold to 0, so all rules will produce output regardless of severity level:
 
 ```bash
-sudo -s
-./scripts/_kunai-amd64.start_with_rules.sh
-# Or manually:
-/opt/kunai/_kunai-amd64 run -c config/dev.rules
+sudo bash start.sh dev
 ```
 
-Output goes to `/tmp/` by default in dev mode.
+Output goes to `/var/log/kunai/`.
 
 ### Step 2: Trigger the Behavior
 
@@ -219,13 +216,13 @@ Use the provided scripts to find rule matches in the output:
 
 ```bash
 # List all rule matches
-cat /tmp/kunai_*.json | scripts/kunai.jsons.list_rules_matches.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh
 
 # Filter for your specific rule
-cat /tmp/kunai_*.json | scripts/kunai.jsons.list_rules_matches.to.jsons.sh | grep "your_rule_name"
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh | grep "your_rule_name"
 
 # Count matches per rule
-cat /tmp/kunai_*.json | scripts/kunai.jsons.count_rules_matches.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.count_rules_matches.to.jsons.sh
 ```
 
 If your rule does not appear, check:
@@ -239,7 +236,7 @@ If your rule does not appear, check:
 Let Kunai run during a normal workload for several hours or a full day. Then review:
 
 ```bash
-cat /tmp/kunai_*.json | scripts/kunai.jsons.list_rules_matches.to.jsons.sh | sort | uniq -c | sort -rn
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh | sort | uniq -c | sort -rn
 ```
 
 Look for rules that fire excessively. Common causes of false positives:

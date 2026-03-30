@@ -52,7 +52,7 @@ To extract network-related events and trace their process ancestry:
 
 ```bash
 
-cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh 
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh 
 
 ```
 
@@ -60,7 +60,7 @@ For a cleaner or minimalistic output, you can use the dedicated viewer:
 
 ```bash
 
-cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh | kunai.jsons.view_network_events.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh | ./scripts/kunai.jsons.view_network_events.to.jsons.sh
 
 ```
 
@@ -68,7 +68,7 @@ Note that you want the ancestor :
 
 ```bash 
 
-cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh  |  ./scripts/kunai.jsons.view_network_events_with_ancestors.to.jsons.sh 
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  |  ./scripts/kunai.jsons.view_network_events_with_ancestors.to.jsons.sh 
 
 ```
 
@@ -97,7 +97,7 @@ To list all write-related events:
 
 ```bash
 
-cat /tmp/data.json | kunai.jsons.filter_write_events.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_write_events.to.jsons.sh
 
 ```
 
@@ -105,7 +105,7 @@ For a cleaner or minimalistic output, you can use the dedicated viewer:
 
 ```bash 
 
-cat /tmp/data.json | kunai.jsons.filter_write_events.to.jsons.sh | ./scripts/kunai.jsons.view_events_write.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_write_events.to.jsons.sh | ./scripts/kunai.jsons.view_events_write.to.jsons.sh
 
 ```
 
@@ -135,7 +135,7 @@ To get a high-level view of the types of events captured by kunai use the follow
 
 ```bash
 
-cat /tmp/data.json | ./scripts/kunai.jsons.count_event_types.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.count_event_types.to.jsons.sh
 
 ```
 
@@ -159,7 +159,7 @@ To get a quick overview of which detection rules were triggered use the followin
 
 ```bash
 
-cat /tmp/data.json | ./scripts/kunai.jsons.count_rules_matches.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.count_rules_matches.to.jsons.sh
 
 ```
 
@@ -179,7 +179,7 @@ cat /tmp/data.json | ./scripts/kunai.jsons.count_rules_matches.to.jsons.sh
 {"count":5,"rules":"bin_system_wiper.execve.detection"}
 {"count":5,"rules":"bin_system_diag.execve.detection"}
 {"count":4,"rules":"bin_network_admin.execve.detection"}
-{"count":4,"rules":"bin_editors.detect.execve"}
+{"count":4,"rules":"bin_editors.execve.detection"}
 {"count":2,"rules":"bin_network_ssh_client.execve.detection"}
 {"count":1,"rules":"config_network_dns.write.detection"}
 {"count":1,"rules":"bin_network_ssh_keys.execve.detection"}
@@ -190,7 +190,7 @@ To get command line associated to connect detection rules use the following comm
 
 ```bash 
 
-cat /tmp/data.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i vim  | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh  | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh 
+cat /var/log/kunai/kunai_*.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i vim  | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh  | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh 
 
 ```
 
@@ -206,7 +206,7 @@ cat /tmp/data.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  |
 Or this ? 
 
 ```bash
-cat /tmp/data.json \
+cat /var/log/kunai/kunai_*.json \
   | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh \
   | grep -i vim \
   | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh \
@@ -219,7 +219,7 @@ But I prefer oneliner:
 
 ```bash 
 
-cat /tmp/data.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i vim  | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh  | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh | jq .command_line | huniq 
+cat /var/log/kunai/kunai_*.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i vim  | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh  | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh | jq .command_line | huniq 
 
 ```
 
@@ -232,7 +232,7 @@ cat /tmp/data.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  |
 hmm or this ? 
 
 ```bash
-cat /tmp/data.json \
+cat /var/log/kunai/kunai_*.json \
   | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh \
   | grep -i vim \
   | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh \
@@ -244,7 +244,7 @@ But I prefer oneliner:
 
 ```bash 
 
-cat /tmp/data.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i vim  | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh  |  jq 'del(.utc_time)' -c  | jq '{host,bin_path,dst_ip,ancestors}' -c 
+cat /var/log/kunai/kunai_*.json  | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh  | grep -i vim  | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh  |  jq 'del(.utc_time)' -c  | jq '{host,bin_path,dst_ip,ancestors}' -c 
 
 ```
 

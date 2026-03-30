@@ -35,13 +35,11 @@ And if you're a ninja, Kunai might just become your weapon of choice... though I
 
 ## Quick introduction
 
-```
-./scripts/_kunai-amd64.start_without_rules.sh
+```bash
+sudo bash start.sh dev    # all events, for demo purposes
 ```
 
 ## Getting Started
-
-
 
 Begin by running Kunai as root. Before doing so, it's strongly recommended to check the integrity / security of the setup:
 
@@ -49,14 +47,13 @@ Begin by running Kunai as root. Before doing so, it's strongly recommended to ch
 - Check that the Kunai binary is owned by `root`.
 - Verify that the configuration files are also owned by `root` and have appropriate permissions.
 
-Once these checks are complete, you're ready to start  : 
+Once these checks are complete, you're ready to start  :
 
-```
-sudo -s  
-./scripts/_kunai-amd64.start_without_rules.sh
+```bash
+sudo bash start.sh
 ```
 
-Please note that the provided script will load the necessary configuration and write the output to `/tmp/data.json`. Of course, some customization may be required depending on your setup. The goal here is to showcase what can be done quickly using the scripts and rules included in this repository.
+Logs are written to `/var/log/kunai/`. The exact path is shown when Kunai starts. The goal here is to showcase what can be done quickly using the scripts and rules included in this repository.
 
 Let's start with a simple yet effective example to demonstrate how the scripts can be used in practice. Start Kunai as `root` and let it run for a few seconds to collect some activity.
 
@@ -119,7 +116,7 @@ vim -c 'call writefile(["hello world."], "/tmp/hello_there")' -c 'q'
 Now inspect the log output using the helper script:
 
 ```bash
-cat /tmp/data.json \
+cat /var/log/kunai/kunai_*.json \
   | ./scripts/kunai.jsons.view_events_write.to.jsons.sh \
   | grep -i vim \
   | jq .
@@ -128,7 +125,7 @@ cat /tmp/data.json \
 But I prefer onliner version : 
 
 ```bash 
-cat /tmp/data.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | jq .
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | jq .
 ```
 
 ### Case 01 - Output
@@ -173,7 +170,7 @@ These views operate on the same principle and accept input via `stdin` enabling 
 For example, to extract the exact command lines related to our `vim` write events:
 
 ```bash
-cat /tmp/data.json \
+cat /var/log/kunai/kunai_*.json \
   | ./scripts/kunai.jsons.view_events_write.to.jsons.sh \
   | grep -i vim \
   | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh
@@ -182,7 +179,7 @@ cat /tmp/data.json \
 But I prefer onliner version : 
 
 ```bash 
-cat /tmp/data.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh |  grep -i vim | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh 
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh |  grep -i vim | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh 
 ```
 
 ### Case 02 - Output
@@ -210,7 +207,7 @@ Optionnaly, if you prefer to extract only the command line associated with a mat
 
 
 ```bash
-cat /tmp/data.json \
+cat /var/log/kunai/kunai_*.json \
   | ./scripts/kunai.jsons.view_events_write.to.jsons.sh \
   | grep -i vim \
   | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh \
@@ -220,7 +217,7 @@ cat /tmp/data.json \
 But I prefer onliner : 
 
 ```bash
-cat /tmp/data.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh | jq ".command_line"
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.view_events_write.to.jsons.sh | grep -i vim | ./scripts/kunai.jsons.list_command_lines.to.jsons.sh | jq ".command_line"
 ```
 In this case, I recommended to **avoid** using the `-r` flag with `jq` to prevent potential gift with escaping or formatting ;) 
 
@@ -240,7 +237,7 @@ vim -c '!curl https://google.com' -c 'q'
 In this case, `vim` launches `curl`, which initiates a connection to `google.com`. You can easily extract and view the corresponding event and its details using the following command:
 
 ```bash
-cat /tmp/data.json \
+cat /var/log/kunai/kunai_*.json \
   | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh \
   | grep vim \
   | ./scripts/kunai.jsons.view_network_events.to.jsons.sh
@@ -250,7 +247,7 @@ But I prefer oneliner:
 
 
 ```bash
-cat /tmp/data.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh |  grep vim |  ./scripts/kunai.jsons.view_network_events.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh |  grep vim |  ./scripts/kunai.jsons.view_network_events.to.jsons.sh
 ```
 
 ### Case 03 - Output
@@ -278,7 +275,7 @@ cat /tmp/data.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh |  
 You can also retrieve the **ancestor** process of the command (`curl`) using a dedicated script:
 
 ```bash
-cat /tmp/data.json \
+cat /var/log/kunai/kunai_*.json \
   | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh \
   | grep vim \
   | ./scripts/kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
@@ -287,7 +284,7 @@ cat /tmp/data.json \
 But I prefer oneliner:
 
 ```bash
-cat /tmp/data.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh | grep vim | ./scripts/kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh | grep vim | ./scripts/kunai.jsons.view_network_events_with_ancestors.to.jsons.sh
 ```
 
 ### Case 03 - Output
