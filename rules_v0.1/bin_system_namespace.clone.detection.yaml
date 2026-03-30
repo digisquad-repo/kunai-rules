@@ -1,0 +1,38 @@
+# Detects clone() with namespace isolation flags from non-container-management processes — container escape or privilege escalation via namespace manipulation.
+---
+name: bin_system_namespace.clone.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_namespace",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_clone",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1611", "escape_to_host",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1611 ]
+  # Escape to Host
+  comments:
+    - detection rule - identify CLONE with namespace flags from non-container-management process (container escape / privilege escalation)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [clone]
+
+matches:
+  $new_user_ns: .data.flags &= 268435456    # CLONE_NEWUSER = 0x10000000
+  $new_net_ns:  .data.flags &= 1073741824   # CLONE_NEWNET  = 0x40000000
+  $new_mnt_ns:  .data.flags &= 131072       # CLONE_NEWNS   = 0x00020000
+  $new_pid_ns:  .data.flags &= 536870912    # CLONE_NEWPID  = 0x20000000
+  $new_uts_ns:  .data.flags &= 67108864     # CLONE_NEWUTS  = 0x04000000
+  $legit_container: rule( bin_container_mgmt_list.dependency)
+condition: (any of $new_) and (not $legit_container)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
