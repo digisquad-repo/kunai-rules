@@ -1,0 +1,33 @@
+# Detects DNS responses containing 5 or more IP addresses — fast-flux C2 infrastructure or DGA-based malware.
+---
+name: net_dns_fast_flux.dns_query.detection
+type: detection
+meta:
+  tags: [
+      "net_dns_fast_flux",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_dns_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1568.001", "dynamic_resolution:_fast_flux_dns",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1568.001 ]
+  # Dynamic Resolution: Fast Flux DNS
+  comments:
+    - detection rule - identify DNS_QUERY response with 5+ IPs (fast-flux C2 / DGA rotation)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [dns_query]
+
+matches:
+  $many_ips: .data.response ~= "^([^;]+;){4,}[^;]+"
+condition: $many_ips
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

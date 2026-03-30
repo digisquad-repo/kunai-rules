@@ -1,0 +1,33 @@
+# Detects abnormally long DNS queries (>=50 chars) — potential DNS tunneling or exfiltration.
+---
+name: net_dns_long_query.dns_query.detection
+type: detection
+meta:
+  tags: [
+      "net_dns_long_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_dns_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.004", "application_layer_protocol:_dns",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071.004 ]
+  # Application Layer Protocol: DNS
+  comments:
+    - detection rule - identify DNS_QUERY with long query string (DNS tunneling indicator)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [dns_query]
+
+matches:
+  $long_query: .data.query ~= "^.{50,}"
+condition: $long_query
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

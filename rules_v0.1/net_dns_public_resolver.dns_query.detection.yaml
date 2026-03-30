@@ -1,0 +1,35 @@
+# Detects DNS queries sent directly to public resolvers (8.8.8.8, 1.1.1.1, etc.) bypassing local DNS monitoring.
+---
+name: net_dns_public_resolver.dns_query.detection
+type: detection
+meta:
+  tags: [
+      "net_dns_public_resolver",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_dns_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.004", "application_layer_protocol:_dns",
+    ]
+  attack: [ T1071.004 ]
+  # Application Layer Protocol: DNS
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify DNS queries going directly to a public resolver (bypasses DNS monitoring)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [dns_query]
+
+matches:
+  $public_resolver: .data.dns_server.public == true
+  $is_browser:      rule( bin_browsers_list.dependency)
+  $is_dns_daemon:   .data.exe.path ~= "/[^/]*/(systemd-resolved|dnsmasq|unbound|named|pdns_recursor|kresd)(-[a-zA-Z0-9._]+)?$"
+condition: $public_resolver and (not $is_browser) and (not $is_dns_daemon)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
