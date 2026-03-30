@@ -1,0 +1,30 @@
+# Detects deletion of security monitoring tool configs or log directories — defense evasion by destroying monitoring infrastructure.
+---
+name: fs_security_tool_deletion.file_unlink.detection
+type: detection
+meta:
+  tags: [
+      "fs_security_tool_deletion",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_unlink",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1562.001", "impair_defenses:_disable_or_modify_tools",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1562.001 ]
+  # Impair Defenses: Disable or Modify Tools
+  comments:
+    - detection rule - identify FILE_UNLINK on security monitoring tool configs and logs (defense evasion)
+
+match-on:
+  events:
+    kunai:
+      - file_unlink
+
+matches:
+  $dep_01: rule( path_security_config_list.file_unlink.dependency)
+condition: $dep_01
+severity: 9

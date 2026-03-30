@@ -1,0 +1,35 @@
+---
+name: path_security_config_list.file_unlink.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_security_tool_deletion",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_unlink",
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_unlink path_security_config_list.file_unlink.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/apparmor(/|$)"
+  $r_02: .data.path ~= "^/etc/apparmor\.d(/|$)"
+  $r_03: .data.path ~= "^/etc/audit(/|$)"
+  $r_04: .data.path ~= "^/etc/auditd\.conf$"
+  $r_05: .data.path ~= "^/etc/aide\.conf$"
+  $r_06: .data.path ~= "^/etc/aide(/|$)"
+  $r_07: .data.path ~= "^/etc/suricata(/|$)"
+  $r_08: .data.path ~= "^/etc/wazuh-agent(/|$)"
+  $r_09: .data.path ~= "^/etc/ossec-init\.conf$"
+  $r_10: .data.path ~= "^/etc/falco(/|$)"
+  $r_11: .data.path ~= "^/var/log/audit(/|$)"
+  $r_12: .data.path ~= "^/var/log/suricata(/|$)"
+  $r_13: .data.path ~= "^/var/ossec(/|$)"
+
+condition: any of $r_
