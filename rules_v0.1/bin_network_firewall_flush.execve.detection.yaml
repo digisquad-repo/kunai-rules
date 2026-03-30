@@ -1,0 +1,41 @@
+# Detects iptables/ufw/nft commands that flush rules, delete chains, or disable the firewall entirely — defense evasion by disabling host firewall.
+---
+name: bin_network_firewall_flush.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_firewall_flush",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1562.004", "impair_defenses:_disable_or_modify_system_firewall",
+    ]
+  attack: [ T1562.004 ]
+  # Impair Defenses: Disable or Modify System Firewall
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify iptables -F/--flush, iptables -P ACCEPT, ufw disable/reset, nft flush (firewall destruction)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_iptables:    .data.exe.path ~= "/[^/]*/(iptables|ip6tables|arptables|ebtables)(-[a-zA-Z0-9._]+)?$"
+  $is_ufw:         .data.exe.path ~= "/[^/]*/(ufw)(-[a-zA-Z0-9._]+)?$"
+  $is_nft:         .data.exe.path ~= "/[^/]*/(nft|nftables)(-[a-zA-Z0-9._]+)?$"
+  $flush:          .data.command_line ~= "(\s|^)(-F|--flush)(\s|$)"
+  $accept_policy:  .data.command_line ~= "-P\s+(INPUT|FORWARD|OUTPUT)\s+ACCEPT"
+  $ufw_disable:    .data.command_line ~= "(\s|^)(disable|reset)(\s|$)"
+  $delete_chain:   .data.command_line ~= "(\s|^)(-X|--delete-chain)(\s|$)"
+  $nft_flush:      .data.command_line ~= "(\s|^)flush(\s|$)"
+condition: ($is_iptables and ($flush or $accept_policy or $delete_chain)) or ($is_ufw and $ufw_disable) or ($is_nft and $nft_flush)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
