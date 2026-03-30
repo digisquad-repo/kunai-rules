@@ -1,0 +1,33 @@
+# Detects DNS queries from network discovery tools (nmap, masscan, etc.) — reverse DNS lookups during network reconnaissance.
+---
+name: bin_hacking_net_discovery.dns_query.detection
+type: detection
+meta:
+  tags: [
+      "bin_hacking_net_discovery",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_dns_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1046", "network_service_discovery",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1018 ]
+  # Remote System Discovery
+  comments:
+    - detection rule - identify DNS_QUERY from network discovery/hacking tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [dns_query]
+
+matches:
+  $hacking: rule( bin_hacking_net_discovery_list.dependency)
+condition: $hacking
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
