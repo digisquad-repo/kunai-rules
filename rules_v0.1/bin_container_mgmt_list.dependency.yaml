@@ -1,0 +1,21 @@
+---
+name: bin_container_mgmt_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_system_namespace",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_container_mgmt_list.dependency - legitimate container/namespace management tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $mgmt_01: .data.exe.path ~= "/[^/]*/(dockerd|containerd|runc|crun|podman|lxc|lxd|lxc-start|lxc-attach|lxc-execute|lxc-copy|lxc-stop|lxc-create|incus|systemd-nspawn|unshare|nsenter|newuidmap|newgidmap)(-[a-zA-Z0-9._]+)?$"
+  $mgmt_02: .data.ancestors ~= "/[^/]*/(dockerd|containerd|runc|crun|podman|lxc|lxd|lxc-start|lxc-attach|lxc-execute|lxc-copy|lxc-stop|lxc-create|incus|systemd-nspawn|unshare|nsenter)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $mgmt_

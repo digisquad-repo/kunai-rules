@@ -1,0 +1,22 @@
+---
+name: bin_log_management_exclude_list.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_log_file_rename",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_log_management_exclude_list.dependency - legitimate log rotation and syslog tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $excl_01: .data.exe.path ~= "/[^/]*/(logrotate|newsyslog|syslogd|rsyslogd|rsyslog|syslog-ng|systemd-journald|journald)(-[a-zA-Z0-9._]+)?$"
+  $excl_02: .data.ancestors ~= "/[^/]*/(logrotate|newsyslog|syslogd|rsyslogd|rsyslog|syslog-ng|systemd-journald|journald)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $excl_

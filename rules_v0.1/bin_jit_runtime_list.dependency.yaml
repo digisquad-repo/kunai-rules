@@ -1,0 +1,21 @@
+---
+name: bin_jit_runtime_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_system_shellcode",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_jit_runtime_list.dependency - legitimate JIT runtimes (browsers, VMs, interpreters)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $jit_01: .data.exe.path ~= "/[^/]*/(java|javaw|node|nodejs|python[0-9.]*|ruby|php|perl|lua|mono|dotnet|chrome|chromium|google-chrome|firefox|iceweasel|icecat|brave|vivaldi|opera|waterfox|electron|V8|v8|qemu|wine|signal-desktop|slack|discord|code|codium|code-oss|zed|cursor|atom|teams|zoom|telegram-desktop|element-desktop|mattermost|rocketchat)(-[a-zA-Z0-9._]+)?$"
+  $jit_02: .data.ancestors ~= "/[^/]*/(java|javaw|node|nodejs|python[0-9.]*|ruby|php|perl|lua|mono|dotnet|chrome|chromium|google-chrome|firefox|iceweasel|icecat|brave|vivaldi|opera|waterfox|electron|V8|v8|qemu|wine|signal-desktop|slack|discord|code|codium|code-oss|zed|cursor|atom|teams|zoom|telegram-desktop|element-desktop|mattermost|rocketchat)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $jit_

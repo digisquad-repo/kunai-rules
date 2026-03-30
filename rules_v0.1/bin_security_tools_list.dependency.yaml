@@ -1,0 +1,20 @@
+---
+name: bin_security_tools_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_system_kill_security",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_security_tools_list.dependency - security monitoring and defense tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $sec_01: .data.target.exe.path ~= "/[^/]*/(kunai|wazuh-agentd|wazuh-modulesd|wazuh-logcollector|wazuh-execd|ossec-agentd|ossec-execd|auditd|syslogd|rsyslogd|syslog-ng|aide|tripwire|osqueryd|falco|snort|suricata|filebeat|auditbeat|elastic-agent|clamd|clamdscan|clamav|tetragon|tracee|cs-falcond|sentineld|crowdstrike|cbsensor|cbdaemon|bro|zeek|sagan|samhain)(-[a-zA-Z0-9._]+)?$"
+
+condition: $sec_01
