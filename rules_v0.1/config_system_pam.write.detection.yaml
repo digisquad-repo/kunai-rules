@@ -1,0 +1,39 @@
+# Detects writes to PAM configuration files or module directories — PAM backdoor installation for credential interception or authentication bypass.
+---
+name: config_system_pam.write.detection
+type: detection
+meta:
+  tags: [
+      "config_system_pam",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1556.003", "modify_authentication_process:_pluggable_authentication_modules",
+    ]
+  attack: [ T1556.003 ]
+  # Modify Authentication Process: Pluggable Authentication Modules
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify write to PAM configuration (/etc/pam.d) or PAM module library paths
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai:
+      - write
+      - write_close
+      - write_config
+
+matches:
+  $dep_01: rule( config_system_pam_list.write.dependency)
+condition: $dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

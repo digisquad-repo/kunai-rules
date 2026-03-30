@@ -1,0 +1,32 @@
+# Dependency list for PAM configuration and module paths — writes indicate authentication bypass attempts.
+---
+name: config_system_pam_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_pam",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write to PAM configuration and module directories
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/pam\.d(/|$)"
+  $r_02: .data.path ~= "^/etc/pam\.conf($)"
+  $r_03: .data.path ~= "^/lib/security(/|$)"
+  $r_04: .data.path ~= "^/lib/x86_64-linux-gnu/security(/|$)"
+  $r_05: .data.path ~= "^/lib/aarch64-linux-gnu/security(/|$)"
+  $r_06: .data.path ~= "^/usr/lib/security(/|$)"
+  $r_07: .data.path ~= "^/usr/lib/x86_64-linux-gnu/security(/|$)"
+  $r_08: .data.path ~= "^/usr/lib/aarch64-linux-gnu/security(/|$)"
+
+condition: any of $r_
