@@ -1,0 +1,38 @@
+# Detects writes to cgroup release_agent or notify_on_release — classic cgroup v1 container escape technique.
+---
+name: fs_container_escape_cgroup.write.detection
+type: detection
+meta:
+  tags: [
+      "fs_container_escape_cgroup",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1611", "escape_to_host",
+    ]
+  attack: [ T1611 ]
+  # Escape to Host
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify write to /sys/fs/cgroup/*/release_agent or notify_on_release (cgroup v1 container escape)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai:
+      - write
+      - write_close
+
+matches:
+  $release_agent:    .data.path ~= "^/sys/fs/cgroup/.*/release_agent$"
+  $notify_release:   .data.path ~= "^/sys/fs/cgroup/.*/notify_on_release$"
+condition: $release_agent or $notify_release
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
