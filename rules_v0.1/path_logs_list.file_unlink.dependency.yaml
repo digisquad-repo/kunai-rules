@@ -1,0 +1,24 @@
+---
+name: path_logs_list.file_unlink.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_log_deletion",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_unlink",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_unlink path_logs_list.file_unlink.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/var/log(/|$)"
+  $r_02: .data.path ~= "^/var/audit(/|$)"
+  $r_03: .data.path ~= "^/var/spool/mail(/|$)"
+
+condition: any of $r_

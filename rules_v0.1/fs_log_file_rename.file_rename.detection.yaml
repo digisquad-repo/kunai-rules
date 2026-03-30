@@ -1,0 +1,35 @@
+# Detects renaming of files in /var/log/ by non-logrotate processes — log tampering or evidence manipulation.
+---
+name: fs_log_file_rename.file_rename.detection
+type: detection
+meta:
+  tags: [
+      "fs_log_file_rename",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_file_rename",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1070.002", "indicator_removal:_clear_linux_or_mac_system_logs",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1070.002 ]
+  # Indicator Removal: Clear Linux or Mac System Logs
+  comments:
+    - detection rule - identify FILE_RENAME on /var/log/ files from non-logrotate/syslog processes (log tampering)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai:
+      - file_rename
+
+matches:
+  $is_log_file:     .data.old ~= "^/var/log/"
+  $is_legit_rotate: rule( bin_log_management_exclude_list.dependency)
+condition: $is_log_file and (not $is_legit_rotate)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

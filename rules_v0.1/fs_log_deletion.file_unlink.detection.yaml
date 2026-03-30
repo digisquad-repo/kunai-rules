@@ -1,0 +1,29 @@
+# Detects deletion of log files — log wiping to cover tracks after an intrusion.
+---
+name: fs_log_deletion.file_unlink.detection
+type: detection
+meta:
+  tags: [
+      "fs_log_deletion",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_file_unlink",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1070.004", "indicator_removal:_file_deletion",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1070.002 ]
+  # Indicator Removal: Clear Linux or Mac System Logs
+  comments:
+    - detection rule - identify FILE_UNLINK on log/audit paths (evidence destruction)
+
+match-on:
+  events:
+    kunai:
+      - file_unlink
+
+matches:
+  $is_log: rule( path_logs_list.file_unlink.dependency)
+condition: $is_log
+severity: 8
