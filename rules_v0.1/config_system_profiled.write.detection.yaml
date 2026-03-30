@@ -1,0 +1,34 @@
+# Detects writes to /etc/profile.d/ or /etc/environment — global shell initialization persistence, executed on every login.
+---
+name: config_system_profiled.write.detection
+type: detection
+meta:
+  tags: [
+      "config_system_profiled",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1546.004", "event_triggered_execution:_unix_shell_configuration_modification",
+    ]
+  attack: [ T1546.004 ]
+  # Event Triggered Execution: Unix Shell Configuration Modification
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify write to /etc/profile.d or /etc/environment (global shell profile persistence)
+
+match-on:
+  events:
+    kunai:
+      - write
+      - write_close
+      - write_config
+
+matches:
+  $dep_01: rule( config_system_profiled_list.write.dependency)
+condition: $dep_01
+severity: 8

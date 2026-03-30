@@ -1,0 +1,26 @@
+---
+name: config_system_profiled_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_profiled",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write config_system_profiled_list.write.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/profile\.d(/|$)"
+  $r_02: .data.path ~= "^/etc/profile$"
+  $r_03: .data.path ~= "^/etc/environment$"
+
+condition: any of $r_
