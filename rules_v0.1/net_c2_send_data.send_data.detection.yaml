@@ -1,0 +1,36 @@
+# Detects data exfiltration from known C2 framework, Metasploit, or Impacket tools to public IPs.
+---
+name: net_c2_send_data.send_data.detection
+type: detection
+meta:
+  tags: [
+      "net_c2_send_data",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_send_data",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1041", "exfiltration_over_c2_channel",
+    ]
+  attack: [ T1041 ]
+  # Exfiltration Over C2 Channel
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify send_data from C2 framework / metasploit / impacket tools to public IP
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [send_data]
+
+matches:
+  $is_c2:         rule( bin_hacking_c2_framework_list.dependency)
+  $is_metasploit: rule( bin_hacking_metasploit_list.dependency)
+  $is_impacket:   rule( bin_hacking_impacket_list.dependency)
+  $to_public:     .data.dst.public == true
+condition: (any of $is_) and $to_public
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

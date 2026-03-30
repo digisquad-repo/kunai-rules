@@ -1,0 +1,40 @@
+# Detects connections to known C2 and Tor ports (4444, 31337, 1337, 9050, 6667, etc.) on public IPs.
+---
+name: net_c2_port.connect.detection
+type: detection
+meta:
+  tags: [
+      "net_c2_port",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1095", "non-application_layer_protocol",
+    ]
+  attack: [ T1095 ]
+  # Non-Application Layer Protocol
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify connect to known C2 and Tor ports on public IPs
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $port_4444:  .data.dst.port == 4444
+  $port_31337: .data.dst.port == 31337
+  $port_1337:  .data.dst.port == 1337
+  $port_9050:  .data.dst.port == 9050
+  $port_9051:  .data.dst.port == 9051
+  $port_9150:  .data.dst.port == 9150
+  $port_6667:  .data.dst.port == 6667
+  $to_public:  .data.dst.public == true
+condition: (any of $port_) and $to_public
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
