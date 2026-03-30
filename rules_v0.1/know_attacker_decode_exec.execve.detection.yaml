@@ -1,0 +1,37 @@
+# Detects base64 -d (decode) or openssl enc -d (decrypt) — T1140 deobfuscation phase used to decode payloads before execution.
+---
+name: know_attacker_decode_exec.execve.detection
+type: detection
+meta:
+  tags: [
+      "know_attacker_decode_exec",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1140", "deobfuscate/decode_files_or_information",
+    ]
+  attack: [ T1140 ]
+  # Deobfuscate/Decode Files or Information
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify base64 -d/--decode or openssl enc -d (payload deobfuscation)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_base64:    .data.exe.path ~= "/[^/]*/(base64)(-[a-zA-Z0-9._]+)?$"
+  $is_openssl:   .data.exe.path ~= "/[^/]*/(openssl)(-[a-zA-Z0-9._]+)?$"
+  $decode_flag:  .data.command_line ~= "(\s|^)(-d|--decode)(\s|$)"
+  $enc_decrypt:  .data.command_line ~= "(\s|^)enc\s.*-d(\s|$)"
+condition: ($is_base64 and $decode_flag) or ($is_openssl and $enc_decrypt)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
