@@ -1,0 +1,33 @@
+# Detects mmap calls mapping executable anonymous memory in non-JIT processes — fileless shellcode loading.
+---
+name: bin_system_shellcode.mmap.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_shellcode",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_mmap_exec",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1620", "reflective_code_loading",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1620 ]
+  # Reflective Code Loading
+  comments:
+    - detection rule - identify MMAP_EXEC from non-JIT process (suspicious executable memory mapping)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [mmap_exec]
+
+matches:
+  $jit: rule( bin_jit_runtime_list.dependency)
+condition: not $jit
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

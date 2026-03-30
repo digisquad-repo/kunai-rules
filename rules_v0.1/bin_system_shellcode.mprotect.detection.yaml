@@ -1,0 +1,33 @@
+# Detects mprotect calls making memory regions executable in non-JIT processes — shellcode execution or process hollowing.
+---
+name: bin_system_shellcode.mprotect.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_shellcode",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_mprotect_exec",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1055.012", "process_injection:_process_hollowing",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1620 ]
+  # Reflective Code Loading
+  comments:
+    - detection rule - identify MPROTECT_EXEC from non-JIT process (fileless execution / shellcode)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [mprotect_exec]
+
+matches:
+  $jit: rule( bin_jit_runtime_list.dependency)
+condition: not $jit
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
