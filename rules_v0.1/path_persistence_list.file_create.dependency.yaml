@@ -1,0 +1,26 @@
+---
+name: path_persistence_list.file_create.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_persistence",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_create",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_create path_persistence_list.file_create.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/cron\.d(/|$)"
+  $r_02: .data.path ~= "^/etc/cron\.(daily|weekly|monthly|hourly)(/|$)"
+  $r_03: .data.path ~= "^/etc/systemd/system(/|$)"
+  $r_04: .data.path ~= "^/usr/lib/systemd/system(/|$)"
+  $r_05: .data.path ~= "^/etc/init\.d(/|$)"
+
+condition: any of $r_

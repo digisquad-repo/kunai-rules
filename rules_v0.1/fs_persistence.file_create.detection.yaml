@@ -1,0 +1,29 @@
+# Detects file creation in persistence paths (cron.d, systemd/system, init.d) — persistence mechanism installation.
+---
+name: fs_persistence.file_create.detection
+type: detection
+meta:
+  tags: [
+      "fs_persistence",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_file_create",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1053.003", "scheduled_task/job:_cron",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1053.003 ]
+  # Scheduled Task/Job: Cron
+  comments:
+    - detection rule - identify FILE_CREATE in cron/systemd/initd directories (persistence)
+
+match-on:
+  events:
+    kunai:
+      - file_create
+
+matches:
+  $is_persistence: rule( path_persistence_list.file_create.dependency)
+condition: $is_persistence
+severity: 7
