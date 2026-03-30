@@ -1,3 +1,4 @@
+# Detects execution of network discovery/scanning tools (nmap, masscan, zmap, etc.) — network reconnaissance.
 ---
 name: bin_hacking_net_discovery.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1046", "network_service_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1046 ]
+  # Network Service Discovery
   comments:
     - detection rule - identify bin_hacking_net_discovery_list.dependency
 

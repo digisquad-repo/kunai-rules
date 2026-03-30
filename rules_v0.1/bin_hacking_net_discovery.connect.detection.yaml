@@ -1,3 +1,4 @@
+# Detects network connections from scanning tools — confirms active network scanning/reconnaissance.
 ---
 name: bin_hacking_net_discovery.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1046", "network_service_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1046 ]
+  # Network Service Discovery
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_net_discovery_list.dependency
 
