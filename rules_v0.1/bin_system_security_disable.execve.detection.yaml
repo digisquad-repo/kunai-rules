@@ -1,0 +1,37 @@
+# Detects systemctl/service commands stopping or disabling known security monitoring tools (wazuh, auditd, apparmor, fail2ban, etc.) — defense evasion.
+---
+name: bin_system_security_disable.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_security_disable",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1562.001", "impair_defenses:_disable_or_modify_tools",
+    ]
+  attack: [ T1562.001 ]
+  # Impair Defenses: Disable or Modify Tools
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify systemctl/service stop/disable/mask targeting security monitoring tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_systemctl:  .data.exe.path ~= "/[^/]*/systemctl(-[a-zA-Z0-9._]+)?$"
+  $is_service:    .data.exe.path ~= "/[^/]*/service(-[a-zA-Z0-9._]+)?$"
+  $stop_disable:  .data.command_line ~= "(\s|^)(stop|disable|mask)(\s|$)"
+  $security_tool: .data.command_line ~= "(wazuh|ossec|auditd|aide|apparmor|fail2ban|clamav|rkhunter|chkrootkit|kunai|suricata|snort|tripwire|samhain|falco)"
+condition: ($is_systemctl or $is_service) and $stop_disable and $security_tool
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
