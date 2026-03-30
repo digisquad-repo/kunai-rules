@@ -1,3 +1,4 @@
+# Detects network connections from script interpreters — script-based C2 beaconing or data exfiltration.
 ---
 name: bin_script_interpreters.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059", "command_and_scripting_interpreter",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059 ]
+  # Command and Scripting Interpreter
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_script_interpreters_list.dependency
 

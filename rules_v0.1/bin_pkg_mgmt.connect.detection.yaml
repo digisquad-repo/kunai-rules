@@ -1,3 +1,4 @@
+# Detects network connections from package managers — confirms active package installation potentially fetching malicious packages.
 ---
 name: bin_pkg_mgmt.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1105", "ingress_tool_transfer",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1105 ]
+  # Ingress Tool Transfer
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_pkg_mgmt_list.dependency
 

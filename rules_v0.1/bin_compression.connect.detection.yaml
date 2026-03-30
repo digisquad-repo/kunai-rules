@@ -1,3 +1,4 @@
+# Detects network connections from compression tools — archive tools initiating connections is highly suspicious (data exfiltration).
 ---
 name: bin_compression.connect.detection
 type: detection
@@ -8,8 +9,14 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1560.001", "archive_collected_data:_archive_via_utility",
+      "T1048", "exfiltration_over_alternative_protocol",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1560.001, T1048 ]
+  # Archive Collected Data: Archive via Utility
+  # Exfiltration Over Alternative Protocol
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_compression_list.dependency
 

@@ -1,3 +1,4 @@
+# Detects network connections from forensic tools — forensic tools calling out to the internet is highly suspicious.
 ---
 name: bin_forensics.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1005", "data_from_local_system",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1005 ]
+  # Data from Local System
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_forensics_list.dependency
 

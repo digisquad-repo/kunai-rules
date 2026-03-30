@@ -1,3 +1,4 @@
+# Detects execution of script interpreters (python, perl, ruby, php, node, etc.) — used for executing attacker scripts.
 ---
 name: bin_script_interpreters.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059", "command_and_scripting_interpreter",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059 ]
+  # Command and Scripting Interpreter
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_script_interpreters_list.dependency
 

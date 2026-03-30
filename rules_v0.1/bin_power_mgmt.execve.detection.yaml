@@ -1,3 +1,4 @@
+# Detects execution of power management commands (shutdown, reboot, halt, poweroff) — may indicate system disruption.
 ---
 name: bin_power_mgmt.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1529", "system_shutdown/reboot",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1529 ]
+  # System Shutdown/Reboot
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_power_mgmt_list.dependency
 

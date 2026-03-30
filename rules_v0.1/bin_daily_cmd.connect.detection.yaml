@@ -1,3 +1,4 @@
+# Detects network connections from basic daily commands (ls, cat, etc.) — these tools should never initiate network connections.
 ---
 name: bin_daily_cmd.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_daily_cmd_list.dependency
 

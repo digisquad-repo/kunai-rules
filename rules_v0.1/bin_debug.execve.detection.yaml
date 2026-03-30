@@ -1,3 +1,4 @@
+# Detects execution of debuggers (gdb, strace, ltrace, etc.) — may indicate process inspection or injection attempts.
 ---
 name: bin_debug.execve.detection
 type: detection
@@ -9,8 +10,13 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1082", "system_information_discovery",
+      "T1049", "system_network_connections_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1082, T1049 ]
+  # System Information Discovery (strace) / System Network Connections Discovery (lsof)
   comments:
     - detection rule - identify bin_debug_list.dependency
 
@@ -25,5 +31,5 @@ matches:
 condition: $bin_dep_01
 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-severity: 7
+severity: 5
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

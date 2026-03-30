@@ -1,3 +1,4 @@
+# Detects network connections from string search tools — grep/awk initiating connections is highly suspicious.
 ---
 name: bin_string_search.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1119", "automated_collection",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1119 ]
+  # Automated Collection
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_string_search_list.dependency
 

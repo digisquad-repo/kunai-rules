@@ -15,7 +15,7 @@ meta:
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 
 matches:
-  $bin_dep_01: .data.exe.path ~= "/[^/]*(apktool|binwalk|dex2jar|volatility|autopsy|foremost|sleuthkit)(-[a-zA-Z0-9._]+)?$"
-  $bin_dep_02: .data.ancestors ~= "/[^/]*(apktool|binwalk|dex2jar|volatility|autopsy|foremost|sleuthkit)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(apktool|binwalk|dex2jar|volatility|autopsy|foremost|sleuthkit)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(apktool|binwalk|dex2jar|volatility|autopsy|foremost|sleuthkit)(-[a-zA-Z0-9._]+)?$"
 
 condition: any of $bin_dep_

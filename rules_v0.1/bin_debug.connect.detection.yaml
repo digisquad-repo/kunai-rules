@@ -1,3 +1,4 @@
+# Detects network connections from debuggers (gdb, strace) — debuggers initiating connections is very suspicious.
 ---
 name: bin_debug.connect.detection
 type: detection
@@ -8,8 +9,13 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1082", "system_information_discovery",
+      "T1049", "system_network_connections_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1082, T1049 ]
+  # System Information Discovery (strace) / System Network Connections Discovery (lsof)
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_debug_list.dependency
 

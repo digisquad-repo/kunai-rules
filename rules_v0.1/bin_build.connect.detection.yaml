@@ -1,3 +1,4 @@
+# Detects network connections from build tools (compilers, linkers) — build tools have no legitimate reason to call out to the internet.
 ---
 name: bin_build.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1587.001", "develop_capabilities:_malware",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1587.001 ]
+  # Develop Capabilities: Malware
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_build_list.dependency
 

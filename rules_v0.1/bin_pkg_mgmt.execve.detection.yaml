@@ -1,3 +1,4 @@
+# Detects execution of package managers (apt, dpkg, pip, npm, gem, etc.) — may be used for installing attack tools.
 ---
 name: bin_pkg_mgmt.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1105", "ingress_tool_transfer",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1105 ]
+  # Ingress Tool Transfer
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_pkg_mgmt_list.dependency
 

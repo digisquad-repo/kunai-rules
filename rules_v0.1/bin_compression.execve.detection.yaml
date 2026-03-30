@@ -1,3 +1,4 @@
+# Detects execution of compression/archiving tools (tar, zip, 7z, etc.) — may be used to pack data before exfiltration.
 ---
 name: bin_compression.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1027.002", "obfuscated_files_or_information:_software_packing",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1027.002 ]
+  # Obfuscated Files or Information: Software Packing
   comments:
     - detection rule - identify bin_compression_list.dependency
 

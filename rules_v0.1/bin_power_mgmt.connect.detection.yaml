@@ -1,3 +1,4 @@
+# Detects network connections from power management commands — these tools have no legitimate network activity.
 ---
 name: bin_power_mgmt.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1529", "system_shutdown/reboot",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1529 ]
+  # System Shutdown/Reboot
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_power_mgmt_list.dependency
 

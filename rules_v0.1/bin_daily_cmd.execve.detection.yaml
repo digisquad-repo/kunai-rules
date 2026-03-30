@@ -1,3 +1,4 @@
+# Detects execution of common daily commands (ls, cp, mv, cat, etc.). Very low severity informational rule for baselining.
 ---
 name: bin_daily_cmd.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_daily_cmd_list.dependency
 

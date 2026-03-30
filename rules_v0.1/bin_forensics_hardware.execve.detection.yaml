@@ -1,3 +1,4 @@
+# Detects execution of hardware forensic tools (lshw, dmidecode, hdparm, smartctl, etc.) — hardware enumeration by an attacker.
 ---
 name: bin_forensics_hardware.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1005", "data_from_local_system",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1005 ]
+  # Data from Local System
   comments:
     - detection rule - identify bin_forensics_hardware_list.dependency
 

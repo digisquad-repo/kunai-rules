@@ -1,3 +1,4 @@
+# Detects execution of string search tools (grep, ripgrep, awk, find with -exec, etc.) — automated collection of sensitive data.
 ---
 name: bin_string_search.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1119", "automated_collection",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1119 ]
+  # Automated Collection
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_string_search_list.dependency
 

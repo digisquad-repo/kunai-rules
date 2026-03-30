@@ -1,3 +1,4 @@
+# Detects execution of forensic tools (dd, strings, hexdump, autopsy, etc.) — may indicate data collection or anti-forensics.
 ---
 name: bin_forensics.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1005", "data_from_local_system",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1005 ]
+  # Data from Local System
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_forensics_list.dependency
 
@@ -25,6 +30,6 @@ matches:
 condition: $bin_dep_01
 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-severity: 3
+severity: 5
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 
