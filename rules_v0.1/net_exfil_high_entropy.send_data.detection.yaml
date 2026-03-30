@@ -1,0 +1,36 @@
+# Detects high-entropy data (>=7) sent to public IPs from non-browser non-HTTP processes — encrypted/compressed exfiltration.
+---
+name: net_exfil_high_entropy.send_data.detection
+type: detection
+meta:
+  tags: [
+      "net_exfil_high_entropy",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_send_data",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1048", "exfiltration_over_alternative_protocol",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1048 ]
+  # Exfiltration Over Alternative Protocol
+  comments:
+    - detection rule - identify SEND_DATA with high entropy to public IP from non-browser (data exfiltration)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [send_data]
+
+matches:
+  $high_entropy:   .data.data_entropy >= 7
+  $to_public:      .data.dst.public == true
+  $is_browser:     rule( bin_browsers_list.dependency)
+  $is_http_client: rule( bin_network_http_client_list.dependency)
+condition: $high_entropy and $to_public and (not $is_browser) and (not $is_http_client)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

@@ -1,0 +1,37 @@
+# Detects large volume data transfers (>=1MB) to public IPs from non-browser non-HTTP-client processes — bulk data exfiltration.
+---
+name: net_exfil_large_volume.send_data.detection
+type: detection
+meta:
+  tags: [
+      "net_exfil_large_volume",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_send_data",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1048", "exfiltration_over_alternative_protocol",
+    ]
+  attack: [ T1048 ]
+  # Exfiltration Over Alternative Protocol
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify large volume send_data (>=1MB) to public IP from non-browser non-http-client non-pkg-mgmt process
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [send_data]
+
+matches:
+  $large_size:     .data.data_size >= 1000000
+  $to_public:      .data.dst.public == true
+  $is_browser:     rule( bin_browsers_list.dependency)
+  $is_pkg_mgmt:    rule( bin_pkg_mgmt_list.dependency)
+  $is_http_client: rule( bin_network_http_client_list.dependency)
+condition: $large_size and $to_public and (not $is_browser) and (not $is_pkg_mgmt) and (not $is_http_client)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
