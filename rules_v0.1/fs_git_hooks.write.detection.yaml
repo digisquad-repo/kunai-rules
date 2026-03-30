@@ -1,0 +1,37 @@
+# Detects writes to git hook scripts (.git/hooks/) — malicious hooks execute arbitrary code on git operations, enabling supply chain compromise or persistence.
+---
+name: fs_git_hooks.write.detection
+type: detection
+meta:
+  tags: [
+      "fs_git_hooks",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1546", "event_triggered_execution",
+    ]
+  attack: [ T1546 ]
+  # Event Triggered Execution
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify write to .git/hooks/ scripts (pre-commit, post-commit, pre-push, post-receive, etc.)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai:
+      - write
+      - write_close
+
+matches:
+  $git_hook: .data.path ~= "/\.git/hooks/(pre-commit|post-commit|pre-push|post-merge|pre-receive|post-receive|update|commit-msg|prepare-commit-msg|pre-rebase|post-checkout|pre-applypatch|post-applypatch|pre-auto-gc|post-rewrite|sendemail-validate)$"
+condition: $git_hook
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
