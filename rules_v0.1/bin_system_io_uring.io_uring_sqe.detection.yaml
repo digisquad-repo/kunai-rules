@@ -1,0 +1,35 @@
+# Detects io_uring IORING_OP_CONNECT operations from non-browser processes — syscall bypass technique to evade network monitoring.
+---
+name: bin_system_io_uring.io_uring_sqe.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_io_uring",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_io_uring_sqe",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071", "application_layer_protocol",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071 ]
+  # Application Layer Protocol
+  comments:
+    - detection rule - identify IO_URING_SQE IORING_OP_CONNECT from non-browser process (syscall bypass)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [io_uring_sqe]
+
+matches:
+  $connect_op: .data.op.name == "IORING_OP_CONNECT"
+  $is_browser: rule( bin_browsers_list.dependency)
+  $is_browser_headless: rule( bin_browsers_headless_list.dependency)
+condition: $connect_op and (not $is_browser) and (not $is_browser_headless)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
