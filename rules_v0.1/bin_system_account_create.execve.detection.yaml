@@ -1,0 +1,34 @@
+# Detects execution of account management tools (useradd, adduser, usermod, groupadd, etc.) — unexpected account creation is suspicious on servers.
+---
+name: bin_system_account_create.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_account_mgmt",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1136", "create_account",
+    ]
+  attack: [ T1136 ]
+  # Create Account
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of account management tools (useradd, adduser, usermod, groupadd, passwd, etc.)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( bin_system_account_mgmt_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
