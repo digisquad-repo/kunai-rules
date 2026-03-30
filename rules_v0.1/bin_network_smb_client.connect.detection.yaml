@@ -1,0 +1,33 @@
+# Detects SMB client tools making network connections — lateral movement via Windows share access.
+---
+name: bin_network_smb_client.connect.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_smb_client",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1021.002", "remote_services:_smb/windows_admin_shares",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1021.002 ]
+  # Remote Services: SMB/Windows Admin Shares
+  comments:
+    - detection rule - identify CONNECT bin_network_smb_client_list.dependency (lateral movement indicator)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $bin_dep_01: rule( bin_network_smb_client_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
