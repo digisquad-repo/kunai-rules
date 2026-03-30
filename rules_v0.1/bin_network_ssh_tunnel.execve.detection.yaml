@@ -1,0 +1,38 @@
+# Detects SSH launched with port-forwarding flags (-L/-R/-D/-w) indicating active tunnel or SOCKS proxy setup.
+---
+name: bin_network_ssh_tunnel.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_ssh_tunnel",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1572", "protocol_tunneling",
+    ]
+  attack: [ T1572 ]
+  # Protocol Tunneling
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify SSH with port forwarding flags (-L/-R/-D/-w) indicating tunneling activity
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_ssh:         rule( bin_network_ssh_client_list.dependency)
+  $local_forward:  .data.command_line ~= "(\s|^)-[a-zA-Z]*L(\s|[0-9])"
+  $remote_forward: .data.command_line ~= "(\s|^)-[a-zA-Z]*R(\s|[0-9])"
+  $socks_proxy:    .data.command_line ~= "(\s|^)-[a-zA-Z]*D(\s|[0-9])"
+  $tun_device:     .data.command_line ~= "(\s|^)-[a-zA-Z]*w(\s|[0-9])"
+condition: $is_ssh and ($local_forward or $remote_forward or $socks_proxy or $tun_device)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

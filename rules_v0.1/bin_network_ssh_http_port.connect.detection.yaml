@@ -1,0 +1,37 @@
+# Detects SSH client connecting on HTTP/HTTPS ports (80, 443, 8080, 8443) — firewall bypass via protocol tunneling.
+---
+name: bin_network_ssh_http_port.connect.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_ssh_http_port",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1572", "protocol_tunneling",
+    ]
+  attack: [ T1572 ]
+  # Protocol Tunneling
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify SSH client connecting on HTTP/HTTPS ports (firewall bypass / tunneling)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $is_ssh:    rule( bin_network_ssh_client_list.dependency)
+  $port_80:   .data.dst.port == 80
+  $port_443:  .data.dst.port == 443
+  $port_8080: .data.dst.port == 8080
+  $port_8443: .data.dst.port == 8443
+condition: $is_ssh and (any of $port_)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
