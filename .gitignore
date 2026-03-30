@@ -1,0 +1,39 @@
+# Runtime output
+*.json
+/tmp/
+/output/
+*.log
+*.bak
+*.orig
+
+# Python
+__pycache__/
+*.pyc
+.python-version
+venv/
+.env
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+
+# Archives / temp
+*.tar.gz
+*.zip
+*.7z
+
+# Secrets (should never be committed)
+*.pem
+*.key
+id_rsa*
+.env.local
+
+# Claude Code (keep settings.json, ignore local overrides)
+!.claude/settings.json
+.claude/settings.local.json
