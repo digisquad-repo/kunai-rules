@@ -1,0 +1,40 @@
+# Detects touch -t or debugfs inode timestamp manipulation — anti-forensic timestomping to hide file modification time.
+---
+name: bin_system_timestomp.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_timestomp",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1070.006", "indicator_removal:_timestomp",
+    ]
+  attack: [ T1070.006 ]
+  # Indicator Removal: Timestomp
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify touch -t (specific timestamp) or debugfs set_inode_field mtime/atime/ctime
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_touch:       .data.exe.path ~= "/[^/]*/(touch)(-[a-zA-Z0-9._]+)?$"
+  $is_debugfs:     .data.exe.path ~= "/[^/]*/(debugfs)(-[a-zA-Z0-9._]+)?$"
+  $touch_ts:       .data.command_line ~= "(\s|^)-t\s+[0-9]"
+  $touch_date:     .data.command_line ~= "(\s|^)--date="
+  $touch_ref:      .data.command_line ~= "(\s|^)--reference="
+  $debugfs_inode:  .data.command_line ~= "set_inode_field"
+  $debugfs_time:   .data.command_line ~= "(mtime|atime|ctime|crtime)"
+condition: ($is_touch and ($touch_ts or $touch_date or $touch_ref)) or ($is_debugfs and ($debugfs_inode or $debugfs_time))
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
