@@ -1,0 +1,33 @@
+# Detects network connections from ARP poisoning and MITM tools — active adversary-in-the-middle attack in progress.
+---
+name: know_attacker_arp_poison.connect.detection
+type: detection
+meta:
+  tags: [
+      "know_attacker_arp_poison",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1557.002", "adversary-in-the-middle:_arp_cache_poisoning",
+    ]
+  attack: [ T1557.002 ]
+  # Adversary-in-the-Middle: ARP Cache Poisoning
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify CONNECT from ARP poisoning / MITM tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $bin_dep_01: rule( know_attacker_arp_poison_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

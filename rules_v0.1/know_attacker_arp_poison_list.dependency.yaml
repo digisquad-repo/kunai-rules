@@ -1,0 +1,31 @@
+# Dependency list for ARP poisoning and MITM attack tools (T1557.002).
+---
+name: know_attacker_arp_poison_list.dependency
+type: dependency
+meta:
+  tags: [
+      "know_attacker_arp_poison",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - know_attacker_arp_poison_list.dependency - ARP spoofing / MITM offensive tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(arpspoof|arpwatch|arping)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(dsniff|macchanger|dnsspoof|filesnarf|mailsnarf|msgsnarf|urlsnarf|webspy)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(ettercap|etterlog|etterfilter)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(bettercap)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_05: .data.exe.path ~= "/[^/]*/(mitmproxy|mitmweb|mitmdump)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(arpspoof|arpwatch|arping)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(dsniff|macchanger|dnsspoof)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_08: .data.ancestors ~= "/[^/]*/(ettercap|etterlog|etterfilter)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_09: .data.ancestors ~= "/[^/]*/(bettercap)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_10: .data.ancestors ~= "/[^/]*/(mitmproxy|mitmweb|mitmdump)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

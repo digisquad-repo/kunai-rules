@@ -1,0 +1,34 @@
+# Detects execution of ARP poisoning and MITM attack tools (arpspoof, ettercap, bettercap, dsniff) — adversary-in-the-middle attack setup.
+---
+name: know_attacker_arp_poison.execve.detection
+type: detection
+meta:
+  tags: [
+      "know_attacker_arp_poison",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1557.002", "adversary-in-the-middle:_arp_cache_poisoning",
+    ]
+  attack: [ T1557.002 ]
+  # Adversary-in-the-Middle: ARP Cache Poisoning
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of ARP poisoning / MITM tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( know_attacker_arp_poison_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
