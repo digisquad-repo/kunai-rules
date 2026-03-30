@@ -1,0 +1,34 @@
+# Detects DNS queries initiated directly by shell interpreters — unusual activity suggesting DNS-based exfiltration or C2 via shell.
+---
+name: bin_system_shell.dns_query.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_shell",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_dns_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.004", "application_layer_protocol:_dns",
+    ]
+  attack: [ T1071.004 ]
+  # Application Layer Protocol: DNS
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify DNS queries directly from shell interpreter (DNS exfil via shell, unusual activity)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [dns_query]
+
+matches:
+  $is_shell:           rule( bin_system_shell_list.dependency)
+  $common_exclusions:  rule( bin_exclusion_common)
+condition: $is_shell and (not $common_exclusions)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
