@@ -1,0 +1,22 @@
+# Dependency list for modern code editors (VSCode, Codium, Zed, Cursor, Atom) — distinct from bin_editors_list (vim/nano/emacs). These editors legitimately make network connections.
+---
+name: bin_desktop_code_editor_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_desktop_code_editor",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_desktop_code_editor_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(code|codium|code-oss|zed|atom|cursor)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(code|codium|code-oss|zed|atom|cursor)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

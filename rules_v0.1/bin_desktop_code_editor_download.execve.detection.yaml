@@ -1,0 +1,36 @@
+# Detects wget/curl spawned from a code editor (VSCode/Codium/Zed/Cursor) downloading to /tmp or /dev/shm — suspicious tool staging via compromised extension or integrated terminal.
+---
+name: bin_desktop_code_editor_download.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_desktop_code_editor_download",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1105", "ingress_tool_transfer",
+    ]
+  attack: [ T1105 ]
+  # Ingress Tool Transfer
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify wget/curl spawned by a code editor ancestor (VSCode/Codium/Zed/Cursor) downloading to /tmp or /dev/shm (suspicious payload staging)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_http_client:   .data.exe.path ~= "/[^/]*/(wget|curl|fetch|aria2c|axel|wget2)(-[a-zA-Z0-9._]+)?$"
+  $from_code_editor: rule( bin_desktop_code_editor_list.dependency)
+  $to_tmp:           .data.command_line ~= "((\s|^)-[oO]\s+/(tmp|dev/shm|var/tmp)/|--output\s+/(tmp|dev/shm|var/tmp)/)"
+condition: $is_http_client and $from_code_editor and $to_tmp
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
