@@ -1,0 +1,29 @@
+# Detects creation of script files (.sh, .py, .pl, etc.) in temporary directories — attacker dropping script payloads.
+---
+name: fs_script_drop.file_create.detection
+type: detection
+meta:
+  tags: [
+      "fs_script_drop",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_file_create",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059", "command_and_scripting_interpreter",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059 ]
+  # Command and Scripting Interpreter
+  comments:
+    - detection rule - identify FILE_CREATE of script/binary in /tmp /dev/shm (payload drop)
+
+match-on:
+  events:
+    kunai:
+      - file_create
+
+matches:
+  $is_tmp_script: rule( path_tmp_script_list.file_create.dependency)
+condition: $is_tmp_script
+severity: 6

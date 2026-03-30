@@ -1,0 +1,24 @@
+---
+name: path_tmp_script_list.file_create.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_script_drop",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_create",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_create path_tmp_script_list.file_create.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/tmp/[^/]*\.(sh|py|pl|rb|php|js|elf|bin|out)$"
+  $r_02: .data.path ~= "^/dev/shm/[^/]*\.(sh|py|pl|rb|php|js|elf|bin|out)$"
+  $r_03: .data.path ~= "^/var/tmp/[^/]*\.(sh|py|pl|rb|php|js|elf|bin|out)$"
+
+condition: any of $r_
