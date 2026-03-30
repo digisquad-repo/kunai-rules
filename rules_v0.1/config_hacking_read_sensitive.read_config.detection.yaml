@@ -1,0 +1,36 @@
+# Detects offensive hacking tools reading sensitive credential config files — targeted credential dumping.
+---
+name: config_hacking_read_sensitive.read_config.detection
+type: detection
+meta:
+  tags: [
+      "config_hacking_read_sensitive",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_read_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1003", "os_credential_dumping",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1003 ]
+  # OS Credential Dumping
+  comments:
+    - detection rule - identify READ_CONFIG of sensitive files by offensive hacking tools
+
+match-on:
+  events:
+    kunai:
+      - read_config
+
+matches:
+  $c2_fw:    rule( bin_hacking_c2_framework_list.dependency)
+  $msf:      rule( bin_hacking_metasploit_list.dependency)
+  $impacket: rule( bin_hacking_impacket_list.dependency)
+  $net_hack: rule( bin_hacking_net_list.dependency)
+  $brute:    rule( bin_hacking_brute_force_list.dependency)
+  $mimikatz: rule( bin_hacking_mimikatz_list.dependency)
+  $sensitive: rule( path_sensitive_config_list.read_config.dependency)
+condition: ($c2_fw or $msf or $impacket or $net_hack or $brute or $mimikatz) and $sensitive
+severity: 9

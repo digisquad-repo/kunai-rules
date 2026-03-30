@@ -1,0 +1,27 @@
+---
+name: path_sensitive_config_list.read_config.dependency
+type: dependency
+meta:
+  tags: [
+      "config_credential_access",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_read_config",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify read_config path_sensitive_config_list.read_config.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/shadow$"
+  $r_02: .data.path ~= "^/etc/sudoers$"
+  $r_03: .data.path ~= "^/etc/sudoers\.d(/|$)"
+  $r_04: .data.path ~= "^/etc/gshadow$"
+  $r_05: .data.path ~= "^/etc/krb5\.keytab$"
+  $r_06: .data.path ~= "^/etc/ssh/ssh_host_[^/]+_key$"
+
+condition: any of $r_
