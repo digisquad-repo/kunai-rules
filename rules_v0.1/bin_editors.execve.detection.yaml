@@ -1,0 +1,28 @@
+# Detects execution of text editors (vi, vim, nano, emacs, etc.). Low severity informational rule.
+---
+name: bin_editors.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_editors",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
+    ]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell (editors can execute shell commands)
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE EXECVE_SCRIPT bin_editors_list.dependency
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+matches:
+  $dep_editor: rule(bin_editors_list.dependency)
+condition: $dep_editor
+severity: 3

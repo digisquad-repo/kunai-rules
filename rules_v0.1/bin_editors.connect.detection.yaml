@@ -1,0 +1,27 @@
+# Detects network connections from text editors — editors initiating network connections should never happen (maximum severity).
+---
+name: bin_editors.connect.detection
+type: detection
+meta:
+  tags: [
+      "bin_editors",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059", "command_and_scripting_interpreter",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059 ]
+  # Command and Scripting Interpreter
+  comments:
+    - detection rule - identify CONNECT - apply on bin - bin_editors_list.dependency
+
+match-on:
+  events:
+    kunai: [connect]
+matches:
+  $dep_editor: rule(bin_editors_list.dependency)
+condition: $dep_editor
+severity: 9 # Editors rarely need network — plugin updates are the exception
