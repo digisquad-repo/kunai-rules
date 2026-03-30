@@ -1,3 +1,4 @@
+# Detects network connections from Impacket tools — confirms active credential theft or lateral movement via SMB/WMI.
 ---
 name: bin_hacking_impacket.connect.detection
 type: detection
@@ -8,8 +9,14 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1003", "os_credential_dumping",
+      "T1550", "use_alternate_authentication_material",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1003, T1550 ]
+  # OS Credential Dumping
+  # Use Alternate Authentication Material
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_impacket_list.dependency
 

@@ -1,3 +1,4 @@
+# Detects execution of brute-force attack tools (hydra, medusa, john, hashcat, ncrack, etc.).
 ---
 name: bin_hacking_brute_force.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1110", "brute_force",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1110 ]
+  # Brute Force
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_brute_force_list.dependency
 
@@ -25,9 +30,5 @@ matches:
 condition: $bin_dep_01
   
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
-severity: 3
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
-
-# reminder : 
-# condition: $is_compression and $not_noise
-# condition: any of $bin_dep_
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

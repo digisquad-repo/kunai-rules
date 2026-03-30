@@ -1,3 +1,4 @@
+# Detects network connections from reverse engineering tools — these tools have no legitimate network activity.
 ---
 name: bin_hacking_reverse.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1587.001", "develop_capabilities:_malware",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1587.001 ]
+  # Develop Capabilities: Malware
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_reverse_list.dependency
 

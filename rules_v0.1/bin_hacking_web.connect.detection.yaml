@@ -1,3 +1,4 @@
+# Detects network connections from web attack tools — confirms active web application scanning or exploitation.
 ---
 name: bin_hacking_web.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1595.002", "active_scanning:_vulnerability_scanning",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1595.002 ]
+  # Active Scanning: Vulnerability Scanning
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_web_list.dependency
 

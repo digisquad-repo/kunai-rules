@@ -1,3 +1,4 @@
+# Detects execution of C2 framework tools (Cobalt Strike, Empire, Sliver, Covenant, Havoc, etc.).
 ---
 name: bin_hacking_c2_framework.execve.detection
 type: detection
@@ -9,8 +10,14 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071", "application_layer_protocol",
+      "T1572", "protocol_tunneling",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071, T1572 ]
+  # Application Layer Protocol
+  # Protocol Tunneling
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_c2_framework_list.dependency
 

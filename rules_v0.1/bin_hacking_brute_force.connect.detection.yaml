@@ -1,3 +1,4 @@
+# Detects network connections from brute-force tools — confirms active credential attack in progress.
 ---
 name: bin_hacking_brute_force.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1110", "brute_force",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1110 ]
+  # Brute Force
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_brute_force_list.dependency
 

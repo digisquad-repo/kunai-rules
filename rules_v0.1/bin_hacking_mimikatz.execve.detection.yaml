@@ -1,3 +1,4 @@
+# Detects execution of Mimikatz or Linux equivalents (mimipenguin, etc.) — credential dumping tools.
 ---
 name: bin_hacking_mimikatz.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1003", "os_credential_dumping",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1003 ]
+  # OS Credential Dumping
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_mimikatz_list.dependency
 

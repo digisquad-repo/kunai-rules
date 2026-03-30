@@ -1,3 +1,4 @@
+# Detects execution of Metasploit framework tools (msfconsole, msfvenom, msfdb, etc.).
 ---
 name: bin_hacking_metasploit.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1587.001", "develop_capabilities:_malware",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1587.001 ]
+  # Develop Capabilities: Malware
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_metasploit_list.dependency
 

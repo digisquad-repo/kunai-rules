@@ -1,3 +1,4 @@
+# Detects execution of Impacket suite tools (secretsdump, psexec, wmiexec, smbclient, etc.) — credential dumping and lateral movement.
 ---
 name: bin_hacking_impacket.execve.detection
 type: detection
@@ -9,8 +10,14 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1003", "os_credential_dumping",
+      "T1550", "use_alternate_authentication_material",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1003, T1550 ]
+  # OS Credential Dumping
+  # Use Alternate Authentication Material
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_impacket_list.dependency
 
@@ -25,9 +32,5 @@ matches:
 condition: $bin_dep_01
   
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
-severity: 3
-#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
-
-# reminder : 
-# condition: $is_compression and $not_noise
-# condition: any of $bin_dep_
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

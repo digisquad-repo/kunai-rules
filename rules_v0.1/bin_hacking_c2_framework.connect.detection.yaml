@@ -1,3 +1,4 @@
+# Detects network connections from C2 framework tools — confirms active C2 communication.
 ---
 name: bin_hacking_c2_framework.connect.detection
 type: detection
@@ -8,8 +9,14 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071", "application_layer_protocol",
+      "T1572", "protocol_tunneling",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071, T1572 ]
+  # Application Layer Protocol
+  # Protocol Tunneling
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_c2_framework_list.dependency
 

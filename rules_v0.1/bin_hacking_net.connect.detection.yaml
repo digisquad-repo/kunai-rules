@@ -1,3 +1,4 @@
+# Detects network connections from offensive network tools (netcat, ncat, etc.) — used for reverse shells and pivoting.
 ---
 name: bin_hacking_net.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1095", "non-application_layer_protocol",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1095 ]
+  # Non-Application Layer Protocol
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_net_list.dependency
 

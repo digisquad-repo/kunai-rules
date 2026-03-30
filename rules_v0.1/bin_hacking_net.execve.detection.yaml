@@ -1,3 +1,4 @@
+# Detects execution of raw network tools used in attacks (netcat, ncat, socat in offensive context, etc.).
 ---
 name: bin_hacking_net.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1095", "non-application_layer_protocol",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1095 ]
+  # Non-Application Layer Protocol
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_net_list.dependency
 

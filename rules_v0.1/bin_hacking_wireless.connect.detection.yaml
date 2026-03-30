@@ -1,3 +1,4 @@
+# Detects network connections from wireless attack tools.
 ---
 name: bin_hacking_wireless.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1040", "network_sniffing",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1040 ]
+  # Network Sniffing
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_wireless_list.dependency
 
@@ -24,5 +29,5 @@ matches:
 condition: $bin_dep_01
 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
-severity: 8
+severity: 9
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

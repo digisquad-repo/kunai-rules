@@ -1,3 +1,4 @@
+# Detects execution of web application attack tools (nikto, sqlmap, wfuzz, dirb, etc.) — active web scanning/exploitation.
 ---
 name: bin_hacking_web.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1595.002", "active_scanning:_vulnerability_scanning",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1595.002 ]
+  # Active Scanning: Vulnerability Scanning
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_web_list.dependency
 

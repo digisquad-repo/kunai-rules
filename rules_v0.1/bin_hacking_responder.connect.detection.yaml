@@ -1,3 +1,4 @@
+# Detects network connections from Responder — confirms active credential interception via LLMNR/NBT-NS poisoning.
 ---
 name: bin_hacking_responder.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1557.001", "adversary-in-the-middle:_llmnr/nbt-ns_poisoning_and_smb_relay",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1557.001 ]
+  # Adversary-in-the-Middle: LLMNR/NBT-NS Poisoning
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_hacking_responder_list.dependency
 

@@ -1,3 +1,4 @@
+# Detects execution of wireless attack tools (aircrack-ng, airodump-ng, wifite, etc.) — wireless network attacks.
 ---
 name: bin_hacking_wireless.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1040", "network_sniffing",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1040 ]
+  # Network Sniffing
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_hacking_wireless_list.dependency
 
