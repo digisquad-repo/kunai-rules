@@ -1,0 +1,34 @@
+# Detects execution of the at/atq/atrm commands — one-time scheduled job execution often used for delayed command execution or persistence.
+---
+name: bin_system_at_job.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_at_job",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1053.001", "scheduled_task/job:_at",
+    ]
+  attack: [ T1053.001 ]
+  # Scheduled Task/Job: At
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of at/atq/atrm/batch (one-time scheduled job — rarely used on modern systems)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_at: .data.exe.path ~= "/[^/]*/(at|atq|atrm|batch)(-[a-zA-Z0-9._]+)?$"
+condition: $is_at
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

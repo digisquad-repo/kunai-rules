@@ -1,0 +1,36 @@
+# Detects chattr setting immutable (+i) or append-only (+a) attributes on files — used by rootkits to protect malicious files from deletion or modification.
+---
+name: bin_system_chattr.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_chattr",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1222", "file_and_directory_permissions_modification",
+    ]
+  attack: [ T1222 ]
+  # File and Directory Permissions Modification
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify chattr setting +i (immutable) or +a (append-only) attributes
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_chattr:   .data.exe.path ~= "/[^/]*/(chattr)(-[a-zA-Z0-9._]+)?$"
+  $immutable:   .data.command_line ~= "(\s|^)\+i(\s|$)"
+  $append_only: .data.command_line ~= "(\s|^)\+a(\s|$)"
+condition: $is_chattr and ($immutable or $append_only)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
