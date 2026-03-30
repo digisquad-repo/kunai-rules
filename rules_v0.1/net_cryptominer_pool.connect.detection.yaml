@@ -1,0 +1,34 @@
+# Detects outbound connections to standard cryptocurrency mining pool ports — any process connecting to mining ports on public IPs is highly suspicious.
+---
+name: net_cryptominer_pool.connect.detection
+type: detection
+meta:
+  tags: [
+      "net_cryptominer_pool",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1496", "resource_hijacking",
+    ]
+  attack: [ T1496 ]
+  # Resource Hijacking
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify connections to standard mining pool ports (3333/4444/5555/7777/9999/14444) on public IPs
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $to_public:    .data.dst.public == true
+  $mining_port:  .data.dst.port ~= "^(4444|5555|7777|9999|14444|14433|45700|3256|20535)$"
+condition: $to_public and $mining_port
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
