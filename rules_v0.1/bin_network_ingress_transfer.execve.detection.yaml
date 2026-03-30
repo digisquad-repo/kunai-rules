@@ -1,0 +1,37 @@
+# Detects wget/curl/fetch downloading files directly to /tmp, /dev/shm, or /var/tmp — ingress tool transfer to staging locations.
+---
+name: bin_network_ingress_transfer.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_network_ingress_transfer",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1105", "ingress_tool_transfer",
+    ]
+  attack: [ T1105 ]
+  # Ingress Tool Transfer
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify wget/curl downloading to /tmp, /dev/shm, /var/tmp (tool staging)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_http_client: rule( bin_network_http_client_list.dependency)
+  $to_tmp:         .data.command_line ~= "(\s|^)-[oO]\s*/(tmp|dev/shm|var/tmp|run)/"
+  $output_flag:    .data.command_line ~= "--output\s+/(tmp|dev/shm|var/tmp|run)/"
+  $pipe_sh:        .data.command_line ~= "\|\s*(ba)?sh(\s|$)"
+condition: $is_http_client and ($to_tmp or $output_flag or $pipe_sh)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
