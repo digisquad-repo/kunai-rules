@@ -1,0 +1,33 @@
+# Detects prctl(PR_SET_NAME) calls changing process name — process masquerading technique used by malware to hide under legitimate names.
+---
+name: bin_system_masquerade.prctl.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_masquerade",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_prctl",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1036", "masquerading",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1036 ]
+  # Masquerading
+  comments:
+    - detection rule - identify PRCTL PR_SET_NAME (process name masquerading)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [prctl]
+
+matches:
+  $is_pr_set_name: .data.option == "PR_SET_NAME"
+condition: $is_pr_set_name
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
