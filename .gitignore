@@ -34,6 +34,5 @@ venv/
 id_rsa*
 .env.local
 
-# Claude Code (keep settings.json, ignore local overrides)
-!.claude/settings.json
-.claude/settings.local.json
+# Claude Code
+.claude/
