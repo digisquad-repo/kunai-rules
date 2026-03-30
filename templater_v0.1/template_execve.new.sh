@@ -42,13 +42,13 @@ generateFilesFromTemplate() {
     red_echo " --------------- $TEMPLATE_DEPENDENCY.env  ---------------"
     (
         cat "$TEMPLATE_DEPENDENCY.env" |
-            python3 render.py "$TEMPLATE_DEPENDENCY.j2" "$DETECTION_TYPE_WITH_VERB" "$DEPENDENCY_TYPE_WITH_VERB" >"../bin/$DEPENDENCY_TYPE_WITH_VERB.yaml"
+            python3 render.py "$TEMPLATE_DEPENDENCY.j2" "$DETECTION_TYPE_WITH_VERB" "$DEPENDENCY_TYPE_WITH_VERB" "$ARG_VERB" >"../bin/$DEPENDENCY_TYPE_WITH_VERB.yaml"
     )
 
     red_echo " --------------- $TEMPLATE_DETECTION.env  ---------------"
     (
         cat "$TEMPLATE_DETECTION.env" |
-            python3 render.py "$TEMPLATE_DETECTION.j2" "$DETECTION_TYPE_WITH_VERB" "$DEPENDENCY_TYPE_WITH_VERB" >"../bin/$DETECTION_TYPE_WITH_VERB.yaml"
+            python3 render.py "$TEMPLATE_DETECTION.j2" "$DETECTION_TYPE_WITH_VERB" "$DEPENDENCY_TYPE_WITH_VERB" "$ARG_VERB" >"../bin/$DETECTION_TYPE_WITH_VERB.yaml"
     )
 }
 

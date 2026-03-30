@@ -15,8 +15,8 @@ meta:
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
 
 matches:
-  $bin_dep_01: .data.exe.path ~= "/.*/(google-chrome|chrome|chromimum|firefox)$"
-  $bin_dep_02: .data.ancestors ~= "/.*/(google-chrome|chrome|chromimum|firefox)$"
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(google-chrome|chrome|chromimum|firefox)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(google-chrome|chrome|chromimum|firefox)(-[a-zA-Z0-9._]+)?$"
 
 condition: any of $bin_dep_
 
