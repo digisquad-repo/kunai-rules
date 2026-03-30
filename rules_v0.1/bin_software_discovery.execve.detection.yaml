@@ -1,0 +1,34 @@
+# Detects execution of software enumeration tools (dpkg -l, rpm -qa, pip list, snap list, etc.) — T1518 Software Discovery at low severity.
+---
+name: bin_software_discovery.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_software_discovery",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1518", "software_discovery",
+    ]
+  attack: [ T1518 ]
+  # Software Discovery
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of software discovery/enumeration tools (exe.path only to avoid ancestor FP)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( bin_software_discovery_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 3
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

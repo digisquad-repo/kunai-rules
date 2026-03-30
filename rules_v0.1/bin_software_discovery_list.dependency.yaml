@@ -1,0 +1,29 @@
+# Dependency list for software discovery/enumeration tools used for T1518 Software Discovery.
+---
+name: bin_software_discovery_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_software_discovery",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_software_discovery_list.dependency - software enumeration tools (exe.path only, no ancestors - too noisy)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(dpkg|dpkg-query)(-[a-zA-Z0-9._]+)?$"        # debian pkg query
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(rpm|rpm2cpio)(-[a-zA-Z0-9._]+)?$"            # redhat pkg query
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(snap)(-[a-zA-Z0-9._]+)?$"                    # snap pkg mgmt
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(flatpak)(-[a-zA-Z0-9._]+)?$"                 # flatpak
+  $bin_dep_05: .data.exe.path ~= "/[^/]*/(pip|pip3|pipx)(-[a-zA-Z0-9._]+)?$"           # python
+  $bin_dep_06: .data.exe.path ~= "/[^/]*/(npm|npx)(-[a-zA-Z0-9._]+)?$"                 # nodejs
+  $bin_dep_07: .data.exe.path ~= "/[^/]*/(gem)(-[a-zA-Z0-9._]+)?$"                     # ruby
+  $bin_dep_08: .data.exe.path ~= "/[^/]*/(cargo)(-[a-zA-Z0-9._]+)?$"                   # rust
+  $bin_dep_09: .data.exe.path ~= "/[^/]*/(go)(-[a-zA-Z0-9._]+)?$"                      # golang
+
+condition: any of $bin_dep_
