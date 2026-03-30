@@ -1,0 +1,34 @@
+# Detects execution of desktop screen capture tools (scrot, import, xwd, gnome-screenshot) — T1113 screen capture for espionage or data collection.
+---
+name: know_attacker_screencapture.execve.detection
+type: detection
+meta:
+  tags: [
+      "know_attacker_screencapture",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1113", "screen_capture",
+    ]
+  attack: [ T1113 ]
+  # Screen Capture
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of screen capture tools (scrot, import, xwd, etc.)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( know_attacker_screencapture_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

@@ -1,0 +1,28 @@
+# Dependency list for screen capture tools used for T1113 Screen Capture.
+---
+name: know_attacker_screencapture_list.dependency
+type: dependency
+meta:
+  tags: [
+      "know_attacker_screencapture",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - know_attacker_screencapture_list.dependency - desktop/screen capture tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(scrot|maim|flameshot|spectacle)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(import|xwd|xwud)(-[a-zA-Z0-9._]+)?$"          # ImageMagick import, X11 tools
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(gnome-screenshot|ksnapshot|shutter)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(xrandr|xdpyinfo)(-[a-zA-Z0-9._]+)?$"           # display info gathering
+
+  $bin_dep_05: .data.ancestors ~= "/[^/]*/(scrot|maim|flameshot|spectacle)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(import|xwd|xwud)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(gnome-screenshot|ksnapshot|shutter)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_
