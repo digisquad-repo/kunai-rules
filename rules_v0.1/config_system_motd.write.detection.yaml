@@ -1,0 +1,39 @@
+# Detects writes to /etc/update-motd.d or /etc/motd — MOTD scripts run as root on every login, making them a stealthy persistence mechanism.
+---
+name: config_system_motd.write.detection
+type: detection
+meta:
+  tags: [
+      "config_system_motd",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1037.005", "boot_or_logon_initialization_scripts:_trap",
+    ]
+  attack: [ T1037.005 ]
+  # Boot or Logon Initialization Scripts
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify write to /etc/update-motd.d/ or /etc/motd (MOTD persistence — runs at every SSH/console login)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai:
+      - write
+      - write_close
+      - write_config
+
+matches:
+  $dep_01: rule( config_system_motd_list.write.dependency)
+condition: $dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

@@ -1,0 +1,28 @@
+# Dependency list for MOTD (message-of-the-day) paths — used for T1037.005 boot/logon persistence detection.
+---
+name: config_system_motd_list.write.dependency
+type: dependency
+meta:
+  tags: [
+      "config_system_motd",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write",
+      "event_write_close",
+      "event_write_config",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write to /etc/update-motd.d or /etc/motd (MOTD persistence)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/etc/update-motd\.d(/|$)"
+  $r_02: .data.path ~= "^/etc/motd($|/)"
+  $r_03: .data.path ~= "^/etc/motd\.dynamic($|/)"
+  $r_04: .data.path ~= "^/run/motd\.dynamic($|/)"
+
+condition: any of $r_
