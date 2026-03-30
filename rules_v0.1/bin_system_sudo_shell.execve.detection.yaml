@@ -1,0 +1,37 @@
+# Detects sudo used to spawn interactive shells or script interpreters — abuse of sudo to bypass restrictions and escalate privileges.
+---
+name: bin_system_sudo_shell.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_sudo_shell",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1548.003", "abuse_elevation_control_mechanism:_sudo_and_sudo_caching",
+    ]
+  attack: [ T1548.003 ]
+  # Abuse Elevation Control Mechanism: Sudo and Sudo Caching
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify sudo spawning shells (sudo bash/sh/zsh) or interactive sessions (sudo -i/-s)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_sudo:      .data.exe.path ~= "/[^/]*/(sudo|sudoedit)(-[a-zA-Z0-9._]+)?$"
+  $shell_spawn:  .data.command_line ~= "(\s|^)(bash|sh|zsh|fish|dash|ksh|tcsh|csh|rbash)(\s|$|-)"
+  $sudo_shell:   .data.command_line ~= "(\s|^)(-i|-s)(\s|$)"
+  $interp_spawn: .data.command_line ~= "(\s|^)(python[23]?|perl|ruby|node|nodejs|awk|vim|vi|env\s+bash|env\s+sh)(\s|$)"
+condition: $is_sudo and ($shell_spawn or $sudo_shell or $interp_spawn)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

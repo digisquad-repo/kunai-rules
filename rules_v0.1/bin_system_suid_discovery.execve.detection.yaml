@@ -1,0 +1,36 @@
+# Detects find commands searching for SUID/SGID binaries — attacker reconnaissance to identify privilege escalation targets.
+---
+name: bin_system_suid_discovery.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_suid_discovery",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1083", "file_and_directory_discovery",
+      "T1548.001", "abuse_elevation_control_mechanism:_setuid_and_setgid",
+    ]
+  attack: [ T1083, T1548.001 ]
+  # File and Directory Discovery / Setuid and Setgid
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify find -perm /4000 or -perm -u=s patterns (SUID binary enumeration)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_find:    .data.exe.path ~= "/[^/]*/(find)(-[a-zA-Z0-9._]+)?$"
+  $suid_perm:  .data.command_line ~= "-perm\s+(/|-)?(u=s|g=s|4000|2000|6000|4755|2755|a=s)"
+condition: $is_find and $suid_perm
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

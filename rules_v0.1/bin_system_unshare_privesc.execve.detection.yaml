@@ -1,0 +1,36 @@
+# Detects unshare with user namespace and root mapping flags — used for privilege escalation by mapping current user to root in a new user namespace.
+---
+name: bin_system_unshare_privesc.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_unshare_privesc",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1611", "escape_to_host",
+    ]
+  attack: [ T1611 ]
+  # Escape to Host
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify unshare --user --map-root-user or unshare -r (user namespace root mapping = privilege escalation)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_unshare:     .data.exe.path ~= "/[^/]*/(unshare)(-[a-zA-Z0-9._]+)?$"
+  $user_ns:        .data.command_line ~= "(--user|-U)(\s|$)"
+  $map_root:       .data.command_line ~= "(--map-root-user|-r)(\s|$)"
+condition: $is_unshare and $user_ns and $map_root
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

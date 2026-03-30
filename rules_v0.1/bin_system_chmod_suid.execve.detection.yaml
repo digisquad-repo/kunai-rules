@@ -1,0 +1,37 @@
+# Detects chmod or install setting the SUID/SGID bit on files — used by attackers to create persistent privilege escalation backdoors.
+---
+name: bin_system_chmod_suid.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_chmod_suid",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1548.001", "abuse_elevation_control_mechanism:_setuid_and_setgid",
+    ]
+  attack: [ T1548.001 ]
+  # Abuse Elevation Control Mechanism: Setuid and Setgid
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify chmod +s (SUID/SGID) or chmod with octal 4xxx/2xxx mode on executables
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_chmod:     .data.exe.path ~= "/[^/]*/(chmod)(-[a-zA-Z0-9._]+)?$"
+  $suid_sym:     .data.command_line ~= "(\s|^)\+s(\s|$)"
+  $suid_octal:   .data.command_line ~= "(\s|^)[46][0-7]{3}(\s|$)"   # 4xxx=SUID, 6xxx=SUID+SGID
+  $sgid_octal:   .data.command_line ~= "(\s|^)2[0-7]{3}(\s|$)"      # 2xxx=SGID
+condition: $is_chmod and ($suid_sym or $suid_octal or $sgid_octal)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
