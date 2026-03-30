@@ -1,0 +1,35 @@
+# Detects shell spawned from a web browser (Firefox, Chrome, Chromium, Brave) — browser sandbox prevents extensions from spawning processes; this indicates browser RCE or sandbox escape.
+---
+name: bin_browsers_shell.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_browsers_shell",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059.004", "command_and_scripting_interpreter:_unix_shell",
+    ]
+  attack: [ T1059.004 ]
+  # Command and Scripting Interpreter: Unix Shell
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify shell spawned by a browser ancestor (Firefox/Chrome/Chromium/Brave) — indicates browser RCE or sandbox escape (T1203)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_shell:     .data.exe.path ~= "/[^/]*/(bash|sh|zsh|dash|fish|ksh|tcsh|csh|rbash)(-[a-zA-Z0-9._]+)?$"
+  $from_browser: .data.ancestors ~= "/[^/]*/(google-chrome|chrome|chromium|firefox|mozilla|brave|opera|vivaldi|iceweasel|icecat)(-[a-zA-Z0-9._]+)?$"
+condition: $is_shell and $from_browser
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

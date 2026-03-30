@@ -1,0 +1,35 @@
+# Detects a browser process reading SSH private keys, AWS credentials, GPG keys, or /etc/shadow — credential theft from a compromised or malicious browser.
+---
+name: bin_browsers_sensitive_read.read_config.detection
+type: detection
+meta:
+  tags: [
+      "bin_browsers_sensitive_read",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_read_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1555", "credentials_from_password_stores",
+      "T1552.004", "unsecured_credentials:_private_keys",
+    ]
+  attack: [ T1555, T1552.004 ]
+  # Credentials from Password Stores / Private Keys
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify browser process (Firefox/Chrome/Chromium/Brave) reading sensitive credential paths (~/.ssh, ~/.aws, /etc/shadow)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [read_config]
+
+matches:
+  $is_browser: .data.exe.path ~= "/[^/]*/(google-chrome|chrome|chromium|firefox|mozilla|brave|opera|vivaldi|iceweasel|icecat)(-[a-zA-Z0-9._]+)?$"
+  $sensitive:  .data.path ~= "(^/(root|home/[^/]+)/\.(ssh|aws|gnupg|config/gcloud)|^/etc/(shadow|gshadow|sudoers))"
+condition: $is_browser and $sensitive
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
