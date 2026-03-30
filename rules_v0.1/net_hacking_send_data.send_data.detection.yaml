@@ -1,0 +1,38 @@
+# Detects known offensive/hacking tools actively sending data to public IPs — C2 channel exfiltration.
+---
+name: net_hacking_send_data.send_data.detection
+type: detection
+meta:
+  tags: [
+      "net_hacking_send_data",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_send_data",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1041", "exfiltration_over_c2_channel",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1041 ]
+  # Exfiltration Over C2 Channel
+  comments:
+    - detection rule - identify SEND_DATA from offensive hacking tools to public IPs (C2 exfiltration)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [send_data]
+
+matches:
+  $c2_fw:    rule( bin_hacking_c2_framework_list.dependency)
+  $msf:      rule( bin_hacking_metasploit_list.dependency)
+  $impacket: rule( bin_hacking_impacket_list.dependency)
+  $net_hack: rule( bin_hacking_net_list.dependency)
+  $brute:    rule( bin_hacking_brute_force_list.dependency)
+  $to_public: .data.dst.public == true
+condition: ($c2_fw or $msf or $impacket or $net_hack or $brute) and $to_public
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

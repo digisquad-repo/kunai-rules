@@ -1,0 +1,37 @@
+# Detects DNS queries from known offensive/hacking tools — C2 beacon domain resolution or target reconnaissance.
+---
+name: net_hacking_dns_query.dns_query.detection
+type: detection
+meta:
+  tags: [
+      "net_hacking_dns_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_dns_query",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.004", "application_layer_protocol:_dns",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071.004 ]
+  # Application Layer Protocol: DNS
+  comments:
+    - detection rule - identify DNS_QUERY from offensive hacking tools (C2 beacon / recon)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [dns_query]
+
+matches:
+  $c2_fw:    rule( bin_hacking_c2_framework_list.dependency)
+  $msf:      rule( bin_hacking_metasploit_list.dependency)
+  $impacket: rule( bin_hacking_impacket_list.dependency)
+  $net_hack: rule( bin_hacking_net_list.dependency)
+  $brute:    rule( bin_hacking_brute_force_list.dependency)
+condition: $c2_fw or $msf or $impacket or $net_hack or $brute
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
