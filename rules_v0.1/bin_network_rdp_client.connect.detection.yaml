@@ -1,3 +1,4 @@
+# Detects network connections from RDP clients — confirms active RDP session potentially for lateral movement.
 ---
 name: bin_network_rdp_client.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1021.001", "remote_services:_remote_desktop_protocol",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1021.001 ]
+  # Remote Services: Remote Desktop Protocol
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_network_rdp_client_list.dependency
 

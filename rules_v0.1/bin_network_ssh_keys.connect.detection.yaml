@@ -1,3 +1,4 @@
+# Detects network connections from SSH key tools — these tools have no legitimate network activity.
 ---
 name: bin_network_ssh_keys.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1552.004", "unsecured_credentials:_private_keys",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1552.004 ]
+  # Unsecured Credentials: Private Keys
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_network_ssh_keys_list.dependency
 

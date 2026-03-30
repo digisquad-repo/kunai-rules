@@ -16,6 +16,6 @@ meta:
 
 matches:
   $bin_dep_01: .data.exe.path ~= "/[^/]*/(wget|curl|fetch|httpie|aria2c|lynx|w3m|elinks|lwp-request|httpc|xh|axel|wget2)(-[a-zA-Z0-9._]+)?$"
-  $bin_dep_02: .data.ancestors ~= "/[^/]*/(get|curl|fetch|httpie|aria2c|lynx|w3m|elinks|lwp-request|httpc|xh|axel|wget2)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(wget|curl|fetch|httpie|aria2c|lynx|w3m|elinks|lwp-request|httpc|xh|axel|wget2)(-[a-zA-Z0-9._]+)?$"
 
 condition: any of $bin_dep_

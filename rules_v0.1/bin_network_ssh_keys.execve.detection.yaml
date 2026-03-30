@@ -1,3 +1,4 @@
+# Detects execution of SSH key generation/management tools (ssh-keygen, ssh-add, ssh-copy-id) — may indicate unauthorized key creation.
 ---
 name: bin_network_ssh_keys.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1552.004", "unsecured_credentials:_private_keys",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1552.004 ]
+  # Unsecured Credentials: Private Keys
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_ssh_keys_list.dependency
 

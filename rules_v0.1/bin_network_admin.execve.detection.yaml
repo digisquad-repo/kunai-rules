@@ -1,3 +1,4 @@
+# Detects execution of network administration tools (ifconfig, ip, route, arp, etc.) — network configuration discovery.
 ---
 name: bin_network_admin.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1016", "system_network_configuration_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1016 ]
+  # System Network Configuration Discovery
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_admin_list.dependency
 

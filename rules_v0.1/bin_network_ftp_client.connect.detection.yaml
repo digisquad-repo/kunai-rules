@@ -1,3 +1,4 @@
+# Detects network connections from FTP clients — confirms active FTP-based file transfer, potentially exfiltration.
 ---
 name: bin_network_ftp_client.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.002", "application_layer_protocol:_file_transfer_protocols",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071.002 ]
+  # Application Layer Protocol: File Transfer Protocols
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_network_ftp_client_list.dependency
 

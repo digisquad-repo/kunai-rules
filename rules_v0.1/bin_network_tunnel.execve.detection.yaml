@@ -1,3 +1,4 @@
+# Detects execution of network tunneling tools (chisel, frp, ngrok, ligolo, iodine, etc.) — protocol tunneling for C2 or pivoting.
 ---
 name: bin_network_tunnel.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1572", "protocol_tunneling",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1572 ]
+  # Protocol Tunneling
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_tunnel_list.dependency
 

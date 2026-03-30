@@ -1,3 +1,4 @@
+# Detects execution of network diagnostic tools (netstat, ss, tcpdump, ping, traceroute, etc.) — network connections discovery.
 ---
 name: bin_network_diag.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1049", "system_network_connections_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1049 ]
+  # System Network Connections Discovery
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_diag_list.dependency
 

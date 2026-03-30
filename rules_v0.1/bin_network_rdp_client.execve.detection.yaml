@@ -1,3 +1,4 @@
+# Detects execution of RDP clients (rdesktop, xfreerdp, etc.) — unexpected RDP usage may indicate lateral movement.
 ---
 name: bin_network_rdp_client.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1021.001", "remote_services:_remote_desktop_protocol",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1021.001 ]
+  # Remote Services: Remote Desktop Protocol
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_rdp_client_list.dependency
 

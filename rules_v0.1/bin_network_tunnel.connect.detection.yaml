@@ -1,3 +1,4 @@
+# Detects network connections from tunneling tools — confirms active tunnel establishment.
 ---
 name: bin_network_tunnel.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1572", "protocol_tunneling",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1572 ]
+  # Protocol Tunneling
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_network_tunnel_list.dependency
 

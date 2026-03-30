@@ -17,8 +17,10 @@ meta:
 matches:
   $bin_dep_01: .data.exe.path ~= "/[^/]*/(stunnel|stunnel4|ptunnel|privoxy|hping3|httptunnel|hts|htc|obfsproxy|iodine|dnscat2|proxychains4|proxychains|dns2tcp)(-[a-zA-Z0-9._]+)?$"
   $bin_dep_02: .data.exe.path ~= "/[^/]*/(redsocks|tunna|rinetd|sslh|chisel|frp|ligolo)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(sshuttle|ngrok|bore|rathole|socat)(-[a-zA-Z0-9._]+)?$"
 
-  $bin_dep_03: .data.ancestors ~= "/[^/]*/(stunnel|stunnel4|ptunnel|privoxy|hping3|httptunnel|hts|htc|obfsproxy|iodine|dnscat2|proxychains4|proxychains|dns2tcp)(-[a-zA-Z0-9._]+)?$"
-  $bin_dep_04: .data.ancestors ~= "/[^/]*/(redsocks|tunna|rinetd|sslh|chisel|frp|ligolo)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.ancestors ~= "/[^/]*/(stunnel|stunnel4|ptunnel|privoxy|hping3|httptunnel|hts|htc|obfsproxy|iodine|dnscat2|proxychains4|proxychains|dns2tcp)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_05: .data.ancestors ~= "/[^/]*/(redsocks|tunna|rinetd|sslh|chisel|frp|ligolo)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.ancestors ~= "/[^/]*/(sshuttle|ngrok|bore|rathole|socat)(-[a-zA-Z0-9._]+)?$"
 
 condition: any of $bin_dep_

@@ -1,3 +1,4 @@
+# Detects network connections from SSH clients — confirms active SSH-based lateral movement.
 ---
 name: bin_network_ssh_client.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1021.004", "remote_services:_ssh",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1021.004 ]
+  # Remote Services: SSH
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_network_ssh_client_list.dependency
 

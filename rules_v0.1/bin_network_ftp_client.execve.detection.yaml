@@ -1,3 +1,4 @@
+# Detects execution of FTP clients (ftp, lftp, ncftp, etc.) — FTP is often used for file transfer during exfiltration.
 ---
 name: bin_network_ftp_client.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1071.002", "application_layer_protocol:_file_transfer_protocols",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1071.002 ]
+  # Application Layer Protocol: File Transfer Protocols
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_ftp_client_list.dependency
 

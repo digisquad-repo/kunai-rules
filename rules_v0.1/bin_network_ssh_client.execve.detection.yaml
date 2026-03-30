@@ -1,3 +1,4 @@
+# Detects execution of SSH clients (ssh, sftp, scp, mosh, etc.) — lateral movement via SSH.
 ---
 name: bin_network_ssh_client.execve.detection
 type: detection
@@ -9,8 +10,12 @@ meta:
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_execve",
       "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1021.004", "remote_services:_ssh",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1021.004 ]
+  # Remote Services: SSH
   comments:
     - detection rule - identify EXECVE EXECVE_SCRIPT bin_network_ssh_client_list.dependency
 

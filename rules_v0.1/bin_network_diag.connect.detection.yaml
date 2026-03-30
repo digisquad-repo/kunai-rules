@@ -1,3 +1,4 @@
+# Detects network connections from network diagnostic tools — suspicious when tools like tcpdump initiate their own connections.
 ---
 name: bin_network_diag.connect.detection
 type: detection
@@ -8,8 +9,12 @@ meta:
       "type_detection",
       #### #### #### #### #### #### #### #### #### #### #### ####
       "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1049", "system_network_connections_discovery",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1049 ]
+  # System Network Connections Discovery
   comments:
     - detection rule - identify CONNECT - apply on bin - bin_network_diag_list.dependency
 
