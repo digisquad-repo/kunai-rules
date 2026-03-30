@@ -14,10 +14,10 @@ showExample() {
   echo "cat /tmp/data.json | $(basename "$0") "
   echo " "
   echo ""
-  echo "cat /tmp/data.json | kunai.jsons.filter_connect_events.to.jsons.sh | $(basename "$0")"
-  echo "cat /tmp/data.json | kunai.jsons.filter_exec_events.to.jsons.sh | $(basename "$0")"
-  echo "cat /tmp/data.json | kunai.jsons.filter_loss_events.to.jsons.sh | $(basename "$0")"
-  echo "cat /tmp/data.json | kunai.jsons.filter_write_events.to.jsons.sh | $(basename "$0")"
+  echo "cat /tmp/data.json | scripts/kunai.jsons.filter_connect_events.to.jsons.sh | $(basename "$0")"
+  echo "cat /tmp/data.json | scripts/kunai.jsons.filter_exec_events.to.jsons.sh | $(basename "$0")"
+  echo "cat /tmp/data.json | scripts/kunai.jsons.filter_loss_events.to.jsons.sh | $(basename "$0")"
+  echo "cat /tmp/data.json | scripts/kunai.jsons.filter_write_events.to.jsons.sh | $(basename "$0")"
 }
 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
