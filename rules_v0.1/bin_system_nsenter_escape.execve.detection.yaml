@@ -1,0 +1,36 @@
+# Detects nsenter targeting PID 1 (host init) — entering the host process namespace from within a container is a definitive container escape attempt.
+---
+name: bin_system_nsenter_escape.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_nsenter_escape",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1611", "escape_to_host",
+    ]
+  attack: [ T1611 ]
+  # Escape to Host
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify nsenter --target 1 (enter PID 1 namespaces = host escape from container)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_nsenter:    .data.exe.path ~= "/[^/]*/(nsenter)(-[a-zA-Z0-9._]+)?$"
+  $target_pid1_a: .data.command_line ~= "--target\s+1(\s|$)"
+  $target_pid1_b: .data.command_line ~= "--target=1(\s|$)"
+condition: $is_nsenter and ($target_pid1_a or $target_pid1_b)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 9
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
