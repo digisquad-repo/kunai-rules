@@ -1,0 +1,40 @@
+# Detects commands that clear, redirect, or disable shell command history (history -c, unset HISTFILE, HISTSIZE=0) — anti-forensic indicator removal.
+---
+name: bin_system_history_tamper.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_system_history_tamper",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1070.003", "indicator_removal:_clear_command_history",
+    ]
+  attack: [ T1070.003 ]
+  # Indicator Removal: Clear Command History
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify history -c, unset HISTFILE, HISTSIZE=0, HISTFILE=/dev/null, truncate .bash_history
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $is_shell:       .data.exe.path ~= "/[^/]*/(bash|sh|zsh|fish|dash|ksh)(-[a-zA-Z0-9._]+)?$"
+  $is_truncate:    .data.exe.path ~= "/[^/]*/(truncate)(-[a-zA-Z0-9._]+)?$"
+  $history_clear:  .data.command_line ~= "history\s+-[cw]"
+  $histfile_null:  .data.command_line ~= "HISTFILE\s*=\s*/dev/null"
+  $unset_hist:     .data.command_line ~= "unset\s+HISTFILE"
+  $histsize_zero:  .data.command_line ~= "HISTSIZE\s*=\s*0"
+  $truncate_hist:  .data.command_line ~= "(bash_history|zsh_history|fish_history)"
+condition: ($is_shell and ($history_clear or $histfile_null or $unset_hist or $histsize_zero)) or ($is_truncate and $truncate_hist)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 8
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
