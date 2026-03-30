@@ -1,0 +1,32 @@
+# Dependency list for known cryptomining software binaries (T1496 Resource Hijacking).
+---
+name: know_attacker_cryptominer_list.dependency
+type: dependency
+meta:
+  tags: [
+      "know_attacker_cryptominer",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - know_attacker_cryptominer_list.dependency - cryptocurrency mining software
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(xmrig|xmrig-cuda|xmrig-cc|xmrigCC)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.exe.path ~= "/[^/]*/(minerd|cpuminer|cpuminer-multi|cpuminer-opt)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_03: .data.exe.path ~= "/[^/]*/(ethminer|t-rex|lolminer|nbminer|nheqminer)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_04: .data.exe.path ~= "/[^/]*/(bfgminer|cgminer|sgminer|ccminer)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_05: .data.exe.path ~= "/[^/]*/(phoenixminer|claymore|kawpow|trex)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_06: .data.exe.path ~= "/[^/]*/(monero|miner|cryptominer|crypto-miner)(-[a-zA-Z0-9._]+)?$"
+
+  $bin_dep_07: .data.ancestors ~= "/[^/]*/(xmrig|xmrig-cuda|xmrig-cc|xmrigCC)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_08: .data.ancestors ~= "/[^/]*/(minerd|cpuminer|cpuminer-multi|cpuminer-opt)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_09: .data.ancestors ~= "/[^/]*/(ethminer|t-rex|lolminer|nbminer|nheqminer)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_10: .data.ancestors ~= "/[^/]*/(bfgminer|cgminer|sgminer|ccminer)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_11: .data.ancestors ~= "/[^/]*/(phoenixminer|claymore|kawpow|trex)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_

@@ -1,0 +1,34 @@
+# Detects execution of known cryptocurrency mining software (xmrig, cpuminer, ethminer, etc.) — resource hijacking T1496.
+---
+name: know_attacker_cryptominer.execve.detection
+type: detection
+meta:
+  tags: [
+      "know_attacker_cryptominer",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1496", "resource_hijacking",
+    ]
+  attack: [ T1496 ]
+  # Resource Hijacking
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE of cryptomining software
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( know_attacker_cryptominer_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 10 # Cryptominer execution — always malicious on a server
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

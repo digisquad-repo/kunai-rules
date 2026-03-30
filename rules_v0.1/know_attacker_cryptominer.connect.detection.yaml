@@ -1,0 +1,33 @@
+# Detects network connections from known cryptomining software — confirms active mining operation.
+---
+name: know_attacker_cryptominer.connect.detection
+type: detection
+meta:
+  tags: [
+      "know_attacker_cryptominer",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1496", "resource_hijacking",
+    ]
+  attack: [ T1496 ]
+  # Resource Hijacking
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify CONNECT from cryptomining software (mining pool connection)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $bin_dep_01: rule( know_attacker_cryptominer_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 10 # Cryptominer network connection — confirms active mining
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
