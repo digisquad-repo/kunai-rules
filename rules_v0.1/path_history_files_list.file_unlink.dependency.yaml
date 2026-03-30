@@ -1,0 +1,28 @@
+# Dependency list for shell history files — used to detect deletion of command history (T1070.003).
+---
+name: path_history_files_list.file_unlink.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_system_history_tamper",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_unlink",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_unlink targeting shell history files
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "\.bash_history$"
+  $r_02: .data.path ~= "\.zsh_history$"
+  $r_03: .data.path ~= "\.sh_history$"
+  $r_04: .data.path ~= "\.history$"
+  $r_05: .data.path ~= "\.fish_history$"
+  $r_06: .data.path ~= "\.local/share/fish/fish_history$"
+
+condition: any of $r_

@@ -1,0 +1,33 @@
+# Detects deletion of shell history files (.bash_history, .zsh_history, etc.) — attacker removing command evidence.
+---
+name: fs_history_deletion.file_unlink.detection
+type: detection
+meta:
+  tags: [
+      "fs_history_deletion",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_file_unlink",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1070.003", "indicator_removal:_clear_command_history",
+    ]
+  attack: [ T1070.003 ]
+  # Indicator Removal: Clear Command History
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify file_unlink of shell history files (.bash_history, .zsh_history, etc.)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [file_unlink]
+
+matches:
+  $dep_01: rule( path_history_files_list.file_unlink.dependency)
+condition: $dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
