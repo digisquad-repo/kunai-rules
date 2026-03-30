@@ -24,7 +24,8 @@ meta:
 
 match-on:
   events:
-    kunai: [file_create]
+    kunai:
+      - file_create
 
 matches:
   $dep_01: rule( path_usb_attack_device_list.file_create.dependency)

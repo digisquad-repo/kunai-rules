@@ -27,7 +27,7 @@ match-on:
 matches:
   $hex_subdomain: .data.query ~= "^[0-9a-fA-F]{20,}\."
   $long_sublabel: .data.query ~= "^[^.]{40,}\."
-condition: any of $hex_subdomain, $long_sublabel
+condition: $hex_subdomain or $long_sublabel
 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 severity: 8
