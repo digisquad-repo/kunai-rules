@@ -1,0 +1,25 @@
+---
+name: path_tmp_exec_list.write_close.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_dropped_exec",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write_close",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify write_close path_tmp_exec_list.write_close.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/tmp(/|$)"
+  $r_02: .data.path ~= "^/dev/shm(/|$)"
+  $r_03: .data.path ~= "^/run/[^/]+$"
+  $r_04: .data.path ~= "^/var/tmp(/|$)"
+
+condition: any of $r_

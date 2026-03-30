@@ -1,0 +1,30 @@
+# Detects creation of executable files in temporary directories (/tmp, /dev/shm, /var/tmp) via write_close — dropped payload staging.
+---
+name: fs_dropped_exec.write_close.detection
+type: detection
+meta:
+  tags: [
+      "fs_dropped_exec",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_write_close",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1059", "command_and_scripting_interpreter",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1059 ]
+  # Command and Scripting Interpreter (dropped payload in temp directory)
+  comments:
+    - detection rule - identify WRITE_CLOSE on /tmp /dev/shm /run (dropper activity)
+
+match-on:
+  events:
+    kunai:
+      - write_close
+
+matches:
+  $is_tmp: rule( path_tmp_exec_list.write_close.dependency)
+condition: $is_tmp
+severity: 6
