@@ -10,11 +10,12 @@
 # UUID identifying the host. This is auto-generated and should not be changed.
 host_uuid: c030b40d-0eab-417b-b33a-22d952357984
 
-max_buffered_events: 65536   # kernel eBPF ring buffer size (events) — raised from 4096
+max_buffered_events: 65535   # kernel eBPF ring buffer size (events) — raised from 4096
 max_eps_fs: 65535            # max filesystem events/sec per CPU — raised from 2048
 workers: null
 send_data_min_len: null
 harden: false
+force_load: true
 
 output:
   path: /dev/stdout
@@ -395,8 +396,8 @@ scanner:
       "./rules_v0.1/bin_network_nfs_client.execve.detection.yaml",
       "./rules_v0.1/bin_network_nfs_client.connect.detection.yaml",
       # USB HID attack device detection (Teensy/Rubber Ducky/O.MG)
-      "./rules_v0.1/path_usb_attack_device_list.file_create.dependency.yaml",
-      "./rules_v0.1/fs_usb_attack_device.file_create.detection.yaml",
+      # "./rules_v0.1/path_usb_attack_device_list.file_create.dependency.yaml",
+      # "./rules_v0.1/fs_usb_attack_device.file_create.detection.yaml",
 
     ]
 

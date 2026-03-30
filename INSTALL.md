@@ -36,27 +36,30 @@ sha256sum _kunai-amd64
 ## 4. Run
 
 ```bash
-# Quick start (development mode)
-sudo ./scripts/_kunai-amd64.start_with_rules.sh
+# Quick start (server profile, default)
+sudo bash start.sh
 
 # With a specific profile
-sudo ./scripts/_kunai-amd64.start_with_rules.sh config/server.rules
+sudo bash start.sh desktop
+sudo bash start.sh dev
 
-# Raw events (no rules)
-sudo ./scripts/_kunai-amd64.start_without_rules.sh
+# List available profiles
+bash start.sh --list
 ```
+
+Logs are written to `/var/log/kunai/`.
 
 ## 5. Analyze output
 
 ```bash
 # Count event types
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.count_event_types.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.count_event_types.to.jsons.sh
 
 # View matched rules
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh
 
 # Filter specific events
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh
 ```
 
 ## Systemd Service (production)

@@ -69,10 +69,10 @@ Before submitting:
 
 ```bash
 # Start Kunai with dev config (captures all events)
-./scripts/_kunai-amd64.start_with_rules.sh config/dev.rules
+sudo bash start.sh dev
 
 # Check that your rule triggers
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh | grep your_rule_name
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh | grep your_rule_name
 ```
 
 ## Commit Messages

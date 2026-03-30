@@ -6,6 +6,7 @@ max_eps_fs: 2048
 workers: null
 send_data_min_len: null
 harden: false
+force_load: true
 
 output:
   path: /dev/stdout

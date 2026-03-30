@@ -23,13 +23,13 @@ Once these checks are complete, you're ready to start.
 To start Kunai with the detection rules enabled, simply run:
 
 ```bash
-scripts/_kunai-amd64.start_with_rules.sh
+sudo bash start.sh
 ```
 
 If you prefer to run it without any rules:
 
 ```bash
-scripts/_kunai-amd64.start_without_rules.sh
+sudo bash start.sh --list
 ```
 
 ---

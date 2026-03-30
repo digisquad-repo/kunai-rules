@@ -36,3 +36,6 @@ id_rsa*
 
 # Claude Code
 .claude/
+
+# Project management (local only)
+TODO.md

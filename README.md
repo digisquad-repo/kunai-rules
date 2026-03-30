@@ -103,39 +103,33 @@ I use them daily and keep them in my `$PATH` for fast access during incident res
 
 ## Quick Start
 
-### 1. Run Kunai with rules (development/debug mode)
+### 1. Start Kunai
 
 ```bash
-# All events, all severities — for rule development
-sudo ./scripts/_kunai-amd64.start_with_rules.sh
+sudo bash start.sh              # server profile (default)
+sudo bash start.sh desktop      # desktop profile
+sudo bash start.sh dev          # all events (debug/rule writing)
+sudo bash start.sh --list       # show available profiles
 ```
 
-### 2. Run Kunai with a profile
+Logs are written to `/var/log/kunai/`.
 
-```bash
-# Server: min severity 3 (catches more)
-sudo ./scripts/_kunai-amd64.start_with_rules.sh config/server.rules
-
-# Desktop: min severity 6 (less noise)
-sudo ./scripts/_kunai-amd64.start_with_rules.sh config/desktop.rules
-```
-
-### 3. Analyze the output
+### 2. Analyze the output
 
 ```bash
 # Count events by type
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.count_event_types.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.count_event_types.to.jsons.sh
 
 # View matched rules
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.list_rules_matches.to.jsons.sh
 
 # Filter specific events
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.filter_exec_events.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_connect_events.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.filter_exec_events.to.jsons.sh
 
 # Formatted views
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.view_01.to.jsons.sh | less
-cat /tmp/kunai_*.json | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.view_01.to.jsons.sh | less
+cat /var/log/kunai/kunai_*.json | ./scripts/kunai.jsons.view_network_events_04_verbose.to.jsons.sh
 ```
 
 ---
@@ -243,6 +237,7 @@ Rules targeting specific attacker techniques.
 │   └── kunai.jsons.*.sh            # JSON processing utilities
 ├── doc/                            # Documentation
 ├── templater_v0.1/                 # Rule templates (Jinja2)
+├── start.sh                        # Entry point: sudo bash start.sh [profile]
 ├── _kunai-amd64                    # Kunai binary (Linux amd64)
 ├── CHECKSUMS.sha256                # Binary integrity verification
 ├── INSTALL.md                      # Installation guide
