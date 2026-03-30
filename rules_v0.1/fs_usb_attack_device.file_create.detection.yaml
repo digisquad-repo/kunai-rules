@@ -1,0 +1,35 @@
+# Detects creation of USB HID or serial device nodes — potential Teensy/Rubber Ducky/O.MG attack device plugged in.
+---
+name: fs_usb_attack_device.file_create.detection
+type: detection
+meta:
+  tags: [
+      "fs_usb_attack_device",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_create",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1200", "hardware_additions",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1200 ]
+  # Hardware Additions
+  comments:
+    - detection rule - identify FILE_CREATE of USB HID/serial device node (Teensy/Rubber Ducky/O.MG attack device)
+    - note: on desktop, /dev/input/event* fires for every USB keyboard/mouse hotplug — increase min_severity or restrict path list to ttyACM + hidraw only
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [file_create]
+
+matches:
+  $dep_01: rule( path_usb_attack_device_list.file_create.dependency)
+condition: $dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

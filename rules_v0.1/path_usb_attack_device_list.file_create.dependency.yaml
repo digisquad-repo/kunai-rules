@@ -1,0 +1,24 @@
+---
+name: path_usb_attack_device_list.file_create.dependency
+type: dependency
+meta:
+  tags: [
+      "path_usb_attack_device",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_create",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_create path_usb_attack_device_list.file_create.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.path ~= "^/dev/ttyACM[0-9]"     # Arduino/Teensy/CDC serial (Rubber Ducky class)
+  $r_02: .data.path ~= "^/dev/hidraw[0-9]"      # Raw HID device (O.MG Cable, bad USB HID)
+  $r_03: .data.path ~= "^/dev/input/event[0-9]" # Input device hotplug (any USB keyboard/mouse)
+
+condition: any of $r_
