@@ -1,0 +1,33 @@
+# Detects network connections from cloud storage transfer tools — confirms active data transfer to cloud (rclone, aws cli, gsutil, etc.).
+---
+name: bin_cloud_transfer.connect.detection
+type: detection
+meta:
+  tags: [
+      "bin_cloud_transfer",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_connect",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1567.002", "exfiltration_to_cloud_storage",
+    ]
+  attack: [ T1567.002 ]
+  # Exfiltration to Cloud Storage
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify CONNECT from cloud transfer tools (rclone, aws, gsutil, etc.)
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [connect]
+
+matches:
+  $bin_dep_01: rule( bin_cloud_transfer_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 7
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

@@ -1,0 +1,34 @@
+# Detects execution of cloud storage transfer tools (rclone, aws cli, gsutil, azcopy, etc.) — potential data exfiltration to cloud storage.
+---
+name: bin_cloud_transfer.execve.detection
+type: detection
+meta:
+  tags: [
+      "bin_cloud_transfer",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_execve",
+      "event_execve_script",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1567.002", "exfiltration_to_cloud_storage",
+    ]
+  attack: [ T1567.002 ]
+  # Exfiltration to Cloud Storage
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - detection rule - identify EXECVE EXECVE_SCRIPT bin_cloud_transfer_list.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+match-on:
+  events:
+    kunai: [execve, execve_script]
+
+matches:
+  $bin_dep_01: rule( bin_cloud_transfer_list.dependency)
+condition: $bin_dep_01
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+severity: 6
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####

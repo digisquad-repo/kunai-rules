@@ -1,0 +1,21 @@
+---
+name: bin_cloud_transfer_list.dependency
+type: dependency
+meta:
+  tags: [
+      "bin_cloud_transfer",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency - bin_cloud_transfer_list.dependency - cloud storage and transfer tools
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $bin_dep_01: .data.exe.path ~= "/[^/]*/(rclone|aws|s3cmd|gsutil|gcloud|az|mc|b2|azcopy)(-[a-zA-Z0-9._]+)?$"
+  $bin_dep_02: .data.ancestors ~= "/[^/]*/(rclone|aws|s3cmd|gsutil|gcloud|az|mc|b2|azcopy)(-[a-zA-Z0-9._]+)?$"
+
+condition: any of $bin_dep_
