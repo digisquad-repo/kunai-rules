@@ -1,0 +1,29 @@
+# Detects file renames where a file is renamed to match a known system binary name — binary masquerading technique.
+---
+name: fs_binary_masquerade.file_rename.detection
+type: detection
+meta:
+  tags: [
+      "fs_binary_masquerade",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_detection",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "event_file_rename",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1036.003", "masquerading:_rename_system_utilities",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1036.003 ]
+  # Masquerading: Rename System Utilities
+  comments:
+    - detection rule - identify FILE_RENAME from /tmp to a system binary name (binary masquerading)
+
+match-on:
+  events:
+    kunai:
+      - file_rename
+
+matches:
+  $masquerade: rule( path_system_bin_list.file_rename.dependency)
+condition: $masquerade
+severity: 9

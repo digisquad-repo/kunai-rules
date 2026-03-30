@@ -1,0 +1,23 @@
+---
+name: path_system_bin_list.file_rename.dependency
+type: dependency
+meta:
+  tags: [
+      "fs_binary_masquerade",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "type_dependency",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      # #
+      "event_file_rename",
+    ]
+  authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  comments:
+    - dependency rule - identify file_rename path_system_bin_list.file_rename.dependency
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
+
+matches:
+  $r_01: .data.new ~= "/[^/]*/(sh|bash|dash|python|perl|curl|wget|nc|ncat|nmap|find|sudo|su|passwd|ssh|sshd|cron|at|awk|sed|env|dd|chmod|chown|chattr)(-[a-zA-Z0-9._]+)?$"
+  $r_02: .data.old ~= "^/tmp(/|$)"
+
+condition: $r_01 and $r_02
