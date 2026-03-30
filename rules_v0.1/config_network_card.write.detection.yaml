@@ -1,3 +1,4 @@
+# Detects writes to network interface configuration files — may indicate traffic interception setup or network covert channel.
 ---
 name: config_network_card.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1205", "traffic_signaling",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1205 ]
+  # Traffic Signaling
   comments:
     - detection rule - identify config_network_card_list.write.dependency
 

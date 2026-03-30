@@ -1,3 +1,4 @@
+# Detects writes to mount configuration (/etc/fstab, /etc/mtab) — filesystem configuration tampering.
 ---
 name: config_system_mount.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1052", "exfiltration_over_physical_medium",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1052 ]
+  # Exfiltration Over Physical Medium
   comments:
     - detection rule - identify config_system_mount_list.write.dependency
 

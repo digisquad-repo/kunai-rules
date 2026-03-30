@@ -1,3 +1,4 @@
+# Detects writes to dm-crypt/LUKS configuration — may indicate ransomware encryption setup or disk wiping preparation.
 ---
 name: config_dmcrypt.write.detection
 type: detection
@@ -10,9 +11,13 @@ meta:
       # #
       "event_write", 
       "event_write_close", 
-      "event_write_config"
+      "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1486", "data_encrypted_for_impact",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1486 ]
+  # Data Encrypted for Impact
   comments:
     - detection rule - identify config_dmcrypt_list.write.dependency
 

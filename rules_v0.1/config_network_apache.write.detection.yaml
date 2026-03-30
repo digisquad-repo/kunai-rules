@@ -1,3 +1,4 @@
+# Detects writes to Apache web server configuration — may indicate web shell installation or server-side request forgery setup.
 ---
 name: config_network_apache.write.detection
 type: detection
@@ -10,9 +11,13 @@ meta:
       # #
       "event_write", 
       "event_write_close", 
-      "event_write_config"
+      "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1505.003", "server_software_component:_web_shell",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1505.003 ]
+  # Server Software Component: Web Shell
   comments:
     - detection rule - identify config_network_apache_list.write.dependency
 

@@ -1,3 +1,4 @@
+# Detects writes to rsync configuration — rsync configuration tampering for unauthorized file sync/exfiltration.
 ---
 name: config_network_rsync.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1048.002", "exfiltration_over_alternative_protocol:_exfiltration_over_asymmetric_encrypted_non-c2_protocol",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1048.002 ]
+  # Exfiltration Over Alternative Protocol: Asymmetric Encrypted Non-C2
   comments:
     - detection rule - identify config_network_rsync_list.write.dependency
 

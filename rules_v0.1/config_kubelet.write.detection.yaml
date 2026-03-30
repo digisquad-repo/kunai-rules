@@ -1,3 +1,4 @@
+# Detects writes to Kubernetes kubelet configuration — container orchestration tampering for privilege escalation.
 ---
 name: config_kubelet.write.detection
 type: detection
@@ -10,9 +11,13 @@ meta:
       # #
       "event_write", 
       "event_write_close", 
-      "event_write_config"
+      "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1610", "deploy_container",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1610 ]
+  # Deploy Container
   comments:
     - detection rule - identify config_kubelet_list.write.dependency
 

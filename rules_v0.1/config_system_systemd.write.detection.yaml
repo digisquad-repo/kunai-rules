@@ -1,3 +1,4 @@
+# Detects writes to systemd unit files (/etc/systemd/system/, /usr/lib/systemd/system/) — service persistence.
 ---
 name: config_system_systemd.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1543.002", "create_or_modify_system_process:_systemd_service",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1543.002 ]
+  # Create or Modify System Process: Systemd Service
   comments:
     - detection rule - identify config_system_systemd_list.write.dependency
 

@@ -20,10 +20,10 @@ meta:
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
 
 matches:
-  $r_01: .data.path ~= ".*/resolv.conf($|/)?"
-  $r_02: .data.path ~= ".*/etc/hosts($|/)?"
-  $r_03: .data.path ~= ".*/etc/hostname($|/)?"
-  $r_04: .data.path ~= ".*/etc/nsswitch.conf($|/)?"
-  $r_06: .data.path ~= ".*/etc/systemd/resolved.conf($|/)?"
+  $r_01: .data.path ~= "^/etc/resolv\.conf$"
+  $r_02: .data.path ~= "^/etc/hosts$"
+  $r_03: .data.path ~= "^/etc/hostname$"
+  $r_04: .data.path ~= "^/etc/nsswitch\.conf$"
+  $r_05: .data.path ~= "^/etc/systemd/resolved\.conf$"
 
 condition: any of $r_

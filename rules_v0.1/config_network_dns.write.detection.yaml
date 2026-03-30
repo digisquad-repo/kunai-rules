@@ -1,3 +1,4 @@
+# Detects writes to DNS configuration files (/etc/hosts, /etc/resolv.conf) — DNS hijacking or traffic redirection.
 ---
 name: config_network_dns.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1565.001", "data_manipulation:_stored_data_manipulation",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1565.001 ]
+  # Data Manipulation: Stored Data Manipulation
   comments:
     - detection rule - identify config_network_dns_list.write.dependency
 

@@ -1,3 +1,4 @@
+# Detects writes to firewall configuration files (iptables-save, nftables.conf, ufw rules) — firewall rule tampering.
 ---
 name: config_network_firewall.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1562.004", "impair_defenses:_disable_or_modify_system_firewall",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1562.004 ]
+  # Impair Defenses: Disable or Modify System Firewall
   comments:
     - detection rule - identify config_network_firewall_list.write.dependency
 

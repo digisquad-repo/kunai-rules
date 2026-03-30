@@ -1,3 +1,4 @@
+# Detects writes to sudoers configuration — privilege escalation via sudo rule modification.
 ---
 name: config_system_sudoers.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1548.003", "abuse_elevation_control_mechanism:_sudo_and_sudo_caching",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1548.003 ]
+  # Abuse Elevation Control Mechanism: Sudo
   comments:
     - detection rule - identify config_system_sudoers_list.write.dependency
 

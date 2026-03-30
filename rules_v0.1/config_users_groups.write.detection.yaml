@@ -1,3 +1,4 @@
+# Detects writes to /etc/passwd, /etc/shadow, /etc/group — account creation or privilege modification.
 ---
 name: config_users_groups.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1098", "account_manipulation",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1098 ]
+  # Account Manipulation
   comments:
     - detection rule - identify config_users_groups_list.write.dependency
 

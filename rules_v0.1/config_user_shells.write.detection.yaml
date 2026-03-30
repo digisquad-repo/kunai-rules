@@ -1,3 +1,4 @@
+# Detects writes to user shell configuration files (.bashrc, .bash_profile, .zshrc, etc.) — login persistence.
 ---
 name: config_user_shells.write.detection
 type: detection
@@ -11,8 +12,12 @@ meta:
       "event_write",
       "event_write_close",
       "event_write_config",
+      #### #### #### #### #### #### #### #### #### #### #### ####
+      "T1546.004", "event_triggered_execution:_unix_shell_configuration_modification",
     ]
   authors: [" hyde - Benjamin Collas - DIGISQUAD - https://www.digisquad.com"]
+  attack: [ T1546.004 ]
+  # Event Triggered Execution: Unix Shell Configuration Modification
   comments:
     - detection rule - identify config_user_shells_list.write.dependency
 
